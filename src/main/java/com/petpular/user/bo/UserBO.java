@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.petpular.user.dao.UserDAO;
+import com.petpular.user.model.User;
 
 @Service
 public class UserBO {
@@ -24,5 +25,10 @@ public class UserBO {
 	// 이메일 중복 확인
 	public boolean existEmail(String email) {
 		return userDAO.existEmail(email);
+	}
+	
+	// 로그인
+	public User getUserByLoginIdAndPassword(String loginId, String Password) {
+		return userDAO.selectUserByLoginIdAndPassword(loginId, Password);
 	}
 }

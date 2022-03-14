@@ -3,6 +3,8 @@ package com.petpular.user.dao;
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.petpular.user.model.User;
+
 @Repository
 public interface UserDAO {
 	
@@ -18,4 +20,9 @@ public interface UserDAO {
 	
 	// 이메일 중복 확인
 	boolean existEmail(String email);
+	
+	// 로그인
+	User selectUserByLoginIdAndPassword(
+			@Param("loginId") String loginId, 
+			@Param("password") String Password);
 }

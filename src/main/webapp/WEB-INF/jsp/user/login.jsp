@@ -104,6 +104,23 @@
 				}
 				
 				
+				$.ajax({
+					type: "POST"
+					, url: "/user/login"
+					, data: {"loginId":loginId, "password": password}
+					, success: function(data) {
+						if (data.result == 'success') {
+							// 메인 페이지로 이동
+							alert("환영합니다");
+						} else {
+							alert(data.errorMessage);
+						}
+					}
+					, error: function(e) {
+						alert("로그인에 실패했습니다. 관리자에게 문의해주세요.");
+					}
+				});
+				
 			});
 			
 		});
