@@ -1,0 +1,16 @@
+@charset "UTF-8";
+
+:root {
+	--site-width: 600px;
+	--border-clr: #cfcfcf;
+	--back-clr: #fff8f1;
+	--main-clr: #ffa44f;
+}
+
+.font-color {
+	color: var(--main-clr);
+}
+
+.font-size-14 {
+	font-size: 14px;
+}
