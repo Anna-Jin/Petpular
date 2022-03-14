@@ -1,5 +1,6 @@
 @charset "UTF-8";
 
+
 * {
 	margin: 0;
 	padding: 0;
@@ -22,14 +23,14 @@ body {
 }
 
 .signup-box {
-	width: 600px;
-	min-height: 650px;
+	width: 500px;
+	min-height: 600px;
 	background-color: #fff;
 	border: 1px solid var(--border-clr);
 }
 
 .signup-hr {
-	width: 500px;
+	width: 80%;
 }
 
 #signup-btn {
