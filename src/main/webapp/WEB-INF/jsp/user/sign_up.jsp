@@ -107,7 +107,7 @@
 					<hr class="signup-hr">
 					<div class="d-flex mt-4 mb-0">
 						<div class="font-color font-size-14 mr-3">이미 아이디가 있으신가요?</div>
-						<a href="#" class="font-size-14">로그인</a>
+						<a href="/user/login" class="font-size-14">로그인</a>
 					</div>
 				</div>
 			</div>

@@ -14,4 +14,10 @@ public class UserController {
 	public String signup() {
 		return "user/sign_up";
 	}
+	
+	@RequestMapping("/user/login")
+	public String login() {
+		return "user/login";
+	}
+	
 }
