@@ -1,1 +1,81 @@
 @charset "UTF-8";
+
+/* aside */
+.gnb-logo {
+	font-size: 36px;
+	font-weight: bold;
+	color: #fff;
+}
+
+aside {
+	position: sticky;
+	top: 0px;
+	min-width: 200px;
+	height: 100vh;
+	background-color: var(--main-clr);
+}
+
+.nav {
+	font-size: 18px;
+}
+.nav .nav-item .nav-link {
+	color: #fff;
+}
+
+.nav .nav-item .nav-link:hover {
+	color: #9F5A1A;
+	background-color: #FFF8F1;
+}
+
+.nav .nav-item .nav-link.active {
+	color: #9F5A1A;
+	background-color: #FFF8F1;
+}
+
+.gnb-logo-box {
+	height: 150px;
+}
+
+.gnb-nav-box {
+	height: 100%;
+}
+
+.gnb-login-btn-box {
+	height: 150px;
+}
+
+.gnb-login-btn {
+	background-color: #fff;
+	border-radius: 8px;
+	padding: 2px 30px 2px 30px;
+	color: var(--main-clr);
+	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.gnb-login-btn:hover {
+	text-decoration: none;
+	color: var(--main-clr);
+}
+
+/* main */
+.main-logo {
+	font-size: 48px;
+	font-weight: bold;
+	color: var(--main-clr);
+}
+
+.text1 {
+	font-size: 30px;
+}
+
+.text2 {
+	font-size: 40px;
+}
+
+.main-signup-btn {
+	background-color: var(--main-clr);
+	width: 240px;
+	height: 60px;
+	font-size: 24px;
+}
+

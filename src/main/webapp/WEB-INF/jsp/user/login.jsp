@@ -18,12 +18,12 @@
 </head>
 <body>
 	<div class="wrap">
-		<div class="d-flex justify-content-center mb-4">
-			<div class="display-4 font-color font-weight-bold">Petpular</div>
-		</div>
-		<div class="login-box d-flex flex-column justify-content-between">
-			<div class="d-flex justify-content-center pt-5">
-				<h4>로그인</h4>
+		<div class="login-box d-flex flex-column justify-content-around">
+			<div class="d-flex justify-content-center">
+				<div class="logo mt-3">Petpular</div>
+			</div>
+			<div class="d-flex justify-content-center">
+				<div class="login-text">로그인</div>
 			</div>
 			<div class="m-0 p-0">
 				<div class="d-flex">
@@ -31,7 +31,7 @@
 						class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 font-weight-bold">
 						<label for="loginId">아이디</label>
 					</div>
-					<div class="ml-3 col-8">
+					<div class="ml-3 col-9">
 						<div class="input-width">
 							<input type="text" class="form-control form-control-sm loginId-area" id="loginId" name="loginId" placeholder="아이디를 입력해주세요"> 
 							<span class="id-val-chk text-danger small d-none">아이디를 입력해주세요</span> 
@@ -45,7 +45,7 @@
 						class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 font-weight-bold">
 						<label for="password">비밀번호</label>
 					</div>
-					<div class="ml-3 col-8">
+					<div class="ml-3 col-9">
 						<div class="input-width">
 							<input type="password" class="form-control form-control-sm password-area" id="password" name="password" placeholder="비밀번호를 입력해주세요"> 
 							<span class="password-val-chk text-danger small d-none">비밀번호를 입력해주세요</span>
@@ -112,6 +112,7 @@
 						if (data.result == 'success') {
 							// 메인 페이지로 이동
 							alert("환영합니다");
+							location.href = "/main"
 						} else {
 							alert(data.errorMessage);
 						}

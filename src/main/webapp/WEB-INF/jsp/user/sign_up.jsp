@@ -21,12 +21,12 @@
 <body>
 	<div class="wrap">
 		<form id="signup-form" method="post" action="/user/signup">
-			<div class="d-flex justify-content-center mb-4">
-				<div class="display-4 font-color font-weight-bold">Petpular</div>
-			</div>
-			<div class="signup-box d-flex flex-column justify-content-between">
-				<div class="d-flex justify-content-center pt-5">
-					<h4>회원가입</h4>
+			<div class="signup-box d-flex flex-column justify-content-around">
+				<div class="d-flex justify-content-center">
+					<div class="logo mt-3">Petpular</div>
+				</div>
+				<div class="d-flex justify-content-center">
+					<div class="signup-text">회원가입</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
@@ -99,7 +99,7 @@
 					</div>	
 				</div>
 				<div class="d-flex justify-content-center">
-					<button type="submit" id="signup-btn" class="btn">회원가입</button>
+					<button type="submit" id="signup-btn" class="btn mt-2">회원가입</button>
 				</div>
 				
 				

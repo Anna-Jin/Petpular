@@ -7,26 +7,28 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--site-width: 600px;
-	--border-clr: #cfcfcf;
-	--back-clr: #fff8f1;
-	--main-clr: #ffa44f;
-}
-
 body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
-	background-color: var(--back-clr);
+	
 }
 
 .login-box {
-	width: 500px;
-	min-height: 400px;
+	width: 400px;
+	min-height: 500px;
 	background-color: #fff;
 	border: 1px solid var(--border-clr);
+}
+
+.logo {
+	font-size: 36px;
+	font-weight: bold;
+	color: var(--main-clr);
+}
+
+.login-text {
+	font-size: 20px;
 }
 
 .login-hr {

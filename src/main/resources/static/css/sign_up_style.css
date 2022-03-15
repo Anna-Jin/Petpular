@@ -7,19 +7,10 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--site-width: 600px;
-	--border-clr: #cfcfcf;
-	--back-clr: #fff8f1;
-	--main-clr: #ffa44f;
-}
-
 body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 100vh;
-	background-color: var(--back-clr);
 }
 
 .signup-box {
@@ -27,6 +18,15 @@ body {
 	min-height: 600px;
 	background-color: #fff;
 	border: 1px solid var(--border-clr);
+}
+
+.logo {
+	font-size: 36px;
+	font-weight: bold;
+	color: var(--main-clr);
+}
+.signup-text {
+	font-size: 20px;
 }
 
 .signup-hr {

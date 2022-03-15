@@ -1,10 +1,17 @@
 @charset "UTF-8";
+@import url(//fonts.googleapis.com/earlyaccess/nanumgothic.css); 
 
 :root {
 	--site-width: 600px;
 	--border-clr: #cfcfcf;
 	--back-clr: #fff8f1;
 	--main-clr: #ffa44f;
+}
+
+body {
+	min-height: 100vh;
+	background-color: var(--back-clr);
+	font-family: 'Nanum Barun Gothic';
 }
 
 .font-color {
