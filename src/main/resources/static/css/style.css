@@ -57,7 +57,22 @@ aside {
 	color: var(--main-clr);
 }
 
+.gnb-profile-img {
+	width: 50px;
+	border: 10px soild #fff;
+	border: 3px solid var(--back-clr);
+	border-radius: 50%;
+}
+.gnb-logout-btn {
+	font-size: 10px;
+}
+
+.gnb-logout-btn:hover {
+	text-decoration: none;
+}
+
 /* main */
+/* not login */
 .main-logo {
 	font-size: 48px;
 	font-weight: bold;
@@ -77,5 +92,16 @@ aside {
 	width: 240px;
 	height: 60px;
 	font-size: 24px;
+	color: #fff;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+.main-signup-btn:hover {
+	color: #fff;
 }
 
+/* login */
+.main-login-box {
+	padding: 50px;
+}

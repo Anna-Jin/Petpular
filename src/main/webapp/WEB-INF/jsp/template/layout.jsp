@@ -22,7 +22,7 @@
 		<div class="d-flex">
 			<jsp:include page="../include/gnb.jsp" />
 			<%-- 비로그인 --%>
-			<jsp:include page="../main/main_not_login.jsp" />
+			<jsp:include page="../main/main.jsp" />
 		</div>
 	</div>
 
