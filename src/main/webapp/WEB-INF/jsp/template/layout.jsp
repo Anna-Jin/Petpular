@@ -21,12 +21,9 @@
 	<div id="wrap">
 		<div class="d-flex">
 			<jsp:include page="../include/gnb.jsp" />
-			<%-- 비로그인 --%>
-			<jsp:include page="../main/main.jsp" />
+			<jsp:include page="../${viewPath}.jsp" />
 		</div>
 	</div>
-
-
 
 </body>   
 </html>

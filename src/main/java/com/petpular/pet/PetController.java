@@ -1,16 +1,19 @@
-package com.petpular.main;
+package com.petpular.pet;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
-public class MainController {
+public class PetController {
 
-	@RequestMapping("/main")
-	public String main(Model model) {
+	@RequestMapping("/mypet")
+	public String mypet(Model model) {
 		
-		model.addAttribute("viewPath", "/main/main");
+		model.addAttribute("viewPath", "/mypet/mypet");
+		
 		return "template/layout";
+		
 	}
+	
 }

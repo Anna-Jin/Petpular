@@ -11,7 +11,7 @@
 		    <a class="nav-link"href="/main">About</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">My pet</a>
+		    <a class="nav-link" href="/mypet">My pet</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">Community</a>
