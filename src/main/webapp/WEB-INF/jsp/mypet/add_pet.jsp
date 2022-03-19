@@ -117,7 +117,7 @@
 						<div class="ms-3 col-8">
 							<div class="w-25">
 								<div class="d-flex align-items-center">
-									<input type="text" class="form-control form-control-sm" id="weight" name="weight" placeholder="kg"> 
+									<input type="number" min="0" class="form-control form-control-sm" id="weight" name="weight" placeholder="kg"> 
 									<span class="ms-2 font-size-14 fw-bold">Kg</span>
 								</div>
 							</div>
@@ -174,7 +174,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" class="form-control form-control-sm" id="feed-count" name="feed-count"> 
+								<input type="number" class="form-control form-control-sm" id="feed-count" name="feed-count"> 
 								<span class="font-size-14 fw-bold count">개</span>
 							</div>
 						</div>
@@ -188,7 +188,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" class="form-control form-control-sm" id="feed-volume" name="feed-volume"> 
+								<input type="number" class="form-control form-control-sm" id="feed-volume" name="feed-volume"> 
 								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
@@ -215,7 +215,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" class="form-control form-control-sm" id="sand-count" name="sand-count"> 
+								<input type="number" class="form-control form-control-sm" id="sand-count" name="sand-count"> 
 								<span class="font-size-14 fw-bold count"> 개</span>
 							</div>
 						</div>
@@ -229,7 +229,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" class="form-control form-control-sm" id="sand-volume" name="sand-volume"> 
+								<input type="number" class="form-control form-control-sm" id="sand-volume" name="sand-volume"> 
 								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
@@ -238,7 +238,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="submit" id="add-pet-btn" class="btn my-4">등록</button>
+				<button type="submit" id="add-pet-btn" class="btn my-4" disabled>등록</button>
 			</div>
 		</div>
 	</form>
@@ -328,19 +328,18 @@ $(document).ready(function() {
 	});
 	
 	// validation check
-	$('#name').keyup(function() {
+	$('#name, #breed, #birthday, #weight').on('keyup',function(param) {
 		var name = $('#name').val().trim();
-		if (name == '') {
+		var breed = $('#breed').val().trim();
+		var birthday = $('#birthday').val();
+		var weight = $('#weight').val().trim();
+		if (name == '' || breed == '' || birthday == '' || weight == '' || weight == 0) {
 			$('#add-pet-btn').attr('disabled', true);
+		} else if (name != '' && breed != '' && birthday != '' && weight != '' && weight > 0){
+			$('#add-pet-btn').attr('disabled', false);
 		}
 	});
 	
-	$('#breed').keyup(function() {
-		var breed = $('#breed').val().trim();
-		if (breed == '') {
-			$('#add-pet-btn').attr('disabled', true);
-		}
-	});
 	
 	
 	
