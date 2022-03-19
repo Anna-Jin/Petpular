@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+
 <aside class="d-flex flex-column">
 	<div class="gnb-logo-box d-flex justify-content-center align-items-center">
 		<div class="gnb-logo">Petpular</div>
@@ -8,10 +9,15 @@
 	<div class="gnb-nav-box">
 		<ul class="nav flex-column">
 		  <li class="nav-item">
-		    <a class="nav-link"href="/main">About</a>
+		    <a class="nav-link" href="/main">About</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="/mypet">My pet</a>
+		    <ul class="nav flex-column">
+		    	<li class="mypet-nav">
+		    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
+		    	</li>
+		    </ul>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">Community</a>
