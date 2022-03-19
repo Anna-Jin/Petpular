@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <div id="add-pet-content">
-	<form id="add-pet-form" method="post" action="/pet/registration">
+	<div>
 		<div class="d-flex justify-content-center">
 			<div class="add-pet-text">반려동물 등록</div>
 		</div>
@@ -16,7 +16,7 @@
 			</div>
 			<div class="mt-2">
 				<a type="button" id="pet-image-btn" class="pet-image-btn">사진 업로드</a>
-				<input type="file" id="pet-file" class="d-none" accept=".gif, .jpg, .png, .jpeg">
+				<input type="file" id="pet-file" name="petImgUrl" class="d-none" accept=".gif, .jpg, .png, .jpeg">
 			</div>
 		</div>
 		
@@ -85,7 +85,7 @@
 								<input type="radio" class="d-none" name="sex" id="boy" value="boy" autocomplete="off">
 								<label class="btn btn-sm radio-btn" for="boy">남자</label>
 								
-								<input type="checkbox" class="d-none" id="neuter" value="neuter" autocomplete="off">
+								<input type="checkbox" class="d-none" id="neuter" value="yes" autocomplete="off">
 								<label class="btn btn-sm radio-btn" for="neuter">중성화</label>
 							</div>
 						</div>
@@ -238,10 +238,10 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="submit" id="add-pet-btn" class="btn my-4" disabled>등록</button>
+				<button type="button" id="add-pet-btn" class="btn my-4" disabled data-user-id="${userId}">등록</button>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>
 
 
@@ -344,17 +344,49 @@ $(document).ready(function() {
 	
 	
 	// 반려동물 등록
-	$('#add-pet-form').on('submit', function(e) {
-		e.preventDefault();
+	$('#add-pet-btn').on('click', function(e) {
 		
-		// validation check
-		
-		
-		var breed = $('#breed').val().trim();
-		if (breed == '') {
-			return false;
+		// 파일이 업로드 된 경우, 확장자 체크
+		let file = $('#pet-file').val();
+		if (file != '') {
+			let ext = file.split('.').pop().toLowerCase(); 			 
+			if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+				alert('jpg, jpeg, png, gif 파일만 업로드 할 수 있습니다.');
+				$('#file').val('');
+				return;
+			}
 		}
-			
+		
+		var formData = new FormData();
+		
+		var params = $(this).serializeArray();
+		
+		$.each(params, function(key, input) {
+			formData.append(input.name, input.value);
+		});
+		
+		formData.append('file', $('#pet-file')[0].files[0]);
+		formData.append('neuter', $('#neuter').is(':checked'));
+		formData.append('userId', $(this).data('user-id'));
+		
+		$.ajax({
+			type: "POST"
+			, url: "/pet/registration"
+			, data: formData
+			, enctype: "multipart/form-data" 	
+			, processData: false			
+			, contentType: false
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert("등록 성공");
+				} else {
+					alert(data.errorMassage);
+				}
+			}
+			, error: function(e) {
+				alert("등록에 실패했습니다. 관리자에게 문의해주세요.");
+			}
+		});
 	});
 	
 });
