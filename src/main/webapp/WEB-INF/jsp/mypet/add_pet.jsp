@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <div id="add-pet-content">
-	<div>
+	<form id="add-pet-form" method="post" action="/pet/registration" accept-charset="UTF-8">
 		<div class="d-flex justify-content-center">
 			<div class="add-pet-text">반려동물 등록</div>
 		</div>
@@ -241,7 +241,7 @@
 				<button type="button" id="add-pet-btn" class="btn my-4" disabled data-user-id="${userId}">등록</button>
 			</div>
 		</div>
-	</div>
+	</form>
 </div>
 
 
@@ -359,7 +359,7 @@ $(document).ready(function() {
 		
 		var formData = new FormData();
 		
-		var params = $(this).serializeArray();
+		var params = $('#add-pet-form').serializeArray();
 		
 		$.each(params, function(key, input) {
 			formData.append(input.name, input.value);
@@ -385,7 +385,7 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert("등록에 실패했습니다. 관리자에게 문의해주세요.");
-			}
+			} 
 		});
 	});
 	

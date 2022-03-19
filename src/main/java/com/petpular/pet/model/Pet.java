@@ -3,6 +3,8 @@ package com.petpular.pet.model;
 import java.time.LocalDate;
 import java.util.Date;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import lombok.Data;
 
 @Data
@@ -16,6 +18,7 @@ public class Pet {
 	private String sex;
 	private boolean neuter;
 	
+	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate birthday;
 	private int weight;
 	private String disease;
