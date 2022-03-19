@@ -38,7 +38,7 @@
 				<div>
 					<img src="/image/user.png" alt="로그인 프로필 이미지" class="gnb-profile-img">
 				</div>
-				<div class="ml-2">
+				<div class="ms-2">
 					<div class="d-flex align-items-end">
 						<div class="text-white font-size-14 font-weight-bold">${userName}</div>
 						<div class="text-white font-size-12">님 안녕하세요!</div>

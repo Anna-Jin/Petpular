@@ -2,5 +2,5 @@
     pageEncoding="UTF-8"%>
 
 <div>
-	
+	<h1>등록 성공</h1>
 </div>
