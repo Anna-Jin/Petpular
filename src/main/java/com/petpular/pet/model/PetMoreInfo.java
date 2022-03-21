@@ -5,21 +5,23 @@ import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import com.petpular.pet.Type;
+
 import lombok.Data;
 
 @Data
 public class PetMoreInfo {
 
 	private int id;
-	private int user_id;
-	private int pet_id;
-	private String type;
+	private int userId;
+	private int petId;
+	private Type type; // sand, feed
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate date;
+	private LocalDate date; // sand-date, feed-date
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
-	private LocalDate after_date;
-	private Date created_at;
-	private Date updated_at;
+	private LocalDate afterDate; // sand(feed)-date와 count/volume을 이용하여 계산
+	private Date createdAt;
+	private Date updatedAt;
 }

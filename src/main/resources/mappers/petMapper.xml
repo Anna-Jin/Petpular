@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.petpular.pet.dao.PetDAO">
+ 	<select id="selectPetByPetId" resultType="com.petpular.pet.model.Pet">
+ 		SELECT
+ 			`id`
+ 			,`user_id`
+			, `pet_image_url`
+			, `name`
+			, `species`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`pet`
+		WHERE
+			`id`  = #{id}	
+ 	</select>
+ 	<insert id="insertPet" parameterType="com.petpular.pet.model.Pet">
+ 		INSERT INTO `pet`
+ 		(
+ 			`user_id`
+			, `pet_image_url`
+			, `name`
+			, `species`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petImageUrl}
+ 			, #{name}
+ 			, #{species}
+ 			, #{breed}
+ 			, #{sex}
+ 			, #{neuter}
+ 			, #{birthday}
+ 			, #{weight}
+ 			, #{disease}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ </mapper>

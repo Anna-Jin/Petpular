@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <div id="add-pet-content">
-	<form id="add-pet-form" method="post" action="/pet/registration" accept-charset="UTF-8">
+	<div>
 		<div class="d-flex justify-content-center">
 			<div class="add-pet-text">반려동물 등록</div>
 		</div>
@@ -85,7 +85,7 @@
 								<input type="radio" class="d-none" name="sex" id="boy" value="boy" autocomplete="off">
 								<label class="btn btn-sm radio-btn" for="boy">남자</label>
 								
-								<input type="checkbox" class="d-none" id="neuter" value="yes" autocomplete="off">
+								<input type="checkbox" class="d-none" id="neuter" value="neuter" autocomplete="off">
 								<label class="btn btn-sm radio-btn" for="neuter">중성화</label>
 							</div>
 						</div>
@@ -153,84 +153,87 @@
 			
 			<%-- 추가정보 (사료/모래 구매일, 수량, 용량) --%>
 			<div id="more-pet-info" class="d-none">
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="feed">사료 구매일</label>
+				<div id="feed" class="d-flex flex-column justify-content-around">
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div
+								class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="feed-date">사료 구매일</label>
+							</div>
+							<div class="ms-3 col-8">
+								<div class="input-width">
+									<input type="text" class="form-control form-control-sm" id="feed-date" name="feed_date" placeholder="yyyy-mm-dd"> 
+								</div>
+							</div>
 						</div>
-						<div class="ms-3 col-8">
-							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="feed" name="feed" placeholder="yyyy-mm-dd"> 
+					</div>
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div
+								class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="feed-count">수량</label>
+							</div>
+							<div class="ms-3 col-8">
+								<div class="w-25 d-flex align-items-center">
+									<input type="number" class="form-control form-control-sm" id="feed-count" name="feed_count"> 
+									<span class="font-size-14 fw-bold count">개</span>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div
+								class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="feed-volume">용량</label>
+							</div>
+							<div class="ms-3 col-8">
+								<div class="w-25 d-flex align-items-center">
+									<input type="number" class="form-control form-control-sm" id="feed-volume" name="feed_volume"> 
+									<span class="font-size-14 fw-bold volume">Kg</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="feed-count">수량</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="w-25 d-flex align-items-center">
-								<input type="number" class="form-control form-control-sm" id="feed-count" name="feed-count"> 
-								<span class="font-size-14 fw-bold count">개</span>
+				<div id="sand" class="d-none d-flex flex-column justify-content-around">
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div
+								class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="sand-date">모래 구매일</label>
+							</div>
+							<div class="ms-3 col-8">
+								<div class="input-width">
+									<input type="text" class="form-control form-control-sm" id="sand-date" name="sand_date" placeholder="yyyy-mm-dd"> 
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="feed-volume">용량</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="w-25 d-flex align-items-center">
-								<input type="number" class="form-control form-control-sm" id="feed-volume" name="feed-volume"> 
-								<span class="font-size-14 fw-bold volume">Kg</span>
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div
+								class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="sand-count">수량</label>
+							</div>
+							<div class="ms-3 col-8">
+								<div class="w-25 d-flex align-items-center">
+									<input type="number" class="form-control form-control-sm" id="sand-count" name="sand_count"> 
+									<span class="font-size-14 fw-bold count"> 개</span>
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="sand">모래 구매일</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="sand" name="sand" placeholder="yyyy-mm-dd"> 
+					<div class="m-0 p-0">
+						<div class="d-flex">
+							<div class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
+								<label for="sand-volume">용량</label>
 							</div>
-						</div>
-					</div>
-				</div>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="sand-count">수량</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="w-25 d-flex align-items-center">
-								<input type="number" class="form-control form-control-sm" id="sand-count" name="sand-count"> 
-								<span class="font-size-14 fw-bold count"> 개</span>
-							</div>
-						</div>
-					</div>
-				</div>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="sand-volume">용량</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="w-25 d-flex align-items-center">
-								<input type="number" class="form-control form-control-sm" id="sand-volume" name="sand-volume"> 
-								<span class="font-size-14 fw-bold volume">Kg</span>
+							<div class="ms-3 col-8">
+								<div class="w-25 d-flex align-items-center">
+									<input type="number" class="form-control form-control-sm" id="sand-volume" name="sand_volume"> 
+									<span class="font-size-14 fw-bold volume">Kg</span>
+								</div>
 							</div>
 						</div>
 					</div>
@@ -238,10 +241,10 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="button" id="add-pet-btn" class="btn my-4" disabled data-user-id="${userId}">등록</button>
+				<button type="button" id="add-pet-btn" class="btn my-4" disabled >등록</button>
 			</div>
 		</div>
-	</form>
+	</div>
 </div>
 
 
@@ -287,8 +290,10 @@ $(document).ready(function() {
 	$('[name="species"]').on('click', function() {
 		if ($(this).val() == 'dog') {
 			$('#breed').attr('placeholder', 'ex) 말티즈');
+			$('#sand').addClass('d-none');
 		} else {
 			$('#breed').attr('placeholder', 'ex) 코리안 숏헤어');
+			$('#sand').removeClass('d-none');
 		}
 	});
 	
@@ -319,8 +324,8 @@ $(document).ready(function() {
 	    })
 	
 	$('#birthday').datepicker();
-	$('#feed').datepicker();
-	$('#sand').datepicker();
+	$('#feed-date').datepicker();
+	$('#sand-date').datepicker();
 	
 	
 	$('#more-info-btn').on('click', function() {
@@ -345,6 +350,7 @@ $(document).ready(function() {
 	
 	// 반려동물 등록
 	$('#add-pet-btn').on('click', function(e) {
+		e.preventDefault();
 		
 		// 파일이 업로드 된 경우, 확장자 체크
 		let file = $('#pet-file').val();
@@ -357,17 +363,22 @@ $(document).ready(function() {
 			}
 		}
 		
+		
 		var formData = new FormData();
 		
-		var params = $('#add-pet-form').serializeArray();
-		
-		$.each(params, function(key, input) {
-			formData.append(input.name, input.value);
-		});
-		
 		formData.append('file', $('#pet-file')[0].files[0]);
-		formData.append('neuter', $('#neuter').is(':checked'));
-		formData.append('userId', $(this).data('user-id'));
+		formData.append('name', $('#name').val().trim());		
+		formData.append('species', $('input[name=species]:checked').val());
+		formData.append('sex', $('input[name=sex]:checked').val());
+		formData.append('breed', $('#breed').val());
+		formData.append('neuter', $('input:checkbox[id="neuter"]').is(":checked"));		
+		formData.append('birthday', $('#birthday').val());		
+		formData.append('weight', $('#weight').val());		
+		formData.append('disease', $('#disease').val().trim());		
+		
+		for (var pair of formData.entries()) {
+			  console.log(pair[0]+ ', ' + pair[1]);
+			}
 		
 		$.ajax({
 			type: "POST"

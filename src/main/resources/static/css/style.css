@@ -219,7 +219,6 @@ aside {
 	justify-content: space-between;
 }
 #more-pet-info {
-	height: 260px;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
@@ -232,6 +231,10 @@ aside {
 	margin-bottom: 25px;
 	padding: 3px 10px 3px 10px;
 }
+
+#feed, #sand {
+	height: 130px;
+} 
  
 .count {
 	margin-left: 11px;
