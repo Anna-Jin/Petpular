@@ -4,7 +4,6 @@
 .gnb-logo {
 	font-size: 36px;
 	font-weight: bold;
-	color: #fff;
 }
 
 aside {
@@ -37,11 +36,6 @@ aside {
 	margin-left: 25px;
 	color: #9F5A1A;
 	font-size: 14px;
-	text-decoration: none;
-}
-
-.mypet-nav .add-pet-nav:hover {
-	text-decoration: none;
 }
 
 .gnb-logo-box {
@@ -62,11 +56,9 @@ aside {
 	padding: 2px 30px 2px 30px;
 	color: var(--main-clr);
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
-	text-decoration: none;
 }
 
 .gnb-login-btn:hover {
-	text-decoration: none;
 	color: var(--main-clr);
 }
 
@@ -78,11 +70,6 @@ aside {
 }
 .gnb-logout-btn {
 	font-size: 10px;
-	text-decoration: none;
-}
-
-.gnb-logout-btn:hover {
-	text-decoration: none;
 }
 
 /* main */
@@ -168,12 +155,8 @@ aside {
 
 #pet-image-btn {
 	font-size: 12px;
-	text-decoration: none;
 }
 
-#pet-image-btn:hover {
-	text-decoration: none;
-}
 
 .add-pet-box {
 	width: 500px;
@@ -249,3 +232,60 @@ input[type="number"]::-webkit-inner-spin-button {
     margin: 0;
 }
 
+
+/* my pet profile */
+
+#mypet-profile {
+	margin-right: auto;
+	margin-left: auto;
+	padding: 30px;
+}
+
+#mypet-profile-add {
+	color: #6B6A6A;
+}
+
+#mypet-profile-content01 {
+	margin-left: -140px;
+	margin-top: 20px;
+}
+.mypet-profile-image-box {
+	transform: translate(140px);
+	background-color: var(--main-clr);
+	width: 280px;
+	height: 280px;
+	border-radius: 50%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.mypet-profile-image {
+	width: 265px;
+	height: 265px;
+	border: 5px solid #fff;
+	border-radius: 50%;
+}
+
+.mypet-profile-box {
+	width: 935px;
+	height: 358px;
+	background-color: #fff;
+	border: 1px solid var(--border-clr);
+	display: flex;
+}
+.blank {
+	width: 140px;
+}
+
+.mypet-profile-name {
+	font-size: 48px;
+	font-weight: bold;
+}
+.mypet-profile-info {
+	width: 50%;
+}
+.mypet-profile-more-info {
+	width: 50%;
+	border-left: 1px solid var(--border-clr);
+}

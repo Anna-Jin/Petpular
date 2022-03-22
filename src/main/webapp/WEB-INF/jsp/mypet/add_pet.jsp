@@ -5,7 +5,7 @@
 <div id="add-pet-content">
 	<div>
 		<div class="d-flex justify-content-center">
-			<div class="add-pet-text">반려동물 등록</div>
+			<div class="add-pet-text">냥이정보 등록</div>
 		</div>
 		
 		<div id="add-pet-image-box">
@@ -26,30 +26,11 @@
 				<div class="m-0 p-0">
 					<div class="d-flex">
 						<div class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="name">반려동물 이름</label>
+							<label for="name">냥이 이름</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
 								<input type="text" class="form-control form-control-sm loginId-area" id="name" name="name" placeholder="반려동물 이름">
-							</div>
-						</div>
-					</div>
-				</div>
-				
-				<%-- 종류 --%>
-				<div class="m-0 p-0">
-					<div class="d-flex">
-						<div
-							class="mt-1 p-0 col-4 d-flex justify-content-end font-size-14 fw-bold">
-							<label for="species">종류</label>
-						</div>
-						<div class="ms-3 col-8">
-							<div class="input-width">
-								<input type="radio" class="d-none" name="species" id="dog" value="dog" autocomplete="off" checked>
-								<label class="btn btn-sm radio-btn" for="dog">강아지</label>
-								
-								<input type="radio" class="d-none" name="species" id="cat" value="cat" autocomplete="off">
-								<label class="btn btn-sm radio-btn" for="cat">고양이</label>
 							</div>
 						</div>
 					</div>
@@ -64,7 +45,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="breed" name="breed" placeholder="ex) 말티즈"> 
+								<input type="text" class="form-control form-control-sm" id="breed" name="breed" placeholder="ex) 코리안 숏헤어"> 
 							</div>
 						</div>
 					</div>
@@ -117,7 +98,7 @@
 						<div class="ms-3 col-8">
 							<div class="w-25">
 								<div class="d-flex align-items-center">
-									<input type="number" min="0" class="form-control form-control-sm" id="weight" name="weight" placeholder="kg"> 
+									<input type="number" min="0" step="0.1" class="form-control form-control-sm" id="weight" name="weight" placeholder="kg"> 
 									<span class="ms-2 font-size-14 fw-bold">Kg</span>
 								</div>
 							</div>
@@ -175,7 +156,7 @@
 							</div>
 							<div class="ms-3 col-8">
 								<div class="w-25 d-flex align-items-center">
-									<input type="number" class="form-control form-control-sm" id="feed-count" name="feed_count"> 
+									<input type="text" numberOnly class="form-control form-control-sm" id="feed-count" name="feed_count"> 
 									<span class="font-size-14 fw-bold count">개</span>
 								</div>
 							</div>
@@ -196,7 +177,7 @@
 						</div>
 					</div>
 				</div>
-				<div id="sand" class="d-none d-flex flex-column justify-content-around">
+				<div id="sand" class="d-flex flex-column justify-content-around">
 					<div class="m-0 p-0">
 						<div class="d-flex">
 							<div
@@ -218,7 +199,7 @@
 							</div>
 							<div class="ms-3 col-8">
 								<div class="w-25 d-flex align-items-center">
-									<input type="number" class="form-control form-control-sm" id="sand-count" name="sand_count"> 
+									<input type="text" numberOnly class="form-control form-control-sm" id="sand-count" name="sand_count"> 
 									<span class="font-size-14 fw-bold count"> 개</span>
 								</div>
 							</div>
@@ -287,16 +268,6 @@ $(document).ready(function() {
 	    }
 	}
 	
-	$('[name="species"]').on('click', function() {
-		if ($(this).val() == 'dog') {
-			$('#breed').attr('placeholder', 'ex) 말티즈');
-			$('#sand').addClass('d-none');
-		} else {
-			$('#breed').attr('placeholder', 'ex) 코리안 숏헤어');
-			$('#sand').removeClass('d-none');
-		}
-	});
-	
 	
 	// datepicker
 	$.datepicker.setDefaults({
@@ -345,8 +316,18 @@ $(document).ready(function() {
 		}
 	});
 	
+	// 소수점 자리 수 제한
+	$('#weight, #sand-volume, #feed-volume').off("keypress").on("keypress",function(e) {
+		var weight = $(this).val();
+		var _pattern1 = /^\d*[.]\d{1}$/; 
+		   if (_pattern1.test(weight)) {
+				return false;
+		   }
+	});
 	
-	
+	$("input:text[numberOnly]").on("keyup", function() {
+	      $(this).val($(this).val().replace(/[^0-9]/g,""));
+	   });
 	
 	// 반려동물 등록
 	$('#add-pet-btn').on('click', function(e) {
@@ -368,7 +349,6 @@ $(document).ready(function() {
 		
 		formData.append('file', $('#pet-file')[0].files[0]);
 		formData.append('name', $('#name').val().trim());		
-		formData.append('species', $('input[name=species]:checked').val());
 		formData.append('sex', $('input[name=sex]:checked').val());
 		formData.append('breed', $('#breed').val());
 		formData.append('neuter', $('input:checkbox[id="neuter"]').is(":checked"));		

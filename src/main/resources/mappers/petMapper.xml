@@ -3,13 +3,12 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="com.petpular.pet.dao.PetDAO">
- 	<select id="selectPetByPetId" resultType="com.petpular.pet.model.Pet">
+ 	<select id="selectPetByUserIdPetId" resultType="com.petpular.pet.model.Pet">
  		SELECT
  			`id`
  			,`user_id`
 			, `pet_image_url`
 			, `name`
-			, `species`
 			, `breed`
 			, `sex`
 			, `neuter`
@@ -21,7 +20,27 @@
 		FROM
 			`pet`
 		WHERE
-			`id`  = #{id}	
+			`id`  = #{id} AND
+			`user_id` = #{userId}	
+ 	</select>
+ 	<select id="selectPetByUserId" resultType="com.petpular.pet.model.Pet">
+ 		SELECT
+ 			`id`
+ 			,`user_id`
+			, `pet_image_url`
+			, `name`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`pet`
+		WHERE
+			`user_id` = #{userId}
  	</select>
  	<insert id="insertPet" parameterType="com.petpular.pet.model.Pet">
  		INSERT INTO `pet`
@@ -29,7 +48,6 @@
  			`user_id`
 			, `pet_image_url`
 			, `name`
-			, `species`
 			, `breed`
 			, `sex`
 			, `neuter`
@@ -44,7 +62,6 @@
  			#{userId}
  			, #{petImageUrl}
  			, #{name}
- 			, #{species}
  			, #{breed}
  			, #{sex}
  			, #{neuter}
