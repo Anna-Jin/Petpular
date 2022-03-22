@@ -57,4 +57,20 @@ public class PetController {
 		return "template/layout";
 	}
 	
+	@RequestMapping("/add/more-info/{petId}")
+	public String addPetMoreInfo(
+			@PathVariable("petId") int petId,
+			Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
+		
+		model.addAttribute("pet", pet);
+		
+		model.addAttribute("viewPath", "/mypet/add_pet_more_info");
+		return "template/layout";
+	}
+	
 }
