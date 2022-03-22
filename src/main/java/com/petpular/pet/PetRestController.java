@@ -35,12 +35,11 @@ public class PetRestController {
 	public Map<String, Object> addPet(
 			@RequestParam(value = "file", required = false) MultipartFile file,
 			@RequestParam("name") String name,
-			@RequestParam("species") String species,
 			@RequestParam("breed") String breed,
 			@RequestParam("sex") String sex,
 			@RequestParam("neuter") boolean neuter,
 			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
-			@RequestParam("weight") int weight,
+			@RequestParam("weight") double weight,
 			@RequestParam(value = "disease", required = false) String disease,
 			@ModelAttribute Sand sand,
 			@ModelAttribute Feed feed,
@@ -53,7 +52,7 @@ public class PetRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		int row = petBO.addPet(userId, userLoginId, file, name, species, breed, sex, neuter, birthday, weight, disease);
+		int row = petBO.addPet(userId, userLoginId, file, name, breed, sex, neuter, birthday, weight, disease);
 		
 		if (row < 1) {
 			result.put("result", "error");

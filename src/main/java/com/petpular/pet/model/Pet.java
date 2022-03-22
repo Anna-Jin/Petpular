@@ -15,14 +15,15 @@ public class Pet {
 	@JsonProperty("pet_image_url")
 	private String petImageUrl;
 	private String name;
-	private String species;
 	private String breed;
 	private String sex;
 	private boolean neuter;
 	private LocalDate birthday;
 	private int weight;
 	private String disease;
+	@JsonProperty("created_at")
 	private Date createdAt;
+	@JsonProperty("updated_at")
 	private Date updatedAt;
 	
 }
