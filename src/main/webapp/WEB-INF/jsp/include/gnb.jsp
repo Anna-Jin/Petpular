@@ -4,7 +4,7 @@
 
 <aside class="d-flex flex-column">
 	<div class="gnb-logo-box d-flex justify-content-center align-items-center">
-		<div class="gnb-logo">Petpular</div>
+		<div class="gnb-logo"><a href="/main" class="text-white">Petpular</a></div>
 	</div>
 	<div class="gnb-nav-box">
 		<ul class="nav flex-column">
@@ -14,9 +14,20 @@
 		  <li class="nav-item">
 		    <a class="nav-link" href="/mypet">My pet</a>
 		    <ul class="nav flex-column">
-		    	<li class="mypet-nav">
-		    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
-		    	</li>
+		    	<c:choose>
+		    		<c:when test="${empty petList}">
+				    	<li class="mypet-nav">
+				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
+				    	</li>	
+		    		</c:when>
+		    		<c:otherwise>
+		    			<c:forEach items="${petList}" var="pet">
+			    			<li class="mypet-nav">
+					    		<a class="add-pet-nav" href="/mypet/${pet.id}">${pet.name}</a>
+					    	</li>
+				    	</c:forEach>
+		    		</c:otherwise>
+		    	</c:choose>
 		    </ul>
 		  </li>
 		  <li class="nav-item">
