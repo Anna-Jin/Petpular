@@ -29,11 +29,15 @@ public interface PetDAO {
 			@Param("disease") String disease);
 	
 	int insertPetMoreInfoBySand(
+			@Param("userId") int userId,
+			@Param("petId") int petId,
 			@Param("sandType") String sandType, 
 			@Param("sandDate") LocalDate sandDate, 
 			@Param("sandAfterDate") LocalDate sandAfterDate);
 	
 	int insertPetMoreInfoByFeed(
+			@Param("userId") int userId,
+			@Param("petId") int petId,
 			@Param("feedType") String feedType, 
 			@Param("feedDate") LocalDate feedDate, 
 			@Param("feedAfterDate") LocalDate feedAfterDate);

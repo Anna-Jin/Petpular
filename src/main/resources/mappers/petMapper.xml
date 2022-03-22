@@ -72,4 +72,40 @@
  			, NOW()
  		)
  	</insert>
+ 	<insert id="insertPetMoreInfoBySand" parameterType="map">
+ 		INSERT INTO `pet_more_info`
+ 		(
+ 			`user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `after_date`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petId}
+ 			, #{sandType}
+ 			, #{sandDate}
+ 			, #{sandAfterDate}
+ 		)
+ 	</insert>
+ 	<insert id="insertPetMoreInfoByFeed" parameterType="map">
+ 		INSERT INTO `pet_more_info`
+ 		(
+ 			`user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `after_date`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petId}
+ 			, #{feedType}
+ 			, #{feedDate}
+ 			, #{feedAfterDate}
+ 		)
+ 	</insert>
  </mapper>

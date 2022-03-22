@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -65,4 +66,30 @@ public class PetRestController {
 		return result;
 	}
 
+	@PostMapping("/more-info/{petId}")
+	public Map<String, Object> addPetMoreInfo(
+			@ModelAttribute Feed feed,
+			@ModelAttribute Sand sand,
+			@PathVariable("petId") int petId,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int row1 = petBO.addPetMoreInfoBySand(sand, userId, petId);
+		int row2 = petBO.addPetMoreInfoByFeed(feed, userId, petId);
+		
+		if (row1 < 1 || row2 < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "등록에 실패했습니다.");
+			logger.error("[per more info] 펫 추가 정보 petId:{}", petId);
+		}
+		
+		result.put("result", "success");
+		
+		return result;
+	}
 }

@@ -59,29 +59,61 @@ public class PetBO {
 		return petDAO.insertPet(userId, imagePath, name, breed, sex, neuter, birthday, weight, disease);
 	}
 	
-	public int addPetMoreInfoBySand(Sand sand) {
+	public int addPetMoreInfoBySand(Sand sand, int userId, int petId) {
 		String sandType = String.valueOf(Type.Sand);
-		LocalDate sandDate = sand.getSand_date();
-		int sandCount = sand.getSand_count(); // 반올림
-		double sandVolume = sand.getSand_volume();
+		LocalDate sandDate = sand.getSandDate();
+		int sandCount = sand.getSandCount(); // 반올림
+		double sandVolume = sand.getSandVolume();
 		int afterDate = (int)Math.round(sandCount * sandVolume * 4);
 		
 		// 다음 모래 구매일 구하기
 		LocalDate sandAfterDate = sandDate.plusDays(afterDate);
 		
-		return petDAO.insertPetMoreInfoBySand(sandType, sandDate, sandAfterDate);
+		return petDAO.insertPetMoreInfoBySand(userId, petId, sandType, sandDate, sandAfterDate);
 	}
 	
-	public int addPetMoreInfoByFeed(Feed feed, int weight) {
+	public int addPetMoreInfoByFeed(Feed feed, int userId, int petId) {
 		String feedType = String.valueOf(Type.Feed);
-		LocalDate feedDate = feed.getFeed_date();
-		int feedCount = feed.getFeed_count();
-		double feedVolume = feed.getFeed_volume();
+		LocalDate feedDate = feed.getFeedDate();
+		int feedCount = feed.getFeedCount();
+		double feedVolume = feed.getFeedVolume();
+		int feedKcal = feed.getFeedKcal();
 		
-		int afterDate;
-			afterDate = (int)Math.round(((feedVolume * 1000) * feedCount) / (30 + ((weight - 1) * 20)));
-			LocalDate feedAfterDate = feedDate.plusDays(afterDate);
-			return petDAO.insertPetMoreInfoBySand(feedType, feedDate, feedAfterDate);
+		PetView pet = getPetByUserIdPetId(userId, petId);
+		
+
+		
+		double weight = pet.getPet().getWeight();
+		
+		// 휴식기 에너지 요구량
+//		2kg 미만 냥이 = 70 ×체중(kg)^0.75
+//		2kg 이상 냥이 = 30 × 체중(kg) + 70
+		double rer;
+		
+		if (weight >= 2.0) {
+			rer = (30 * weight) + 70;
+		} else {
+			rer = Math.pow((70 * weight), 0.75);
+		}
+		
+		// 하루 필요 칼로리
+//		중성화 함 = 1.2 × RER
+//		중성화 안 함 = 1.4 × RER
+		double needKcal;
+		boolean neuter = pet.getPet().isNeuter();
+		if (neuter) {
+			needKcal = 1.2 * rer;
+		} else {
+			needKcal = 1.4 * rer;
+		}
+		
+		// 하루 사료 급여량
+		double feedPerDay = (needKcal / feedKcal) * 1000; 
+		
+		int consumDate = (int)Math.round((feedCount * feedVolume * 1000) / feedPerDay);
+		
+		LocalDate feedAfterDate = feedDate.plusDays(consumDate);
+		return petDAO.insertPetMoreInfoBySand(userId, petId, feedType, feedDate, feedAfterDate);
 		
 	}
 	
