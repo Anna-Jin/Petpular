@@ -10,62 +10,51 @@
 			<div id="feed" class="d-flex flex-column justify-content-around">
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="feed-date">사료 구매일</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm"
-									id="feed-date" name="feed_date" placeholder="yyyy-mm-dd">
+								<input type="text" class="form-control form-control-sm" id="feed-date" name="feedDate" placeholder="yyyy-mm-dd">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="feed-count">수량</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" numberOnly
-									class="form-control form-control-sm" id="feed-count"
-									name="feed_count"> <span
-									class="font-size-14 fw-bold count">개</span>
+								<input type="text" numberOnly class="form-control form-control-sm" id="feed-count" name="feedCount"> 
+								<span class="font-size-14 fw-bold count">개</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="feed-volume">용량</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="number" min="1"
-									class="form-control form-control-sm" id="feed-volume"
-									name="feed_volume"> <span
-									class="font-size-14 fw-bold volume">Kg</span>
+								<input type="number" min="1" class="form-control form-control-sm" id="feed-volume" name="feedVolume"> 
+								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="feed-volume">1kg 당 kcal</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="kcal d-flex align-items-center">
-								<input type="text" numberOnly
-									class="form-control form-control-sm" id="feed-kcal"
-									name="feed-kcal"> <span
-									class="font-size-14 fw-bold volume">Kcal</span>
+								<input type="text" numberOnly class="form-control form-control-sm" id="feed-kcal" name="feedKcal"> 
+								<span class="font-size-14 fw-bold volume">Kcal</span>
 							</div>
 						</div>
 					</div>
@@ -79,46 +68,38 @@
 			<div id="sand" class="d-flex flex-column justify-content-around">
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="sand-date">모래 구매일</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm"
-									id="sand-date" name="sand_date" placeholder="yyyy-mm-dd">
+								<input type="text" class="form-control form-control-sm" id="sand-date" name="sandDate" placeholder="yyyy-mm-dd">
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="sand-count">수량</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" numberOnly
-									class="form-control form-control-sm" id="sand-count"
-									name="sand_count"> <span
-									class="font-size-14 fw-bold count"> 개</span>
+								<input type="text" numberOnly class="form-control form-control-sm" id="sand-count" name="sandCount"> 
+								<span class="font-size-14 fw-bold count"> 개</span>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="m-0 p-0">
 					<div class="d-flex">
-						<div
-							class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
+						<div class="p-0 col-4 d-flex justify-content-end align-items-center font-size-14 fw-bold">
 							<label for="sand-volume">용량</label>
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="number" min="1"
-									class="form-control form-control-sm" id="sand-volume"
-									name="sand_volume"> <span
-									class="font-size-14 fw-bold volume">Kg</span>
+								<input type="number" min="1" class="form-control form-control-sm" id="sand-volume" name="sandVolume"> 
+								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
 					</div>
