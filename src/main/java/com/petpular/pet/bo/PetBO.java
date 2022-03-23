@@ -1,5 +1,6 @@
 package com.petpular.pet.bo;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -48,7 +49,7 @@ public class PetBO {
 	}
 	
 	public int addPet(int userId, String userLoginId, MultipartFile file, String name, 
-			String breed, String sex, boolean neuter, LocalDate birthday, double weight, String disease) {
+			String breed, String sex, boolean neuter, LocalDate birthday, BigDecimal weight, String disease) {
 		
 		String imagePath = null;
 		// file이 null이면 수정하지 않는다
@@ -83,7 +84,7 @@ public class PetBO {
 		
 
 		
-		double weight = pet.getPet().getWeight();
+		double weight = pet.getPet().getWeight().doubleValue();
 		
 		// 휴식기 에너지 요구량
 //		2kg 미만 냥이 = 70 ×체중(kg)^0.75

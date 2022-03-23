@@ -1,5 +1,6 @@
 package com.petpular.pet.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -19,7 +20,7 @@ public class Pet {
 	private String sex;
 	private boolean neuter;
 	private LocalDate birthday;
-	private int weight;
+	private BigDecimal weight;
 	private String disease;
 	@JsonProperty("created_at")
 	private Date createdAt;

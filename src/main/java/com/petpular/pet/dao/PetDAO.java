@@ -1,5 +1,6 @@
 package com.petpular.pet.dao;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
@@ -25,7 +26,7 @@ public interface PetDAO {
 			@Param("sex") String sex, 
 			@Param("neuter") boolean neuter, 
 			@Param("birthday") LocalDate birthday, 
-			@Param("weight") double weight, 
+			@Param("weight") BigDecimal weight, 
 			@Param("disease") String disease);
 	
 	int insertPetMoreInfoBySand(

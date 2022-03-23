@@ -1,5 +1,6 @@
 package com.petpular.pet;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,7 +41,7 @@ public class PetRestController {
 			@RequestParam("sex") String sex,
 			@RequestParam("neuter") boolean neuter,
 			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
-			@RequestParam("weight") double weight,
+			@RequestParam("weight") BigDecimal weight,
 			@RequestParam(value = "disease", required = false) String disease,
 			@ModelAttribute Sand sand,
 			@ModelAttribute Feed feed,
