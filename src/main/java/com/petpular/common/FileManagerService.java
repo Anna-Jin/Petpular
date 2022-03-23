@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.UUID;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -27,15 +28,25 @@ public class FileManagerService {
 		// 파일 업로드: byte 단위로 업로드한다.
 		try {
 			byte[] bytes = file.getBytes();
-			Path path = Paths.get(filePath + file.getOriginalFilename()); // getOriginalFilename()는 input에 올린 파일명이다. (한글이면 안됨)
+			
+			//파일명 암호화
+			String origName = new String(file.getOriginalFilename().getBytes("8859_1"),"UTF-8");
+			String ext = origName.substring(origName.lastIndexOf(".")); // 확장자
+			String saveFileName = getUuid() + ext;
+			
+			Path path = Paths.get(filePath + saveFileName); // getOriginalFilename()는 input에 올린 파일명이다. (한글이면 안됨)
 			Files.write(path, bytes);
 			
-			return "/images/" + directoryName + file.getOriginalFilename();
+			return "/images/" + directoryName + saveFileName;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 		
 		return null;
+	}
+	
+	public static String getUuid() {
+		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
 	public void deleteFile(String imagePath) {
