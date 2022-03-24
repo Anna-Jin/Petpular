@@ -1,4 +1,4 @@
-package com.petpular.pet;
+package com.petpular.pet.model;
 
 public enum Type {
 	Sand,

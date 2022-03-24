@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.petpular.common.FileManagerService;
-import com.petpular.pet.Type;
 import com.petpular.pet.dao.PetDAO;
 import com.petpular.pet.model.Feed;
 import com.petpular.pet.model.Pet;
 import com.petpular.pet.model.PetMoreInfo;
 import com.petpular.pet.model.PetView;
 import com.petpular.pet.model.Sand;
+import com.petpular.pet.model.Type;
 
 @Service
 public class PetBO {
