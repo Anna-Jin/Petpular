@@ -8,6 +8,7 @@ import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import com.petpular.pet.model.Pet;
+import com.petpular.pet.model.PetMoreInfo;
 
 @Repository
 public interface PetDAO {
@@ -17,6 +18,10 @@ public interface PetDAO {
 			@Param("id") int id);
 	
 	List<Pet> selectPetByUserId(int userId);
+	
+	List<PetMoreInfo> selectPetMoreIfoByUserIdPetId(
+			@Param("userId") int userId, 
+			@Param("petId") int petId);
 	
 	int insertPet(
 			@Param("userId") int userId, 

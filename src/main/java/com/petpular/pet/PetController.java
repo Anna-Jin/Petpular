@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.petpular.pet.bo.PetBO;
 import com.petpular.pet.model.Pet;
+import com.petpular.pet.model.PetMoreInfo;
 import com.petpular.pet.model.PetView;
 
 @Controller
@@ -43,8 +44,10 @@ public class PetController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
+		List<PetMoreInfo> petMoreInfoList = petBO.getPetMoreIfoByUserIdPetId(userId, petId);
 		
 		model.addAttribute("pet", pet);
+		model.addAttribute("petMoreInfoList", petMoreInfoList);
 		model.addAttribute("viewPath", "/mypet/mypet_profile");
 		return "template/layout";
 		

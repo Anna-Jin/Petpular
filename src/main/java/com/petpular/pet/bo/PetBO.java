@@ -13,6 +13,7 @@ import com.petpular.pet.Type;
 import com.petpular.pet.dao.PetDAO;
 import com.petpular.pet.model.Feed;
 import com.petpular.pet.model.Pet;
+import com.petpular.pet.model.PetMoreInfo;
 import com.petpular.pet.model.PetView;
 import com.petpular.pet.model.Sand;
 
@@ -46,6 +47,11 @@ public class PetBO {
 		
 		petView.setAge(age);
 		return petView;
+	}
+	
+	public List<PetMoreInfo> getPetMoreIfoByUserIdPetId(int userId, int petId) {
+		return petDAO.selectPetMoreIfoByUserIdPetId(userId, petId);
+		
 	}
 	
 	public int addPet(int userId, String userLoginId, MultipartFile file, String name, 

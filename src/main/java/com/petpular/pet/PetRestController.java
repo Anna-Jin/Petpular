@@ -51,6 +51,7 @@ public class PetRestController {
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
+		session.setAttribute("petName", name);
 		
 		Map<String, Object> result = new HashMap<>();
 		

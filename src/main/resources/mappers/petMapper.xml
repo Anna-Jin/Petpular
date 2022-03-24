@@ -42,6 +42,22 @@
 		WHERE
 			`user_id` = #{userId}
  	</select>
+ 	<select id="selectPetMoreIfoByUserIdPetId" resultType="com.petpular.pet.model.PetMoreInfo">
+ 		SELECT 
+ 			`id`
+			, `user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `after_date`
+			, `created_at`
+			, `updated_at`
+ 		FROM
+ 			`pet_more_info`
+ 		WHERE
+ 			`user_id` = #{userId} AND
+ 			`pet_id` = #{petId}
+ 	</select>
  	<insert id="insertPet" parameterType="com.petpular.pet.model.Pet">
  		INSERT INTO `pet`
  		(
