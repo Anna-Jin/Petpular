@@ -47,4 +47,17 @@ public interface PetDAO {
 			@Param("feedType") String feedType, 
 			@Param("feedDate") LocalDate feedDate, 
 			@Param("feedAfterDate") LocalDate feedAfterDate);
+	
+	int updatePet(
+			@Param("userId") int userId,
+			@Param("petId") int petId,
+			@Param("petImageUrl") String petImageUrl, 
+			@Param("name") String name, 
+			@Param("breed") String breed, 
+			@Param("sex") String sex, 
+			@Param("neuter") boolean neuter, 
+			@Param("birthday") LocalDate birthday, 
+			@Param("weight") BigDecimal weight, 
+			@Param("disease") String disease);
+	
 }

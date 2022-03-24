@@ -92,13 +92,16 @@
     <div class="modal-content">
       <div class="modal-body p-0">
         <div class="mypet-profile-edit">
-			<a href="#" class="font-color">냥이 정보 수정</a>
+			<a href="/mypet/edit/${pet.pet.id}" class="text-dark">냥이 정보 수정</a>
 		</div>
 		<div class="mypet-profile-add">
-			<a href="/mypet/add/more-info/${pet.pet.id}" class="font-color">사료 / 모래 정보 등록</a>
+			<a href="/mypet/add/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 등록</a>
 		</div>
 		<div class="mypet-more-info-edit">
-			<a href="" class="font-color">사료 / 모래 정보 수정</a>
+			<a href="" class="text-dark">사료 / 모래 정보 수정</a>
+		</div>
+		<div class="mypet-profile-delete">
+			<a href="" class="text-danger">냥이 정보 삭제</a>
 		</div>
       </div>
     </div>

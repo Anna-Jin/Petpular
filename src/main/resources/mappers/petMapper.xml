@@ -124,4 +124,19 @@
  			, #{feedAfterDate}
  		)
  	</insert>
+ 	<update id="updatePet" parameterType="map">
+ 		UPDATE `pet`
+ 		SET
+ 			`user_id` = #{userId}
+ 			<if test="petImageUrl != null">, `pet_image_url` = #{petImageUrl}</if>
+			, `name` = #{name}
+			, `breed` = #{breed}
+			, `sex` = #{sex}
+			, `neuter` = #{neuter}
+			, `birthday`= #{birthday}
+			, `weight` = #{weight}
+			<if test="disease != null">, `disease` = #{disease}</if>
+		WHERE
+			`id` = #{petId}	
+ 	</update>
  </mapper>

@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import com.petpular.pet.bo.PetBO;
-import com.petpular.pet.model.Pet;
 import com.petpular.pet.model.PetMoreInfo;
 import com.petpular.pet.model.PetView;
 
@@ -78,8 +77,25 @@ public class PetController {
 		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
 		
 		model.addAttribute("pet", pet);
-		
 		model.addAttribute("viewPath", "/mypet/add_pet_more_info");
+		return "template/layout";
+	}
+	
+	@RequestMapping("/edit/{petId}")
+	public String editPet(
+			@PathVariable("petId") int petId,
+			Model model,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
+		
+		model.addAttribute("pet", pet);
+		model.addAttribute("viewPath", "/mypet/edit_pet");
+		
 		return "template/layout";
 	}
 	

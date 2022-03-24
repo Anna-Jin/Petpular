@@ -116,12 +116,28 @@ public class PetBO {
 		
 		// 하루 사료 급여량
 		double feedPerDay = (needKcal / feedKcal) * 1000; 
-		
 		int consumDate = (int)Math.round((feedCount * feedVolume * 1000) / feedPerDay);
 		
 		LocalDate feedAfterDate = feedDate.plusDays(consumDate);
-		return petDAO.insertPetMoreInfoBySand(userId, petId, feedType, feedDate, feedAfterDate);
 		
+		return petDAO.insertPetMoreInfoBySand(userId, petId, feedType, feedDate, feedAfterDate);
+	}
+	
+	public int updatePet(int userId, String userLoginId, int petId, MultipartFile file, String name, 
+			String breed, String sex, boolean neuter, LocalDate birthday, BigDecimal weight, String disease) {
+		String petProfileImageUrl = getPetByUserIdPetId(userId, petId).getPet().getPetImageUrl();
+		
+		String imagePath = null;
+		if (file != null) {
+			imagePath = fileManagerService.savaFile(userLoginId, file);
+			
+			// 새로운 이미지 업로드에 성공하면 기존 이미지 삭제
+			if (petProfileImageUrl != null && imagePath != null) {
+				fileManagerService.deleteFile(petProfileImageUrl);
+			}
+		}
+		
+		return petDAO.updatePet(userId, petId, petProfileImageUrl, name, breed, sex, neuter, birthday, weight, disease);
 	}
 	
 }

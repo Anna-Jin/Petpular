@@ -33,6 +33,21 @@ public class PetRestController {
 	@Autowired
 	private PetBO petBO;
 	
+	/**
+	 * 고양이 등록
+	 * @param file
+	 * @param name
+	 * @param breed
+	 * @param sex
+	 * @param neuter
+	 * @param birthday
+	 * @param weight
+	 * @param disease
+	 * @param sand
+	 * @param feed
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/registration")
 	public Map<String, Object> addPet(
 			@RequestParam(value = "file", required = false) MultipartFile file,
@@ -43,15 +58,12 @@ public class PetRestController {
 			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
 			@RequestParam("weight") BigDecimal weight,
 			@RequestParam(value = "disease", required = false) String disease,
-			@ModelAttribute Sand sand,
-			@ModelAttribute Feed feed,
 			HttpServletRequest request
 			) {
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
-		session.setAttribute("petName", name);
 		
 		Map<String, Object> result = new HashMap<>();
 		
@@ -67,7 +79,15 @@ public class PetRestController {
 		
 		return result;
 	}
-
+	
+	/**
+	 * 고양이 추가정보 등록
+	 * @param feed
+	 * @param sand
+	 * @param petId
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/more-info/{petId}")
 	public Map<String, Object> addPetMoreInfo(
 			@ModelAttribute Feed feed,
@@ -93,5 +113,39 @@ public class PetRestController {
 		result.put("result", "success");
 		
 		return result;
+	}
+	
+	@PostMapping("/edit")
+	public Map<String, Object> editPet(
+			@RequestParam("petId") int petId,
+			@RequestParam(value = "file", required = false) MultipartFile file,
+			@RequestParam("name") String name,
+			@RequestParam("breed") String breed,
+			@RequestParam("sex") String sex,
+			@RequestParam("neuter") boolean neuter,
+			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
+			@RequestParam("weight") BigDecimal weight,
+			@RequestParam(value = "disease", required = false) String disease,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int row = petBO.updatePet(userId, userLoginId, petId, file, name, breed, sex, neuter, birthday, weight, disease);
+		
+		if (row < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "반려동물 등록에 실패했습니다.");
+			logger.error("[add pet] 반려동물 등록 userId: {}", userId);
+		}
+		
+		result.put("result", "success");
+		
+		return result;
+		
 	}
 }

@@ -5,13 +5,20 @@
 <div id="add-pet-content">
 	<div>
 		<div class="d-flex justify-content-center">
-			<div class="add-pet-text">냥이정보 등록</div>
+			<div class="add-pet-text">냥이정보 수정</div>
 		</div>
 		
 		<div id="add-pet-image-box">
 			<div class="add-pet-image">
 				<div class="d-flex justify-content-center">
-					<img src="/image/user.png" id="pet-img" alt="반려동물 사진 등록">
+					<c:choose>
+						<c:when test="${empty pet.pet.petImageUrl}">
+							<img src="/image/user.png" id="pet-img" alt="반려동물 사진 등록">
+						</c:when>
+						<c:otherwise>
+							<img src="${pet.pet.petImageUrl}" id="pet-img" alt="반려동물 사진 등록">
+						</c:otherwise>
+					</c:choose>
 				</div>
 			</div>
 			<div class="mt-2">
@@ -30,7 +37,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm loginId-area" id="name" name="name" placeholder="반려동물 이름">
+								<input type="text" class="form-control form-control-sm loginId-area" id="name" name="name" value="${pet.pet.name}">
 							</div>
 						</div>
 					</div>
@@ -45,7 +52,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="breed" name="breed" placeholder="ex) 코리안 숏헤어"> 
+								<input type="text" class="form-control form-control-sm" id="breed" name="breed" value="${pet.pet.breed}"> 
 							</div>
 						</div>
 					</div>
@@ -60,14 +67,32 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="radio" class="d-none" name="sex" id="girl" value="girl" autocomplete="off" checked>
-								<label class="btn btn-sm radio-btn" for="girl">여자</label>
-								
-								<input type="radio" class="d-none" name="sex" id="boy" value="boy" autocomplete="off">
-								<label class="btn btn-sm radio-btn" for="boy">남자</label>
-								
-								<input type="checkbox" class="d-none" id="neuter" value="neuter" autocomplete="off">
-								<label class="btn btn-sm radio-btn" for="neuter">중성화</label>
+								<c:choose>
+									<c:when test="${pet.pet.sex eq 'girl'}">
+										<input type="radio" class="d-none" name="sex" id="girl" value="girl" autocomplete="off" checked>
+										<label class="btn btn-sm radio-btn" for="girl">여자</label>
+										
+										<input type="radio" class="d-none" name="sex" id="boy" value="boy" autocomplete="off">
+										<label class="btn btn-sm radio-btn" for="boy">남자</label>
+									</c:when>
+									<c:when test="${pet.pet.sex eq 'boy'}">
+										<input type="radio" class="d-none" name="sex" id="girl" value="girl" autocomplete="off">
+										<label class="btn btn-sm radio-btn" for="girl">여자</label>
+										
+										<input type="radio" class="d-none" name="sex" id="boy" value="boy" autocomplete="off" checked>
+										<label class="btn btn-sm radio-btn" for="boy">남자</label>
+									</c:when>
+								</c:choose>
+								<c:choose>
+									<c:when test="${pet.pet.neuter}">
+										<input type="checkbox" class="d-none" id="neuter" value="neuter" autocomplete="off" checked>
+										<label class="btn btn-sm radio-btn" for="neuter">중성화</label>
+									</c:when>
+									<c:otherwise>
+										<input type="checkbox" class="d-none" id="neuter" value="neuter" autocomplete="off">
+										<label class="btn btn-sm radio-btn" for="neuter">중성화</label>
+									</c:otherwise>
+								</c:choose>
 							</div>
 						</div>
 					</div>
@@ -82,7 +107,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="birthday" name="birthday" placeholder="yyyy-mm-dd"> 
+								<input type="text" class="form-control form-control-sm" id="birthday" name="birthday" value="${pet.pet.birthday}"> 
 							</div>
 						</div>
 					</div>
@@ -98,7 +123,7 @@
 						<div class="ms-3 col-8">
 							<div class="w-25">
 								<div class="d-flex align-items-center">
-									<input type="number" min="0" step="0.1" class="form-control form-control-sm" id="weight" name="weight" placeholder="kg"> 
+									<input type="number" min="0" step="0.1" class="form-control form-control-sm" id="weight" name="weight" value="${pet.pet.weight}"> 
 									<span class="ms-2 font-size-14 fw-bold">Kg</span>
 								</div>
 							</div>
@@ -115,7 +140,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="disease" name="disease" placeholder="ex) 알레르기, 질병 등"> 
+								<input type="text" class="form-control form-control-sm" id="disease" name="disease" placeholder="ex) 알레르기, 질병 등" value="${pet.pet.disease}"> 
 							</div>
 						</div>
 					</div>
@@ -123,7 +148,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="button" id="add-pet-btn" class="btn my-4" disabled >등록</button>
+				<button type="button" id="add-pet-btn" class="btn my-4" data-pet-id="${pet.pet.id}">등록</button>
 			</div>
 		</div>
 	</div>
@@ -132,7 +157,6 @@
 
 <script>
 $(document).ready(function() {
-	
 	// 사진 업로드 버튼 클릭
 	$('.pet-image-btn').on('click', function() {
 		$('#pet-file').click();
@@ -171,8 +195,6 @@ $(document).ready(function() {
 	}
 	
 	
-	
-	
 	// datepicker
 	$.datepicker.setDefaults({
 		  changeYear: true,
@@ -199,6 +221,7 @@ $(document).ready(function() {
 	    })
 	
 	$('#birthday').datepicker();
+	
 	
 	// validation check
 	$('#name, #breed, #birthday, #weight').on('keyup',function(param) {
@@ -241,9 +264,11 @@ $(document).ready(function() {
 			}
 		}
 		
+		var petId = $(this).data("pet-id");
 		
 		var formData = new FormData();
 		
+		formData.append("petId", petId);
 		formData.append('file', $('#pet-file')[0].files[0]);
 		formData.append('name', $('#name').val().trim());		
 		formData.append('sex', $('input[name=sex]:checked').val());
@@ -253,20 +278,23 @@ $(document).ready(function() {
 		formData.append('weight', $('#weight').val());		
 		formData.append('disease', $('#disease').val().trim());		
 		
+		
+		
+		
 		for (var pair of formData.entries()) {
 			  console.log(pair[0]+ ', ' + pair[1]);
 			}
 		
 		$.ajax({
 			type: "POST"
-			, url: "/pet/registration"
+			, url: "/pet/edit"
 			, data: formData
 			, enctype: "multipart/form-data" 	
 			, processData: false			
 			, contentType: false
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert("등록 성공");
+					location.href="/mypet/" + petId
 				} else {
 					alert(data.errorMassage);
 				}
