@@ -23,18 +23,13 @@ public class PetController {
 	@Autowired
 	private PetBO petBO;
 	
-	public String mypet(Model model, HttpServletRequest request) {
-		
-		HttpSession session = request.getSession();
-		Integer userId = (Integer)session.getAttribute("userId");
-		
-		List<Pet> petList = petBO.getPetByUserId(userId);
-		
-		model.addAttribute("petList", petList);
-		model.addAttribute("viewPath", "/mypet/mypet");
-		return "template/layout";
-	}
-	
+	/**
+	 * 고양이 프로필 화면
+	 * @param petId
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/{petId}")
 	public String mypetProfile(
 			@PathVariable("petId") int petId,
@@ -53,6 +48,11 @@ public class PetController {
 		
 	}
 	
+	/** 
+	 * 고양이 등록 화면
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/add")
 	public String addPet(Model model) {
 		
@@ -60,6 +60,13 @@ public class PetController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 고양이 추가정보 등록 화면
+	 * @param petId
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/add/more-info/{petId}")
 	public String addPetMoreInfo(
 			@PathVariable("petId") int petId,
