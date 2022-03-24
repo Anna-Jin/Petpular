@@ -7,11 +7,11 @@ import lombok.Data;
 @Data
 public class User {
 	private int id;
-	private String login_id;
+	private String loginId;
 	private String name;
 	private String email;
 	private String password;
-	private String profile_image_url;
+	private String profileImageUrl;
 	private Date created_at;
 	private Date updated_at;
 }

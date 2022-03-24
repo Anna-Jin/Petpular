@@ -34,7 +34,7 @@ public class FileManagerService {
 			String ext = origName.substring(origName.lastIndexOf(".")); // 확장자
 			String saveFileName = getUuid() + ext;
 			
-			Path path = Paths.get(filePath + saveFileName); // getOriginalFilename()는 input에 올린 파일명이다. (한글이면 안됨)
+			Path path = Paths.get(filePath + saveFileName);
 			Files.write(path, bytes);
 			
 			return "/images/" + directoryName + saveFileName;

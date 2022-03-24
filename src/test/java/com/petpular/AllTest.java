@@ -14,7 +14,7 @@ import com.petpular.user.bo.UserBO;
 import com.petpular.user.model.User;
 
 @SpringBootTest
-public class SginupTest {
+public class AllTest {
 	
 	@Autowired
 	private UserBO userBO;

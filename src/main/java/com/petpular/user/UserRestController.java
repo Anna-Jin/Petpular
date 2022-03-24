@@ -116,9 +116,10 @@ public class UserRestController {
 		
 		if (user != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("userLoginId", user.getLogin_id());
+			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
+			
 			
 			result.put("result", "success");
 		} else {
@@ -127,4 +128,5 @@ public class UserRestController {
 		
 		return result;
 	}
+	
 }
