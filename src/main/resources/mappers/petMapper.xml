@@ -176,4 +176,16 @@
 			`user_id` = #{userId} AND
 			`pet_id` = #{petId}
  	</update>
+ 	<delete id="deletePet" parameterType="map">
+ 		DELETE FROM `pet`
+ 		WHERE
+ 			`id` = #{petId} AND
+ 			`user_id` = #{userId} 
+ 	</delete>
+ 	<delete id="deletePetMoreInfo" parameterType="map">
+ 		DELETE FROM `pet_more_info`
+ 		WHERE
+ 			`user_id` = #{userId} AND
+ 			`pet_id` = #{petId}
+ 	</delete>
  </mapper>

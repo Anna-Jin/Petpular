@@ -94,18 +94,62 @@
         <div class="mypet-profile-edit">
 			<a href="/mypet/edit/${pet.pet.id}" class="text-dark">냥이 정보 수정</a>
 		</div>
-		<c:if test="${empty petMoreInfoList}">
-			<div class="mypet-profile-add">
-				<a href="/mypet/add/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 등록</a>
-			</div>
-		</c:if>
-		<div class="mypet-more-info-edit">
-			<a href="/mypet/edit/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 수정</a>
-		</div>
+		<c:choose>
+			<c:when test="${empty petMoreInfoList}">		
+				<div class="mypet-profile-add">
+					<a href="/mypet/add/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 등록</a>
+				</div>
+			</c:when>
+			<c:otherwise>
+				<div class="mypet-more-info-edit">
+					<a href="/mypet/edit/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 수정</a>
+				</div>	
+			</c:otherwise>
+		</c:choose>
 		<div class="mypet-profile-delete">
-			<a href="" class="text-danger">냥이 정보 삭제</a>
+			<a href="#" class="text-danger" data-bs-toggle="modal" data-bs-target="#delete-modal">냥이 정보 삭제</a>
 		</div>
       </div>
     </div>
   </div>
 </div>
+
+
+<div class="modal fade" id="delete-modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-body text-center p-5 fs-4">
+		정말 삭제하시게요?<br>
+		삭제된 정보는 복구할 수 없습니다.
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="pet-delete-cancel-btn" data-bs-dismiss="modal">취소</button>
+        <a type="button" href="#" id="pet-delete-btn" class="pet-delete-btn" data-pet-id="${pet.pet.id}">진짜 삭제</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+	$(document).ready(function() {
+		$('#pet-delete-btn').on('click', function() {
+			var petId = $(this).data('pet-id');
+			
+			$.ajax({
+				type: "DELETE"
+				, url: "/pet/delete"
+				, data: {"petId": petId}
+				, success: function(data) {
+					if (data.result == 'success') {
+						location.href="/main"
+					} else {
+						alert(data.errorMessage);
+					}
+				}
+				, error: function(e) {
+					alert("삭제에 실패했습니다. 관리자에게 문의해주세요.");
+				}
+			});
+		});
+	});
+</script>

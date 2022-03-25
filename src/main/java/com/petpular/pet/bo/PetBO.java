@@ -177,4 +177,17 @@ public class PetBO {
 		
 		return petDAO.updatePetMoreInfoByFeed(userId, petId, feedType, feedDate, feedCount, feedVolume, feedKcal, feedAfterDate);
 	}
+	
+	// 반려동물 삭제
+	public void deletePet(int userId, int petId) {
+		// 이미지 파일 삭제
+		String petProfileImageUrl = getPetByUserIdPetId(userId, petId).getPet().getPetImageUrl();
+		fileManagerService.deleteFile(petProfileImageUrl);
+		
+		petDAO.deletePet(userId, petId);
+	}
+	
+	public void deletePetMoreInfo(int userId, int petId) {
+		petDAO.deletePetMoreInfo(userId, petId);
+	}
 }

@@ -85,4 +85,11 @@ public interface PetDAO {
 			@Param("feedKcal") int feedKcal,
 			@Param("feedAfterDate") LocalDate feedAfterDate);
 	
+	void deletePet(
+			@Param("userId") int userId,
+			@Param("petId") int petId);
+	
+	void deletePetMoreInfo(
+			@Param("userId") int userId,
+			@Param("petId") int petId);
 }

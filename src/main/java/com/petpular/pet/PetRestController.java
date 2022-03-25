@@ -12,6 +12,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -72,10 +73,10 @@ public class PetRestController {
 		if (row < 1) {
 			result.put("result", "error");
 			result.put("errorMessage", "반려동물 등록에 실패했습니다.");
-			logger.error("[add pet] 반려동물 등록 userId: {}", userId);
+			logger.error("[add pet] 펫 등록 userId: {}", userId);
+		} else {
+			result.put("result", "success");
 		}
-		
-		result.put("result", "success");
 		
 		return result;
 	}
@@ -108,9 +109,9 @@ public class PetRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "등록에 실패했습니다.");
 			logger.error("[per more info] 펫 추가 정보 petId:{}", petId);
+		} else {
+			result.put("result", "success");
 		}
-		
-		result.put("result", "success");
 		
 		return result;
 	}
@@ -154,14 +155,22 @@ public class PetRestController {
 		if (row < 1) {
 			result.put("result", "error");
 			result.put("errorMessage", "반려동물 수정에 실패했습니다.");
-			logger.error("[add pet] 반려동물 수정 userId: {}", userId);
+			logger.error("[add pet] 펫 수정 userId: {}", userId);
+		} else {
+			result.put("result", "success");
 		}
-		
-		result.put("result", "success");
 		
 		return result;
 	}
 	
+	/**
+	 * 고양이 추가정보 수정
+	 * @param feed
+	 * @param sand
+	 * @param petId
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/edit/more-info/{petId}")
 	public Map<String, Object> editPetMoreInfo(
 			@ModelAttribute Feed feed,
@@ -175,7 +184,6 @@ public class PetRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		// db update
 		int row1 = petBO.updatePetMoreInfoBySand(sand, userId, petId);
 		int row2 = petBO.updatePetMoreInfoByFeed(feed, userId, petId);
 		
@@ -183,7 +191,26 @@ public class PetRestController {
 			result.put("result", "error");
 			result.put("errorMessage", "등록에 실패했습니다.");
 			logger.error("[per more info] 펫 추가 정보 petId:{}", petId);
+		} else {
+			result.put("result", "success");
 		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> deletePet(
+			@RequestParam("petId") int petId,
+			HttpServletRequest request
+			) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		
+		petBO.deletePet(userId, petId);
+		petBO.deletePetMoreInfo(userId, petId);
 		
 		result.put("result", "success");
 		

@@ -365,3 +365,23 @@ aside {
 	padding: 3px 10px 3px 10px;
 	margin: 20px;
 }
+
+.pet-delete-cancel-btn {
+	background-color: #fff;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	padding: 7px 15px 7px 15px;
+}
+
+.pet-delete-btn {
+	background-color: var(--main-clr);
+	color: #fff;
+	outline: none;
+	border: none;
+	border-radius: 5px;
+	padding: 7px 15px 7px 15px;
+}
+.pet-delete-btn:hover {
+	color: #fff;
+}
