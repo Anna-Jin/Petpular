@@ -1,5 +1,6 @@
 package com.petpular.pet.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.Date;
 
@@ -17,6 +18,10 @@ public class PetMoreInfo {
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate date; // sand-date, feed-date
+	
+	private int count;
+	private BigDecimal volume;
+	private int kcal;
 	
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private LocalDate afterDate; // sand(feed)-date와 count/volume을 이용하여 계산

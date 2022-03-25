@@ -94,11 +94,13 @@
         <div class="mypet-profile-edit">
 			<a href="/mypet/edit/${pet.pet.id}" class="text-dark">냥이 정보 수정</a>
 		</div>
-		<div class="mypet-profile-add">
-			<a href="/mypet/add/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 등록</a>
-		</div>
+		<c:if test="${empty petMoreInfoList}">
+			<div class="mypet-profile-add">
+				<a href="/mypet/add/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 등록</a>
+			</div>
+		</c:if>
 		<div class="mypet-more-info-edit">
-			<a href="" class="text-dark">사료 / 모래 정보 수정</a>
+			<a href="/mypet/edit/more-info/${pet.pet.id}" class="text-dark">사료 / 모래 정보 수정</a>
 		</div>
 		<div class="mypet-profile-delete">
 			<a href="" class="text-danger">냥이 정보 삭제</a>

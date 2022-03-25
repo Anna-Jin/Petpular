@@ -81,6 +81,13 @@ public class PetController {
 		return "template/layout";
 	}
 	
+	/**
+	 * 고양이 정보 수정
+	 * @param petId
+	 * @param model
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/edit/{petId}")
 	public String editPet(
 			@PathVariable("petId") int petId,
@@ -99,4 +106,22 @@ public class PetController {
 		return "template/layout";
 	}
 	
+	
+	@RequestMapping("edit/more-info/{petId}")
+	public String editPetMoreInfo(
+			@PathVariable("petId") int petId,
+			Model model,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		Integer userId = (Integer)session.getAttribute("userId");
+		
+		List<PetMoreInfo> petMoreInfoList = petBO.getPetMoreIfoByUserIdPetId(userId, petId);
+		
+		model.addAttribute("petMoreInfoList", petMoreInfoList);
+		model.addAttribute("viewPath", "/mypet/edit_pet_more_info");
+		
+		return "template/layout";
+	}
 }

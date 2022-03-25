@@ -38,7 +38,9 @@ public interface PetDAO {
 			@Param("userId") int userId,
 			@Param("petId") int petId,
 			@Param("sandType") String sandType, 
-			@Param("sandDate") LocalDate sandDate, 
+			@Param("sandDate") LocalDate sandDate,
+			@Param("sandCount") int sandCount,
+			@Param("sandVolume") BigDecimal sandVolume,
 			@Param("sandAfterDate") LocalDate sandAfterDate);
 	
 	int insertPetMoreInfoByFeed(
@@ -46,6 +48,9 @@ public interface PetDAO {
 			@Param("petId") int petId,
 			@Param("feedType") String feedType, 
 			@Param("feedDate") LocalDate feedDate, 
+			@Param("feedCount") int feedCount,
+			@Param("feedVolume") BigDecimal feedVolume,
+			@Param("feedKcal") int feedKcal,
 			@Param("feedAfterDate") LocalDate feedAfterDate);
 	
 	int updatePet(
@@ -59,5 +64,25 @@ public interface PetDAO {
 			@Param("birthday") LocalDate birthday, 
 			@Param("weight") BigDecimal weight, 
 			@Param("disease") String disease);
+	
+	int updatePetMoreInfoBySand(
+			@Param("userId") int userId,
+			@Param("petId") int petId,
+			@Param("sandType") String sandType, 
+			@Param("sandDate") LocalDate sandDate,
+			@Param("sandCount") int sandCount,
+			@Param("sandVolume") BigDecimal sandVolume,
+			@Param("sandAfterDate") LocalDate sandAfterDate
+			);
+	
+	int updatePetMoreInfoByFeed(
+			@Param("userId") int userId,
+			@Param("petId") int petId,
+			@Param("feedType") String feedType, 
+			@Param("feedDate") LocalDate feedDate, 
+			@Param("feedCount") int feedCount,
+			@Param("feedVolume") BigDecimal feedVolume,
+			@Param("feedKcal") int feedKcal,
+			@Param("feedAfterDate") LocalDate feedAfterDate);
 	
 }

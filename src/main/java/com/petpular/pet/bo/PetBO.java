@@ -26,10 +26,48 @@ public class PetBO {
 	@Autowired
 	private PetDAO petDAO;
 	
+	// 다음 사료 구매일 계산 함수
+	private LocalDate calFeedAfterDate(int userId, int petId, LocalDate feedDate, int feedCount, BigDecimal feedVolume, int feedKcal) {
+		PetView pet = getPetByUserIdPetId(userId, petId);
+		double weight = pet.getPet().getWeight().doubleValue();
+		
+		// 휴식기 에너지 요구량
+		// 2kg 미만 냥이 = 70 ×체중(kg)^0.75
+		// 2kg 이상 냥이 = 30 × 체중(kg) + 70
+		double rer;
+		
+		if (weight >= 2.0) {
+			rer = (30 * weight) + 70;
+		} else {
+			rer = Math.pow((70 * weight), 0.75);
+		}
+		
+		// 하루 필요 칼로리
+		// 중성화 함 = 1.2 × RER
+		// 중성화 안 함 = 1.4 × RER
+		double needKcal;
+		boolean neuter = pet.getPet().isNeuter();
+		if (neuter) {
+			needKcal = 1.2 * rer;
+		} else {
+			needKcal = 1.4 * rer;
+		}
+		
+		// 하루 사료 급여량
+		double feedPerDay = (needKcal / feedKcal) * 1000; 
+		int consumDate = (int)Math.round((feedCount * feedVolume.doubleValue() * 1000) / feedPerDay);
+		
+		LocalDate feedAfterDate = feedDate.plusDays(consumDate);
+		
+		return feedAfterDate;
+	}
+	
+	// 반려동물 프로필 리스트 가져오기
 	public List<Pet> getPetByUserId(int userId) {
 		return petDAO.selectPetByUserId(userId);
 	}
 	
+	// 반려동물 프로필 하나 가져오기
 	public PetView getPetByUserIdPetId(int userId, int id) {
 		Pet pet = petDAO.selectPetByUserIdPetId(userId, id);
 		PetView petView = new PetView();
@@ -49,11 +87,13 @@ public class PetBO {
 		return petView;
 	}
 	
+	// 반려동물 추가정보 가져오기
 	public List<PetMoreInfo> getPetMoreIfoByUserIdPetId(int userId, int petId) {
 		return petDAO.selectPetMoreIfoByUserIdPetId(userId, petId);
 		
 	}
 	
+	// 반려동물 등록
 	public int addPet(int userId, String userLoginId, MultipartFile file, String name, 
 			String breed, String sex, boolean neuter, LocalDate birthday, BigDecimal weight, String disease) {
 		
@@ -66,63 +106,34 @@ public class PetBO {
 		return petDAO.insertPet(userId, imagePath, name, breed, sex, neuter, birthday, weight, disease);
 	}
 	
+	// 반려동물 추가정보 등록 - 모래
 	public int addPetMoreInfoBySand(Sand sand, int userId, int petId) {
 		String sandType = String.valueOf(Type.Sand);
 		LocalDate sandDate = sand.getSandDate();
 		int sandCount = sand.getSandCount(); // 반올림
-		double sandVolume = sand.getSandVolume();
-		int afterDate = (int)Math.round(sandCount * sandVolume * 4);
+		BigDecimal sandVolume = sand.getSandVolume();
+		int afterDate = (int)Math.round(sandCount * sandVolume.doubleValue() * 4);
 		
 		// 다음 모래 구매일 구하기
 		LocalDate sandAfterDate = sandDate.plusDays(afterDate);
 		
-		return petDAO.insertPetMoreInfoBySand(userId, petId, sandType, sandDate, sandAfterDate);
+		return petDAO.insertPetMoreInfoBySand(userId, petId, sandType, sandDate, sandCount, sandVolume, sandAfterDate);
 	}
 	
+	// 반려동물 추가정보 등록 - 사료
 	public int addPetMoreInfoByFeed(Feed feed, int userId, int petId) {
 		String feedType = String.valueOf(Type.Feed);
 		LocalDate feedDate = feed.getFeedDate();
 		int feedCount = feed.getFeedCount();
-		double feedVolume = feed.getFeedVolume();
+		BigDecimal feedVolume = feed.getFeedVolume();
 		int feedKcal = feed.getFeedKcal();
 		
-		PetView pet = getPetByUserIdPetId(userId, petId);
+		LocalDate feedAfterDate = calFeedAfterDate(userId, petId, feedDate, feedCount, feedVolume, feedKcal);
 		
-
-		
-		double weight = pet.getPet().getWeight().doubleValue();
-		
-		// 휴식기 에너지 요구량
-//		2kg 미만 냥이 = 70 ×체중(kg)^0.75
-//		2kg 이상 냥이 = 30 × 체중(kg) + 70
-		double rer;
-		
-		if (weight >= 2.0) {
-			rer = (30 * weight) + 70;
-		} else {
-			rer = Math.pow((70 * weight), 0.75);
-		}
-		
-		// 하루 필요 칼로리
-//		중성화 함 = 1.2 × RER
-//		중성화 안 함 = 1.4 × RER
-		double needKcal;
-		boolean neuter = pet.getPet().isNeuter();
-		if (neuter) {
-			needKcal = 1.2 * rer;
-		} else {
-			needKcal = 1.4 * rer;
-		}
-		
-		// 하루 사료 급여량
-		double feedPerDay = (needKcal / feedKcal) * 1000; 
-		int consumDate = (int)Math.round((feedCount * feedVolume * 1000) / feedPerDay);
-		
-		LocalDate feedAfterDate = feedDate.plusDays(consumDate);
-		
-		return petDAO.insertPetMoreInfoBySand(userId, petId, feedType, feedDate, feedAfterDate);
+		return petDAO.insertPetMoreInfoByFeed(userId, petId, feedType, feedDate, feedCount, feedVolume, feedKcal, feedAfterDate);
 	}
 	
+	// 반려동물 프로필 업데이트
 	public int updatePet(int userId, String userLoginId, int petId, MultipartFile file, String name, 
 			String breed, String sex, boolean neuter, LocalDate birthday, BigDecimal weight, String disease) {
 		String petProfileImageUrl = getPetByUserIdPetId(userId, petId).getPet().getPetImageUrl();
@@ -137,7 +148,33 @@ public class PetBO {
 			}
 		}
 		
-		return petDAO.updatePet(userId, petId, petProfileImageUrl, name, breed, sex, neuter, birthday, weight, disease);
+		return petDAO.updatePet(userId, petId, imagePath, name, breed, sex, neuter, birthday, weight, disease);
 	}
 	
+	// 반려동물 추가정보 업데이트 - 모래
+	public int updatePetMoreInfoBySand(Sand sand, int userId, int petId) {
+		String sandType = String.valueOf(Type.Sand);
+		LocalDate sandDate = sand.getSandDate();
+		int sandCount = sand.getSandCount(); // 반올림
+		BigDecimal sandVolume = sand.getSandVolume();
+		int afterDate = (int)Math.round(sandCount * sandVolume.doubleValue() * 4);
+		
+		// 다음 모래 구매일 구하기
+		LocalDate sandAfterDate = sandDate.plusDays(afterDate);
+		
+		return petDAO.updatePetMoreInfoBySand(userId, petId, sandType, sandDate, sandCount, sandVolume, sandAfterDate);
+	}
+	
+	// 반려동물 추가정보 업데이트 - 사료
+	public int updatePetMoreInfoByFeed(Feed feed, int userId, int petId) {
+		String feedType = String.valueOf(Type.Feed);
+		LocalDate feedDate = feed.getFeedDate();
+		int feedCount = feed.getFeedCount();
+		BigDecimal feedVolume = feed.getFeedVolume();
+		int feedKcal = feed.getFeedKcal();
+		
+		LocalDate feedAfterDate = calFeedAfterDate(userId, petId, feedDate, feedCount, feedVolume, feedKcal);
+		
+		return petDAO.updatePetMoreInfoByFeed(userId, petId, feedType, feedDate, feedCount, feedVolume, feedKcal, feedAfterDate);
+	}
 }

@@ -115,6 +115,20 @@ public class PetRestController {
 		return result;
 	}
 	
+	/**
+	 * 고양이 정보 수정
+	 * @param petId
+	 * @param file
+	 * @param name
+	 * @param breed
+	 * @param sex
+	 * @param neuter
+	 * @param birthday
+	 * @param weight
+	 * @param disease
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/edit")
 	public Map<String, Object> editPet(
 			@RequestParam("petId") int petId,
@@ -139,13 +153,41 @@ public class PetRestController {
 		
 		if (row < 1) {
 			result.put("result", "error");
-			result.put("errorMessage", "반려동물 등록에 실패했습니다.");
-			logger.error("[add pet] 반려동물 등록 userId: {}", userId);
+			result.put("errorMessage", "반려동물 수정에 실패했습니다.");
+			logger.error("[add pet] 반려동물 수정 userId: {}", userId);
 		}
 		
 		result.put("result", "success");
 		
 		return result;
-		
 	}
+	
+	@PostMapping("/edit/more-info/{petId}")
+	public Map<String, Object> editPetMoreInfo(
+			@ModelAttribute Feed feed,
+			@ModelAttribute Sand sand,
+			@PathVariable("petId") int petId,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		// db update
+		int row1 = petBO.updatePetMoreInfoBySand(sand, userId, petId);
+		int row2 = petBO.updatePetMoreInfoByFeed(feed, userId, petId);
+		
+		if (row1 < 1 || row2 < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "등록에 실패했습니다.");
+			logger.error("[per more info] 펫 추가 정보 petId:{}", petId);
+		}
+		
+		result.put("result", "success");
+		
+		return result;
+	}
+	
 }

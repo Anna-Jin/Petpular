@@ -1,5 +1,6 @@
 package com.petpular.pet.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -13,7 +14,7 @@ public class Feed {
 	
 	private int feedCount;
 	
-	private int feedVolume;
+	private BigDecimal feedVolume;
 	
 	private int feedKcal;
 }

@@ -49,6 +49,9 @@
 			, `pet_id`
 			, `type`
 			, `date`
+			, `count`
+			, `volume`
+			, `kcal`
 			, `after_date`
 			, `created_at`
 			, `updated_at`
@@ -95,6 +98,8 @@
 			, `pet_id`
 			, `type`
 			, `date`
+			, `count`
+			, `volume`
 			, `after_date`
  		)
  		VALUES
@@ -103,6 +108,8 @@
  			, #{petId}
  			, #{sandType}
  			, #{sandDate}
+ 			, #{sandCount}
+ 			, #{sandVolume}
  			, #{sandAfterDate}
  		)
  	</insert>
@@ -113,6 +120,9 @@
 			, `pet_id`
 			, `type`
 			, `date`
+			, `count`
+			, `volume`
+			, `kcal`
 			, `after_date`
  		)
  		VALUES
@@ -121,6 +131,9 @@
  			, #{petId}
  			, #{feedType}
  			, #{feedDate}
+ 			, #{feedCount}
+ 			, #{feedVolume}
+ 			, #{feedKcal}
  			, #{feedAfterDate}
  		)
  	</insert>
@@ -138,5 +151,29 @@
 			<if test="disease != null">, `disease` = #{disease}</if>
 		WHERE
 			`id` = #{petId}	
+ 	</update>
+ 	<update id="updatePetMoreInfoBySand" parameterType="map">
+ 		UPDATE `pet_more_info`
+ 		SET	
+			`date` = #{sandDate}
+			, `count` = #{sandCount}
+			, `volume` = #{sandVolume}
+			, `after_date` = #{sandAfterDate}
+		WHERE
+			`type` = #{sandType} AND
+			`user_id` = #{userId} AND
+			`pet_id` = #{petId}
+ 	</update>
+ 	 	<update id="updatePetMoreInfoByFeed" parameterType="map">
+ 		UPDATE `pet_more_info`
+ 		SET	
+			`date` = #{feedDate}
+			, `count` = #{feedCount}
+			, `volume` = #{feedVolume}
+			, `after_date` = #{feedAfterDate}
+		WHERE
+			`type` = #{feedType} AND
+			`user_id` = #{userId} AND
+			`pet_id` = #{petId}
  	</update>
  </mapper>

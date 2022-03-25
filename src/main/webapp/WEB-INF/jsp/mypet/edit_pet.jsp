@@ -300,7 +300,7 @@ $(document).ready(function() {
 				}
 			}
 			, error: function(e) {
-				alert("등록에 실패했습니다. 관리자에게 문의해주세요.");
+				alert("수정에 실패했습니다. 관리자에게 문의해주세요.");
 			} 
 		});
 	});

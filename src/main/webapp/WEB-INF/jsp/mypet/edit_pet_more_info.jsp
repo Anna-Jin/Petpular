@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<form id="add-pet-more-info-form" method="post" action="/pet/more-info/${pet.pet.id}">
+<form id="add-pet-more-info-form" method="post" action="/pet/edit/more-info/${petMoreInfoList[0].petId}" data-pet-id="${petMoreInfoList[0].petId}">
 	<div class="d-flex justify-content-center mb-3">
-		<div class="add-pet-more-info-text">추가 정보 등록</div>
+		<div class="add-pet-more-info-text">추가 정보 수정</div>
 	</div>
 	<div class="add-pet-more-info-box">
 		<%-- 추가정보 (사료/모래 구매일, 수량, 용량) --%>
@@ -15,7 +15,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="feed-date" name="feedDate" placeholder="yyyy-mm-dd">
+								<input type="text" class="form-control form-control-sm" id="feed-date" name="feedDate" placeholder="yyyy-mm-dd" value="${petMoreInfoList[1].date}">
 							</div>
 						</div>
 					</div>
@@ -27,7 +27,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" numberOnly class="form-control form-control-sm" id="feed-count" name="feedCount"> 
+								<input type="text" numberOnly class="form-control form-control-sm" id="feed-count" name="feedCount" value="${petMoreInfoList[1].count}"> 
 								<span class="font-size-14 fw-bold count">개</span>
 							</div>
 						</div>
@@ -40,7 +40,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="number" min="1" step="0.1" class="form-control form-control-sm" id="feed-volume" name="feedVolume"> 
+								<input type="number" min="1" step="0.1" class="form-control form-control-sm" id="feed-volume" name="feedVolume" value="${petMoreInfoList[1].volume}"> 
 								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
@@ -53,7 +53,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="kcal d-flex align-items-center">
-								<input  type="text" numberOnly class="form-control form-control-sm" id="feed-kcal" name="feedKcal"> 
+								<input type="text" numberOnly class="form-control form-control-sm" id="feed-kcal" name="feedKcal" value="${petMoreInfoList[1].kcal}"> 
 								<span class="font-size-14 fw-bold volume">Kcal</span>
 							</div>
 						</div>
@@ -73,7 +73,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="input-width">
-								<input type="text" class="form-control form-control-sm" id="sand-date" name="sandDate" placeholder="yyyy-mm-dd">
+								<input type="text" class="form-control form-control-sm" id="sand-date" name="sandDate" placeholder="yyyy-mm-dd" value="${petMoreInfoList[0].date}">
 							</div>
 						</div>
 					</div>
@@ -85,7 +85,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="text" numberOnly class="form-control form-control-sm" id="sand-count" name="sandCount"> 
+								<input type="text" numberOnly class="form-control form-control-sm" id="sand-count" name="sandCount" value="${petMoreInfoList[0].count}"> 
 								<span class="font-size-14 fw-bold count"> 개</span>
 							</div>
 						</div>
@@ -98,7 +98,7 @@
 						</div>
 						<div class="ms-3 col-8">
 							<div class="w-25 d-flex align-items-center">
-								<input type="number" min="1" step="0.1" class="form-control form-control-sm" id="sand-volume" name="sandVolume"> 
+								<input type="number" min="1" step="0.1" class="form-control form-control-sm" id="sand-volume" name="sandVolume" value="${petMoreInfoList[0].volume}"> 
 								<span class="font-size-14 fw-bold volume">Kg</span>
 							</div>
 						</div>
@@ -182,8 +182,8 @@
 			var url = $(this).attr('action');
 			
 			var params = $(this).serialize();
-			console.log(params);
-			
+			var petId = ${petMoreInfoList[0].petId}
+						
 			
 			$.ajax({
 				type: "POST"
@@ -191,13 +191,13 @@
 				, data: params
 				, success: function(data) {
 					if (data.result == 'success') {
-						location.href="/mypet/" + ${pet.pet.id}
+						location.href="/mypet/" + petId
 					} else {
 						alert(data.errorMessage);
 					}
 				}
 				, error: function(e) {
-					alert('정보 등록에 실패했습니다. 관리자에게 문의해주세요.');
+					alert('정보 수정에 실패했습니다. 관리자에게 문의해주세요.');
 				}
 			});
 		});

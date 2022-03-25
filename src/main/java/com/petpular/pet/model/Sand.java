@@ -1,5 +1,6 @@
 package com.petpular.pet.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -18,5 +19,5 @@ public class Sand {
 	private int sandCount;
 	
 	@JsonProperty("sand_volume")
-	private int sandVolume;
+	private BigDecimal sandVolume;
 }
