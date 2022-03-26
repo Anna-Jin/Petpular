@@ -111,7 +111,6 @@ public class UserRestController {
 		
 		// DB SELECT
 		User user = userBO.getUserByLoginIdAndPassword(loginId, encryptedPassword);
-		
 		Map<String, Object> result = new HashMap<>();
 		
 		if (user != null) {
@@ -120,10 +119,10 @@ public class UserRestController {
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
 			
-			
 			result.put("result", "success");
 		} else {
 			result.put("errorMessage", "존재하지 않는 사용자입니다. 아이디와 비밀번호를 확인해주세요.");
+			logger.error("[login] 유저 로그인 loginId:{}", loginId);
 		}
 		
 		return result;

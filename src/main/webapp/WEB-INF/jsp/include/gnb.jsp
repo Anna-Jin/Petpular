@@ -15,17 +15,15 @@
 		    <a class="nav-link gnb-nav-mypet">My pet</a>
 		    <ul class="nav flex-column">
 		    	<c:choose>
-		    		<c:when test="${empty petList}">
+		    		<c:when test="${empty petName}">
 				    	<li class="mypet-nav">
 				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
 				    	</li>	
 		    		</c:when>
 		    		<c:otherwise>
-		    			<c:forEach items="${petList}" var="pet">
-			    			<li class="mypet-nav">
-					    		<a class="add-pet-nav" href="/mypet/${pet.id}">${pet.name}</a>
-					    	</li>
-				    	</c:forEach>
+			    		<li class="mypet-nav">
+					    	<a class="add-pet-nav" href="/mypet/${petId}">${petName}</a>
+					    </li>
 				    	<li class="mypet-nav">
 				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
 				    	</li>

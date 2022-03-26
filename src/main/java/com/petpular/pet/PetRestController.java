@@ -198,6 +198,12 @@ public class PetRestController {
 		return result;
 	}
 	
+	/**
+	 * 고양이 정보 삭제
+	 * @param petId
+	 * @param request
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deletePet(
 			@RequestParam("petId") int petId,

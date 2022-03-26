@@ -27,6 +27,11 @@ public class UserController {
 		return "user/login";
 	}
 	
+	/**
+	 * 로그아웃
+	 * @param request
+	 * @return
+	 */
 	@RequestMapping("/user/logout")
 	public String logout(HttpServletRequest request) {
 		HttpSession session = request.getSession();
@@ -34,7 +39,7 @@ public class UserController {
 		session.removeAttribute("userLoginId");
 		session.removeAttribute("userName");
 		
-		return "redirect:/user/login";
+		return "redirect:/main";
 	}
 	
 }

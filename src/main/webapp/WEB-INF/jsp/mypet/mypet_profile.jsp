@@ -24,11 +24,13 @@
 							<c:when test="${pet.pet.sex == 'boy'}">
 								${fn:replace(pet.pet.sex, pet.pet.sex, '남')}
 							</c:when>
+							<c:otherwise>
+								${fn:replace(pet.pet.sex, pet.pet.sex, '여')}
+							</c:otherwise>
 						</c:choose>
-						/
 						<c:choose>
 							<c:when test="${pet.pet.neuter}">
-								중성화
+								/ 중성화
 							</c:when>
 						</c:choose>
 					</div>

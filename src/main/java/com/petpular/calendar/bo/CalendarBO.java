@@ -28,7 +28,7 @@ public class CalendarBO {
 									.dtstart(petBO.getPetByUserIdPetId(userId, petId).getPet().getBirthday().toString())
 									.interval(1)
 									.build())
-							.color("#ffa44f")
+							.color("#009854")
 							.build();
 		calendars.put("birthday", birthday);
 		
