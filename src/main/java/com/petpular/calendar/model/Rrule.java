@@ -5,10 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Calendar {
-
-	private String title;
-	private String start;
-	private String color;
-	
+public class Rrule {
+	private String freq;
+	private String dtstart;
+	private int interval;
 }

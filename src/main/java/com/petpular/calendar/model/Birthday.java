@@ -5,10 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class Calendar {
-
+public class Birthday {
 	private String title;
-	private String start;
+	private Rrule rrule;
 	private String color;
-	
 }

@@ -25,6 +25,9 @@
     				, dataType: 'json'
     				, success: function(param) {
     					var events = [];
+    					console.log(param);
+    					console.log(':::::::::::');
+    					
     					$.each(param, function(index, data) {
     						events.push(data);
     					}); 
