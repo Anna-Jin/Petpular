@@ -13,7 +13,14 @@
 	<div id="mypet-profile-content01">
 		<div class="d-flex align-items-center">
 			<div class="mypet-profile-image-box">
-				<img src="${pet.pet.petImageUrl}" alt="반려동물 프로필 사진" class="mypet-profile-image">					
+				<c:choose>
+					<c:when test="${not empty pet.pet.petImageUrl}">
+						<img src="${pet.pet.petImageUrl}" alt="반려동물 프로필 사진" class="mypet-profile-image">					
+					</c:when>
+					<c:otherwise>
+						<img src="/image/paws.png" alt="임시 사진" class="mypet-profile-image">
+					</c:otherwise>
+				</c:choose>
 			</div>
 			<div class="mypet-profile-box">
 				<div class="mypet-profile-info">

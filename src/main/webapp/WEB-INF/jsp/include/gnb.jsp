@@ -22,7 +22,7 @@
 		    		</c:when>
 		    		<c:otherwise>
 			    		<li class="mypet-nav">
-					    	<a class="add-pet-nav" href="/mypet/${petId}">${petName}</a>
+					    	<a class="add-pet-nav" href="/mypet/${petId5}">${petName5}</a>
 					    </li>
 				    	<li class="mypet-nav">
 				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>

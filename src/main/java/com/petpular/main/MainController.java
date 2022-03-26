@@ -33,6 +33,8 @@ public class MainController {
 				String petName = "petName" + pet.getId();
 				session.setAttribute(petId, pet.getId());
 				session.setAttribute(petName, pet.getName());
+				
+				model.addAttribute("petList", petList);
 			}
 		}
 		

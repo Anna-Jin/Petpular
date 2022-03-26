@@ -182,7 +182,9 @@ public class PetBO {
 	public void deletePet(int userId, int petId) {
 		// 이미지 파일 삭제
 		String petProfileImageUrl = getPetByUserIdPetId(userId, petId).getPet().getPetImageUrl();
-		fileManagerService.deleteFile(petProfileImageUrl);
+		if (petProfileImageUrl != null) {
+			fileManagerService.deleteFile(petProfileImageUrl);
+		}
 		
 		petDAO.deletePet(userId, petId);
 	}

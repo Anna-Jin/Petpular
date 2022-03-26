@@ -253,10 +253,6 @@ $(document).ready(function() {
 		formData.append('weight', $('#weight').val());		
 		formData.append('disease', $('#disease').val().trim());		
 		
-		for (var pair of formData.entries()) {
-			  console.log(pair[0]+ ', ' + pair[1]);
-			}
-		
 		$.ajax({
 			type: "POST"
 			, url: "/pet/registration"
