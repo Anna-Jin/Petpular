@@ -385,3 +385,20 @@ aside {
 .pet-delete-btn:hover {
 	color: #fff;
 }
+
+
+/* full calendar */
+
+#calendar-wrap {
+	background-color: #fff;
+	margin-top: 50px;
+	padding: 40px 0;
+	border: 1px solid var(--border-clr);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+#calendar {
+  min-width: 900px;
+}

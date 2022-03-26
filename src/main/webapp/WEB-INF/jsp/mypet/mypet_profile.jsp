@@ -83,6 +83,9 @@
 			</div>
 		</div>
 	</div>
+	<div id="calendar-wrap">
+		<jsp:include page="../mypet/calendar.jsp"></jsp:include>
+	</div>
 </div>
 
 
@@ -131,22 +134,28 @@
 </div>
 
 <script>
+	
 	$(document).ready(function() {
+		
+		
+		// 반려동물 삭제
 		$('#pet-delete-btn').on('click', function() {
 			var petId = $(this).data('pet-id');
-			
+
 			$.ajax({
-				type: "DELETE"
-				, url: "/pet/delete"
-				, data: {"petId": petId}
-				, success: function(data) {
+				type : "DELETE",
+				url : "/pet/delete",
+				data : {
+					"petId" : petId
+				},
+				success : function(data) {
 					if (data.result == 'success') {
-						location.href="/main"
+						location.href = "/main"
 					} else {
 						alert(data.errorMessage);
 					}
-				}
-				, error: function(e) {
+				},
+				error : function(e) {
 					alert("삭제에 실패했습니다. 관리자에게 문의해주세요.");
 				}
 			});

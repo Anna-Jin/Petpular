@@ -35,3 +35,13 @@ a:hover {
 .input-width {
 	width: 60%;
 }
+
+.btn-primary, .btn-primary:hover, .btn-primary:focus, .btn-primary:disabled, .btn-primary:active {
+	background-color: var(--main-clr);
+	border-color: var(--main-clr); 
+}
+
+.btn-primary:focus {
+	box-shadow: 0 0 0 0.25rem rgba(255, 164, 79, 0.5);
+}
+
