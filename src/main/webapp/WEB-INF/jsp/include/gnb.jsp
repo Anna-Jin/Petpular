@@ -22,7 +22,7 @@
 		    		</c:when>
 		    		<c:otherwise>
 			    		<li class="mypet-nav">
-					    	<a class="add-pet-nav" href="/mypet/${petId5}">${petName5}</a>
+					    	<a class="pet-nav" href="/mypet/${petId5}">${petName5}</a>
 					    </li>
 				    	<li class="mypet-nav">
 				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
@@ -35,7 +35,15 @@
 		    <a class="nav-link" href="#">Community</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Service</a>
+		    <a class="nav-link gnb-nav-service">Service</a>
+		    <ul class="nav flex-column">
+		    	<li class="service-nav">
+		    		<a href="#" class="abandoned-animals-nav">유기동물</a>
+		    	</li>
+		    	<li class="service-nav">
+		    		<a href="https://wayopet.com/" target='_blank' class="wayo-nav">반려동물 돌보미</a>
+		    	</li>
+		    </ul>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link" href="#">For you</a>
@@ -73,6 +81,10 @@
 $(document).ready(function() {
 	$('.gnb-nav-mypet').on('click', function() {
 		$('.mypet-nav').toggle('slow');
-	})
+	});
+	
+	$('.gnb-nav-service').on('click', function() {
+		$('.service-nav').toggle('slow');
+	});
 });
 </script>

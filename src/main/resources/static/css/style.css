@@ -31,23 +31,30 @@ aside {
 	background-color: #FFF8F1;
 }
 
-.mypet-nav .add-pet-nav {
-	position: relative;
-	margin-left: 25px;
-	color: #9F5A1A;
-	font-size: 14px;
-}
-
-.mypet-nav {
-	display: none;
-}
-
 .gnb-logo-box {
 	height: 150px;
 }
 
 .gnb-nav-box {
 	height: 100%;
+}
+
+.mypet-nav, .service-nav {
+	display: none;
+}
+
+.mypet-nav .add-pet-nav, .pet-nav {
+	position: relative;
+	margin-left: 25px;
+	color: #9F5A1A;
+	font-size: 14px;
+}
+
+.service-nav .abandoned-animals-nav, .wayo-nav, .wayo-nav:hover {
+	position: relative;
+	margin-left: 25px;
+	color: #9F5A1A;
+	font-size: 14px;
 }
 
 .gnb-login-btn-box {
