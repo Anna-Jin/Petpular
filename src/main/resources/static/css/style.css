@@ -327,11 +327,7 @@ aside {
 	font-weight: bold;
 }
 
-.mypet-profile-add-btn {
-	color: var(--main-clr);
-}
-
-.mypet-profile-add-btn:hover {
+.mypet-profile-add-btn, .mypet-profile-add-btn:hover  {
 	color: var(--main-clr);
 }
 
@@ -464,4 +460,242 @@ aside {
 
 #calendar {
   min-width: 900px;
+}
+
+
+/* community */
+#community-wrap {
+	margin: auto;
+}
+
+#community-post-write-btn {
+	width: 550px;
+	height: 79px;
+	background: #FFFFFF;
+	border: 1px solid var(--border-clr);
+	box-sizing: border-box;
+	box-shadow: 0px 0px 17px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	display: flex;
+	align-items: center;
+	padding-left: 27px;
+	margin: 33px 0;
+}
+
+#community-post-box {
+	width: 550px;
+	background: #FFFFFF;
+	border: 1px solid var(--border-clr);
+	box-sizing: border-box;
+	box-shadow: 0px 0px 17px 4px rgba(0, 0, 0, 0.25);
+	border-radius: 15px;
+	margin-bottom: 33px;
+	padding: 0 23px;
+}
+
+.community-post-header {
+	height: 77px;
+	display: flex;
+	align-items: center;
+}
+
+.community-post-header-left, .community-post-header-right {
+	width: 60%;
+	display: flex;
+	align-items: center;
+}
+
+.community-post-header-right {
+	justify-content: end;
+}
+
+
+.community-post-user-profile-img {
+	width: 40px;
+	border: 2px solid var(--main-clr);
+	border-radius: 50%;
+	margin-right: 23px;
+}
+.community-post-id, .community-post-id:hover {
+	font-weight: bold;
+	font-size: 14px;
+	color: #000;
+}
+
+.community-post-time {
+	color: var(--post-light-clr);
+	font-size: 11px;
+}
+
+#community-post-more-btn {
+	background-color: #fff;
+	border: none;
+}
+.community-post-more-img {
+	width: 24px;
+}
+
+.community-post-body-img {
+	height: 550px;
+}
+.community-post-body-nav {
+	display: flex;
+	align-items: center;
+	margin: 23px 0;
+}
+
+.community-post-body-nav .community-post-like-btn {
+	background-color: #fff;
+	border: none;
+	padding: 0;
+}
+.community-post-body-nav .community-post-like-btn .community-post-like-img {
+	width: 22px;
+}
+
+.community-post-body-content-box {
+	font-size: 12px;
+	display: flex;
+	align-items: center;
+	border-bottom: 1px solid var(--border-clr);
+	padding-bottom: 23px;
+}
+
+.community-post-body-content-box .community-post-body-content-view-more-bnt {
+	padding: 0;
+	background-color: #fff;
+	border: none;
+	color: var(--post-light-clr);
+}
+
+.community-post-footer {
+	margin: 23px 0;
+}
+
+.community-post-footer-comment-box {
+	font-size: 12px;
+	display: flex;
+	padding: 3px 0;
+}
+
+.community-post-footer-comment-box .community-post-footer-comment-left {
+	display: flex;
+	align-items: center;
+	margin: 3px;
+	width: 70%;
+}
+
+.community-post-footer-comment-box .community-post-footer-comment-left .community-post-footer-comment-id {
+	margin-right: 10px;
+	font-weight: bold;
+}
+
+.community-post-footer-comment-box .community-post-footer-comment-right {
+	width: 30%;
+	display: flex;
+	justify-content: end;
+}
+
+.community-post-footer-comment-box .community-post-footer-comment-right .community-post-footer-comment-delete-btn {
+	padding: 0;
+	background-color: #fff;
+	border: none;
+}
+
+.community-post-footer-comment-box .community-post-footer-comment-right .community-post-footer-comment-delete-btn .community-post-footer-comment-delete-img {
+	width: 9px;
+}
+
+
+.community-post-footer .community-post-footer-comment-write-box {
+	display: flex;
+	align-items: center;
+	margin-top: 23px;
+}
+
+.community-post-footer .community-post-footer-comment-write-box .community-post-footer-comment-write-img {
+	width: 24px;
+}
+
+.community-post-footer .community-post-footer-comment-write-box .community-post-footer-comment-write-input, .community-post-footer-comment-write-input:hover {
+	width: 100%;
+	height: 35px;
+	font-size: 12px;
+	border: none;
+	outline: none;
+}
+
+.community-post-footer .community-post-footer-comment-write-box .community-post-footer-comment-write-btn {
+	background-color: #fff;
+	border: 0;
+	font-size: 12px;
+	color: var(--main-clr);
+}
+
+/* modal */
+
+/* post modal */
+.post-modal-header {
+	height: 52px;
+	font-size: 14px;
+	color: var(--main-clr);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.post-modal-body {
+	height: 460px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.post-modal-footer {
+	height: 202px;
+	padding: 23px;
+	display: flex;
+	flex-direction: column;
+}
+
+.post-modal-footer .post-modal-footer-write-box .post-modal-footer-write-id {
+	font-size: 14px;
+	font-weight: bold;
+}
+
+.post-modal-footer .post-modal-footer-write-box .post-modal-footer-write-textarea, .post-modal-footer-write-textarea:active {
+	width: 100%;
+	height: 90px;
+	font-size: 14px;
+	border: none;
+	outline: none;
+	resize: none;
+	margin: 10px 0;
+}
+
+.post-modal-footer .post-modal-footer-write-btn-box {
+	display: flex;
+	justify-content: end;
+}
+
+.post-modal-footer .post-modal-footer-write-btn-box .post-modal-footer-write-btn {
+	background-color: #fff;
+	border: none;
+	font-size: 14px;
+	color: var(--main-clr);
+}
+
+/* more modal */
+.more-modal {
+	height: 50px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.more-modal .more-modal-delete-btn {
+	background-color: #fff;
+	border: none;
+	font-size: 14px;
+	color: red;
 }
