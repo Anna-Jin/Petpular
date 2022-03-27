@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <aside class="d-flex flex-column">
 	<div class="gnb-logo-box d-flex justify-content-center align-items-center">
@@ -12,36 +13,43 @@
 		    <a class="nav-link" href="/main">About</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link gnb-nav-mypet">My pet</a>
+		    <a  class="nav-link gnb-nav-mypet">My pet</a>
 		    <ul class="nav flex-column">
 		    	<c:choose>
-		    		<c:when test="${empty petName}">
+		    		<c:when test="${empty petIdArr}">
 				    	<li class="mypet-nav">
-				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
+				    		<a class="add-pet-nav d-block" href="/mypet/add">> 반려동물 등록하기</a>
 				    	</li>	
 		    		</c:when>
 		    		<c:otherwise>
-			    		<li class="mypet-nav">
-					    	<a class="pet-nav" href="/mypet/${petId5}">${petName5}</a>
-					    </li>
+			    		<c:set var="petIdArr" value="${fn:split(petIdArr, ',')}" />
+			    		<c:set var="petNameArr" value="${fn:split(petNameArr, ',')}" />
+			    		<c:forEach items="${petIdArr}" var="petId" varStatus="status">
+			    			<c:set var="petName" value="${petNameArr[status.index]}" />
+				    		<li class="mypet-nav">
+						    	<a class="pet-nav d-block" href="/mypet/${petId}">
+									> ${petName}
+								</a>
+							</li>
+						</c:forEach>	
 				    	<li class="mypet-nav">
-				    		<a class="add-pet-nav" href="/mypet/add">+ 반려동물 등록하기</a>
+				    		<a class="add-pet-nav d-block" href="/mypet/add">> 반려동물 등록하기</a>
 				    	</li>
 		    		</c:otherwise>
 		    	</c:choose>
 		    </ul>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">Community</a>
+		    <a class="nav-link" href="/community">Community</a>
 		  </li>
 		  <li class="nav-item">
 		    <a class="nav-link gnb-nav-service">Service</a>
 		    <ul class="nav flex-column">
 		    	<li class="service-nav">
-		    		<a href="#" class="abandoned-animals-nav">유기동물</a>
+		    		<a href="#" class="abandoned-animals-nav d-block">> 유기동물</a>
 		    	</li>
 		    	<li class="service-nav">
-		    		<a href="https://wayopet.com/" target='_blank' class="wayo-nav">반려동물 돌보미</a>
+		    		<a href="https://wayopet.com/" target='_blank' class="wayo-nav d-block">> 반려동물 돌보미</a>
 		    	</li>
 		    </ul>
 		  </li>

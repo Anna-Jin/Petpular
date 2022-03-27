@@ -17,6 +17,7 @@ aside {
 .nav {
 	font-size: 18px;
 }
+
 .nav .nav-item .nav-link {
 	color: #fff;
 }
@@ -26,7 +27,7 @@ aside {
 	background-color: #FFF8F1;
 }
 
-.nav .nav-item .nav-link.active {
+.nav .nav-item .nav-link:active {
 	color: #9F5A1A;
 	background-color: #FFF8F1;
 }
@@ -43,19 +44,33 @@ aside {
 	display: none;
 }
 
+.mypet-nav:hover, .service-nav:hover {
+	background-color: #FFF8F1;
+	color: #9F5A1A;
+}
+
 .mypet-nav .add-pet-nav, .pet-nav {
 	position: relative;
-	margin-left: 25px;
-	color: #9F5A1A;
+	padding: 5px 0 5px 30px;
+	color: #fff;
 	font-size: 14px;
 }
 
-.service-nav .abandoned-animals-nav, .wayo-nav, .wayo-nav:hover {
-	position: relative;
-	margin-left: 25px;
+.pet-nav:hover, .add-pet-nav:hover {
 	color: #9F5A1A;
+}
+
+.service-nav .abandoned-animals-nav, .wayo-nav {
+	position: relative;
+	padding: 5px 0 5px 30px;
+	color: #fff;
 	font-size: 14px;
 }
+
+.abandoned-animals-nav:hover, .wayo-nav:hover {
+	color: #9F5A1A;
+}
+
 
 .gnb-login-btn-box {
 	height: 150px;

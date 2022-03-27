@@ -25,17 +25,19 @@ public class MainController {
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
-		
 		if(userId != null) {
 			List<Pet> petList = petBO.getPetByUserId(userId);
-			for (Pet pet : petList) {
-				String petId = "petId" + pet.getId();
-				String petName = "petName" + pet.getId();
-				session.setAttribute(petId, pet.getId());
-				session.setAttribute(petName, pet.getName());
-				
-				model.addAttribute("petList", petList);
+			String petNameArr = petList.get(0).getName();
+			String petIdArr = Integer.toString(petList.get(0).getId());
+			if (petList.size() > 0) {
+				for (int i = 1; i < petList.size(); i++) {
+					
+					petIdArr = petIdArr + "," + petList.get(i).getId();
+					petNameArr = petNameArr + "," + petList.get(i).getName();
+				}
 			}
+			session.setAttribute("petIdArr", petIdArr);
+			session.setAttribute("petNameArr", petNameArr);
 		}
 		
 		model.addAttribute("viewPath", "/main/main");
