@@ -35,7 +35,7 @@
 					</div>
 				</div>
 			</div>
-			<div class="d-flex flex-wrap justify-content-around main-profile">
+			<div class="d-flex flex-wrap justify-content-around w-100 main-profile">
 				<c:forEach items="${petList}" var="pet">
 					<div class="main-profile-box">
 						<div class="main-profile-image-box">
