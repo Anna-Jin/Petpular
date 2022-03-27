@@ -25,10 +25,12 @@ public class MainController {
 		
 		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
+		List<Pet> petList = petBO.getPetByUserId(userId);
+		
 		if(userId != null) {
-			List<Pet> petList = petBO.getPetByUserId(userId);
 			String petNameArr = petList.get(0).getName();
 			String petIdArr = Integer.toString(petList.get(0).getId());
+			 
 			if (petList.size() > 0) {
 				for (int i = 1; i < petList.size(); i++) {
 					
@@ -40,6 +42,7 @@ public class MainController {
 			session.setAttribute("petNameArr", petNameArr);
 		}
 		
+		model.addAttribute("petList", petList);
 		model.addAttribute("viewPath", "/main/main");
 		return "template/layout";
 	}
