@@ -146,7 +146,7 @@
 						<input type="text" class="community-post-footer-comment-write-input" id="comment" name="comment" placeholder="댓글달기">
 					</div>
 					<div class="col-2 d-flex justify-content-end">
-						<button type="button" class="community-post-footer-comment-write-btn">게시</button>
+						<button type="button" class="community-post-footer-comment-write-btn" disabled="disabled">게시</button>
 					</div>
 				</div>			
 			</div>
@@ -187,6 +187,43 @@ $(document).ready(function() {
 			placement: 'left',
 			offset: [60, 120]
 		});
+	
+	// 댓글 입력 시에만 게시 버튼 활성화
+	$('.community-post-footer-comment-write-input').on('keyup', function() {
+		var comment = $(this).val().trim();
+		if (comment != '') {
+			$('.community-post-footer-comment-write-btn').attr('disabled', false);
+		} else {
+			$('.community-post-footer-comment-write-btn').attr('disabled', true);
+		}
+	});
+	
+	// 댓글 쓰기
+	$('.community-post-footer-comment-write-btn').on('click', function() {
+		var comment = $('.community-post-footer-comment-write-input').val().trim();
+		
+		// validation
+		if (comment == '') {
+			alert('댓글을 입력해주세요');
+			return;
+		}
+		
+		$.ajax({
+			type: "POST"
+			, url: "/comment/write"
+			, data: {"comment":comment}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload(true);
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('댓글 작성에 실패했습니다. 관리자에게 문의해주세요.');
+			}
+		});
+	});
 	
 	});
 </script>
