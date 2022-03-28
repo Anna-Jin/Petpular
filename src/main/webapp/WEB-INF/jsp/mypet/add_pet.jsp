@@ -156,7 +156,6 @@ $(document).ready(function() {
 		
 		// 파일 업로드 시 미리보기 이미지를 선택한 이미지로 변경
 		setImageFromFile(this, '#pet-img');
-		
 	});
 	
 	// 파일 업로드 시 미리보기 이미지를 선택한 이미지로 변경 --> 이거를 위한 함수

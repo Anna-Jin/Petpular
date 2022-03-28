@@ -490,13 +490,13 @@ aside {
 	box-shadow: 0px 0px 17px 4px rgba(0, 0, 0, 0.25);
 	border-radius: 15px;
 	margin-bottom: 33px;
-	padding: 0 23px;
 }
 
 .community-post-header {
 	height: 77px;
 	display: flex;
 	align-items: center;
+	padding: 0 23px;
 }
 
 .community-post-header-left, .community-post-header-right {
@@ -605,7 +605,8 @@ aside {
 .community-post-body-nav {
 	display: flex;
 	align-items: center;
-	margin: 23px 0;
+	margin: 23px;
+	
 }
 
 .community-post-body-nav .community-post-like-btn {
@@ -622,6 +623,7 @@ aside {
 	display: flex;
 	align-items: center;
 	border-bottom: 1px solid var(--border-clr);
+	margin: 0 23px 0 23px;
 	padding-bottom: 23px;
 }
 
@@ -633,7 +635,7 @@ aside {
 }
 
 .community-post-footer {
-	margin: 23px 0;
+	margin: 23px;
 }
 
 .community-post-footer-comment-box {
@@ -709,10 +711,14 @@ aside {
 }
 
 .post-modal-body {
-	height: 460px;
+	height: 498px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.post-modal-body .post-modal-body-img #post-modal-body-img-file {
+	width: 100%;
 }
 
 .post-modal-footer {
