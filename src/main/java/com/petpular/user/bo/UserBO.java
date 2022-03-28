@@ -32,7 +32,4 @@ public class UserBO {
 		return userDAO.selectUserByLoginIdAndPassword(loginId, Password);
 	}
 	
-	public User getUserByUserId(Integer userId) {
-		return userDAO.selectUserByUserId(userId);
-	}
 }
