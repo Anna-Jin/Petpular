@@ -173,44 +173,6 @@
 <script>
 $(document).ready(function() {
 
-	// 사진 업로드 버튼 클릭
-	$('#post-modal-body-img-btn').on('click', function() {
-		$('#post-file').click();
-	});
-	
-	$('#post-file').on('change', function(e) {
-		var postFile = e.target.files[0].name;
-		
-		// 확장자 유효성 확인
-		var extension = postFile.split('.');
-		if (extension.length < 2 || 
-		 	(extension[extension.length - 1] != 'gif' 
-		 	&& extension[extension.length - 1] != 'png' 
-		 	&& extension[extension.length - 1] != 'jpg'
-		 	&& extension[extension.length - 1] != 'jpeg')) {
-		 	
-		 	alert("이미지 파일만 업로드 할 수 있습니다.");
-		 	$(this).val(""); // 이미 올라간 것을 확인한 것이기 때문에 비워주어야 한다.
-		 	return;
-		 }
-		
-		// 파일 업로드 시 사진 업로드 버튼 숨기고 선택한 이미지 노출
-		$('#post-modal-body-img-btn').addClass('d-none');
-		$('#post-modal-body-img-file').removeClass('d-none');
-		setImageFromFile(this, '#post-modal-body-img-file');
-	});
-	
-	// 파일 업로드 시 미리보기 이미지를 선택한 이미지로 변경 --> 이거를 위한 함수
-	function setImageFromFile(input, expression) {
-	    if (input.files && input.files[0]) {
-	        var reader = new FileReader();
-	        reader.onload = function (e) {
-	            $(expression).attr('src', e.target.result);
-	        }
-	        reader.readAsDataURL(input.files[0]);
-	    }
-	}
-	
 	// 팝 오버
 	$("[data-toggle=popover]").popover({
 			html : true,
