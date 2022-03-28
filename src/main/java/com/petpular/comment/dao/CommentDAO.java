@@ -8,5 +8,6 @@ public interface CommentDAO {
 
 	int insertComment(
 			@Param("userId") int userId, 
+			@Param("postId") int postId,
 			@Param("comment") String comment);
 }

@@ -11,7 +11,7 @@ public class CommentBO {
 	@Autowired
 	private CommentDAO commentDAO;
 
-	public int writeComment(int userId, String comment) {
-		return commentDAO.insertComment(userId, comment);
+	public int writeComment(int userId, int postId, String comment) {
+		return commentDAO.insertComment(userId, postId, comment);
 	}
 }

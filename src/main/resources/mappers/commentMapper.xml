@@ -4,5 +4,21 @@
  
  <mapper namespace="com.petpular.comment.dao.CommentDAO">
  	<insert id="insertComment" parameterType="map">
+ 		INSERT INTO `comment`
+ 		(
+			`user_id`
+			, `post_id`
+			, `content`
+			, `created_at`
+			, `updated_at` 		
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{postId}
+ 			, #{comment}
+ 			, NOW()
+ 			, NOW()
+ 		)
  	</insert>
  </mapper>
