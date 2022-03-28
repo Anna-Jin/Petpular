@@ -21,12 +21,46 @@
 			<div class="community-post-header">
 				<div class="community-post-header-left">
 					<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
-					<div>
-						<button type="button"
-							class="community-post-id"
-							data-bs-toggle="popover" data-bs-trigger="focus" title="Popover title"
-							data-bs-content="And here's some amazing content. It's very engaging. Right?">유저 아이디</button>
-
+					<div>	
+						<a href="#" class="community-post-id" tabindex="0" data-toggle="popover" data-bs-trigger="focus" data-popover-content="#community-post-user-popover">유저 아이디</a>
+						
+						<%-- 팝오버 --%>
+						<div id="community-post-user-popover" class="popover d-none" role="tooltip">
+							<div class="popover-arrow"></div>
+							<div class="popover-header">
+								<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+								<div>유저 아이디</div>
+							</div>
+							<div class="popover-body">
+								<div class="popover-body-title">반려동물</div>
+								<div class="popover-body-content">
+									<div class="popover-body-content-pet">
+										<div class="popover-body-content-pet-img-box">
+											<img src="/image/paws.png" alt="사진 없을 때" class="popover-body-content-pet-img">
+										</div>
+										<div class="d-flex flex-column align-items-center">
+											<div class="popover-body-content-pet-name">진빵</div>
+											<div class="popover-body-content-pet-breed">믹스</div>
+										</div>
+									</div>
+									<div class="popover-body-content-pet">
+										<div class="popover-body-content-pet-img-box">
+											<img src="/image/paws.png" alt="사진 없을 때" class="popover-body-content-pet-img">
+										</div>
+										<div class="d-flex flex-column align-items-center">
+											<div class="popover-body-content-pet-name">진빵</div>
+											<div class="popover-body-content-pet-breed">믹스</div>
+										</div>
+									</div>
+								</div>
+								<div class="d-flex align-items-center">
+									<div class="popover-body-title me-3">게시글</div>
+									<div class="font-size-12">20</div>
+								</div>
+							</div>
+						</div>
+						<%-- 팝오버 --%>
+						
 						<div class="community-post-time">3월 27일 오후 6:19</div>
 					</div>
 				</div>
@@ -162,10 +196,21 @@
 
 <script>
 $(document).ready(function() {
-	$('.community-post-id').popover({
-		container: 'body'
-		, placement: 'left'
-		, trigger: 'focus'
+
+	// 팝 오버
+	$("[data-toggle=popover]").popover({
+			html : true,
+			content : function() {
+				var content = $(this).attr("data-popover-content");
+				return $(content).children(".popover-body").html();
+			},
+			title : function() {
+				var title = $(this).attr("data-popover-content");
+				return $(title).children(".popover-header").html();
+			},
+			placement: 'left',
+			offset: [60, 120]
+		});
+	
 	});
-});
 </script>

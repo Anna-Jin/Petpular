@@ -111,7 +111,6 @@
 					, success: function(data) {
 						if (data.result == 'success') {
 							// 메인 페이지로 이동
-							alert("환영합니다");
 							location.href = "/main"
 						} else {
 							alert(data.errorMessage);
