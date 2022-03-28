@@ -72,7 +72,7 @@ $(document).ready(function() {
 	        reader.readAsDataURL(input.files[0]);
 	    }
 	}
-	
+
 	// 모달 창 닫히면 입력값 초기화
 	$('.modal').on('hidden.bs.modal', function() {
 		console.log('modal close');
@@ -101,7 +101,7 @@ $(document).ready(function() {
 		var formData = new FormData();
 		
 		formData.append('postFile', $('#post-file')[0].files[0]);
-		formData.append('content', $('.post-modal-footer-write-textarea').val());
+		formData.append('content', $('.post-modal-footer-write-textarea').val().trim());
 		
 		$.ajax({
 			type: "POST"

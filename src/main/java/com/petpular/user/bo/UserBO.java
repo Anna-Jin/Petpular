@@ -32,4 +32,8 @@ public class UserBO {
 		return userDAO.selectUserByLoginIdAndPassword(loginId, Password);
 	}
 	
+	public User getUserByUserId(int userId) {
+		return userDAO.selectUserByUserId(userId);
+	}
+	
 }

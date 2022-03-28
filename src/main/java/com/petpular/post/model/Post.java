@@ -1,4 +1,4 @@
-package com.petpular.user.model;
+package com.petpular.post.model;
 
 import java.util.Date;
 
@@ -9,15 +9,12 @@ import lombok.Data;
 
 @Data
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
-public class User {
+public class Post {
 	private int id;
-	private String loginId;
-	private String name;
-	private String email;
-	private String password;
-	private String profileImageUrl;
+	private int userId;
+	private String imagePath;
+	private String content;
 	private Date createdAt;
 	private Date updatedAt;
+	
 }
-
-

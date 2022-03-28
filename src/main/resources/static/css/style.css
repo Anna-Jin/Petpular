@@ -594,13 +594,18 @@ aside {
 #community-post-more-btn {
 	background-color: #fff;
 	border: none;
+	padding: 0;
 }
 .community-post-more-img {
 	width: 24px;
 }
 
-.community-post-body-img {
+.community-post-body-img-box {
 	height: 550px;
+}
+
+.community-post-body-img-box .community-post-body-img {
+	width: 550px;
 }
 .community-post-body-nav {
 	display: flex;
@@ -627,7 +632,7 @@ aside {
 	padding-bottom: 23px;
 }
 
-.community-post-body-content-box .community-post-body-content-view-more-bnt {
+.community-post-body-content-box .community-post-body-content-view-more-btn {
 	padding: 0;
 	background-color: #fff;
 	border: none;
@@ -663,13 +668,17 @@ aside {
 }
 
 .community-post-footer-comment-box .community-post-footer-comment-right .community-post-footer-comment-delete-btn {
+	height: 100%;
 	padding: 0;
+	margin-left: 2px;
 	background-color: #fff;
 	border: none;
 }
 
 .community-post-footer-comment-box .community-post-footer-comment-right .community-post-footer-comment-delete-btn .community-post-footer-comment-delete-img {
 	width: 9px;
+	margin: 0;
+	padding: 0;
 }
 
 
@@ -696,6 +705,7 @@ aside {
 	border: 0;
 	font-size: 12px;
 	color: var(--main-clr);
+	padding: 0;
 }
 
 /* modal */

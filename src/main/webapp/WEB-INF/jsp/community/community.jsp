@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
 <div id="community-wrap">
 	<div>
@@ -14,23 +15,39 @@
 			</button>
 		</div>
 		
-		
+		<c:forEach items="${contentList}" var="content">
 		<%-- 게시물 card --%>
 		<div id="community-post-box">
 		
 			<%-- header --%>
 			<div class="community-post-header">
 				<div class="community-post-header-left">
-					<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
-					<div>	
-						<a href="#" class="community-post-id" tabindex="0" data-toggle="popover" data-bs-trigger="focus" data-popover-content="#community-post-user-popover">유저 아이디</a>
-						
-						<%-- 팝오버 --%>
+					<c:choose>
+						<c:when test="${empty content.user.profileImageUrl}">
+							<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+						</c:when>
+						<c:otherwise>
+							<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+						</c:otherwise>
+					</c:choose>
+					<div>
+							<a href="#" class="community-post-id" tabindex="0"
+								data-toggle="popover" data-bs-trigger="focus"
+								data-popover-content="#community-post-user-popover">${content.user.loginId}</a>
+
+							<%-- 팝오버 --%>
 						<div id="community-post-user-popover" class="popover d-none" role="tooltip">
 							<div class="popover-arrow"></div>
 							<div class="popover-header">
-								<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
-								<div>유저 아이디</div>
+								<c:choose>
+									<c:when test="${empty content.user.profileImageUrl}">
+										<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+									</c:when>
+									<c:otherwise>
+										<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+									</c:otherwise>
+								</c:choose>
+								<div>${content.user.loginId}</div>
 							</div>
 							<div class="popover-body">
 								<div class="popover-body-title">반려동물</div>
@@ -62,7 +79,8 @@
 						</div>
 						<%-- 팝오버 --%>
 						
-						<div class="community-post-time">3월 27일 오후 6:19</div>
+						<fmt:formatDate value="${content.post.createdAt}" var="createdDate" pattern="yyyy년 MM월 dd일 a hh:mm"/>
+						<div class="community-post-time">${createdDate}</div>
 					</div>
 				</div>
 				<div class="community-post-header-right">
@@ -76,8 +94,8 @@
 			<div class="community-post-body">
 				
 				<%-- 게시물 사진 --%>
-				<div class="community-post-body-img">
-					
+				<div class="community-post-body-img-box">
+					<img src="${content.post.imagePath}" alt="이미지" class="community-post-body-img">
 				</div>
 				
 				<%-- 좋아요 버튼 --%>
@@ -90,12 +108,10 @@
 				<%-- 게시물 내용 --%>
 				<div class="community-post-body-content-box">
 					<div class="community-post-body-content">
-						글 내용, 10글자만 노출, 더보기 클릭시 모든 글자 노출<br>
-						안녕하세요
+						${content.post.content}
 					</div>
 					<div>
-						<span>...</span>
-						<button type="button" class="community-post-body-content-view-more-bnt">
+						<button type="button" class="community-post-body-content-view-more-btn d-none">
 							더보기
 						</button>
 					</div>
@@ -121,21 +137,6 @@
 						</button>
 					</div>
 				</div>
-				<div class="community-post-footer-comment-box">
-					<div class="community-post-footer-comment-left">
-						<div class="community-post-footer-comment-id">
-							댓글 작성자 아이디
-						</div>
-						<div>
-							댓글 내용
-						</div>
-					</div>
-					<div class="community-post-footer-comment-right">
-						<button type="button" class="community-post-footer-comment-delete-btn">
-							<img src="/image/close.png" class="community-post-footer-comment-delete-img">
-						</button>
-					</div>
-				</div>
 				
 				<%-- 댓글 쓰기 --%>
 				<div class="community-post-footer-comment-write-box">
@@ -143,14 +144,15 @@
 						<img src="/image/comment.png" alt="댓글 아이콘" class="community-post-footer-comment-write-img">
 					</div>
 					<div class="col-9">
-						<input type="text" class="community-post-footer-comment-write-input" id="comment" name="comment" placeholder="댓글달기">
+						<input type="text" class="community-post-footer-comment-write-input" id="comment${content.post.id}" name="comment" placeholder="댓글달기">
 					</div>
 					<div class="col-2 d-flex justify-content-end">
-						<button type="button" class="community-post-footer-comment-write-btn" disabled="disabled">게시</button>
+						<button type="button" class="community-post-footer-comment-write-btn" disabled="disabled" data-post-id="${content.post.id}">게시</button>
 					</div>
 				</div>			
 			</div>
 		</div>
+		</c:forEach>
 	</div>
 </div>
 
@@ -188,6 +190,36 @@ $(document).ready(function() {
 			offset: [60, 120]
 		});
 	
+	
+	// 글내용 더보기 기능
+	$('.community-post-body-content-box').each(function() {
+		// 더보기 버튼
+		var moreBtn = $(this).find('.community-post-body-content-view-more-btn');
+		
+		// 글 내용
+		var content = $(this).find('.community-post-body-content');
+		var content_text = content.text().trim();
+		
+		if (content_text.length > 9) {
+			// 글 내용 요약
+			var content_short = content_text.substring(0, 10) + "...";
+			
+			// 글 내용이 10글자 이상일 때 글자수를 10자로 줄이고, 더보기 버튼을 노출한다
+			content.html(content_short);
+			moreBtn.removeClass('d-none');
+			
+		} else {
+			// 10글자 미만일 때 더보기 버튼 숨기기
+			moreBtn.addClass('d-none');
+		}
+		
+		// 더보기 버튼 클릭하면 글 내용 전체 보이기
+		moreBtn.on('click', function() {
+			content.html(content_text);
+			moreBtn.addClass('d-none');
+		});
+	});
+	
 	// 댓글 입력 시에만 게시 버튼 활성화
 	$('.community-post-footer-comment-write-input').on('keyup', function() {
 		var comment = $(this).val().trim();
@@ -200,7 +232,8 @@ $(document).ready(function() {
 	
 	// 댓글 쓰기
 	$('.community-post-footer-comment-write-btn').on('click', function() {
-		var comment = $('.community-post-footer-comment-write-input').val().trim();
+		var postId = $(this).data('post-id');
+		var comment = $('#comment' + postId).val().trim();
 		
 		// validation
 		if (comment == '') {
@@ -211,9 +244,10 @@ $(document).ready(function() {
 		$.ajax({
 			type: "POST"
 			, url: "/comment/write"
-			, data: {"comment":comment}
+			, data: {"comment":comment, "postId":postId}
 			, success: function(data) {
 				if (data.result == 'success') {
+					alert("comment success");
 					location.reload(true);
 				} else {
 					alert(data.errorMessage);
