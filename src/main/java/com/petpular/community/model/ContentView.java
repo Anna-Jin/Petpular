@@ -1,5 +1,8 @@
 package com.petpular.community.model;
 
+import java.util.List;
+
+import com.petpular.comment.model.CommentView;
 import com.petpular.post.model.Post;
 import com.petpular.user.model.User;
 
@@ -12,8 +15,8 @@ public class ContentView {
 	
 	private User user;
 	private Post post;
-	// 게시글 개수
-	// 댓글 리스트
+	private int countPost;
+	private List<CommentView> commentList;
 	// 좋아요 여부
 	
 }

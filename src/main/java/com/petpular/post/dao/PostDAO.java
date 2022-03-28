@@ -16,4 +16,6 @@ public interface PostDAO {
 			@Param("content") String content);
 	
 	List<Post> selectPostList(int userId);
+	
+	int countPost(int userId);
 }

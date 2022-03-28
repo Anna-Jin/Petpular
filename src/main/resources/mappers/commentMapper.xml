@@ -21,4 +21,17 @@
  			, NOW()
  		)
  	</insert>
+ 	<select id="selectCommentList" resultType="com.petpular.comment.model.Comment">
+ 		SELECT
+ 			`id`
+ 			, `user_id`
+			, `post_id`
+			, `content`
+			, `created_at`
+			, `updated_at` 
+		FROM
+			`comment`
+		WHERE
+			`post_id` = #{postId}			
+ 	</select>
  </mapper>

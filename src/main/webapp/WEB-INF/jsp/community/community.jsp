@@ -71,9 +71,9 @@
 										</div>
 									</div>
 								</div>
-								<div class="d-flex align-items-center">
+								<div class="d-flex align-items-center mt-3">
 									<div class="popover-body-title me-3">게시글</div>
-									<div class="font-size-12">20</div>
+									<div class="font-size-12">${content.countPost}</div>
 								</div>
 							</div>
 						</div>
@@ -122,21 +122,23 @@
 			<div class="community-post-footer">
 				
 				<%-- 댓글 내용 --%>
-				<div class="community-post-footer-comment-box">
-					<div class="community-post-footer-comment-left">
-						<div class="community-post-footer-comment-id">
-							댓글 작성자 아이디
+				<c:forEach items="${content.commentList}" var="comment">
+					<div class="community-post-footer-comment-box">
+						<div class="community-post-footer-comment-left">
+							<div class="community-post-footer-comment-id">
+								${comment.user.loginId}
+							</div>
+							<div>
+								${comment.comment.content}
+							</div>
 						</div>
-						<div>
-							댓글 내용
+						<div class="community-post-footer-comment-right">
+							<button type="button" class="community-post-footer-comment-delete-btn">
+								<img src="/image/close.png" class="community-post-footer-comment-delete-img">
+							</button>
 						</div>
 					</div>
-					<div class="community-post-footer-comment-right">
-						<button type="button" class="community-post-footer-comment-delete-btn">
-							<img src="/image/close.png" class="community-post-footer-comment-delete-img">
-						</button>
-					</div>
-				</div>
+				</c:forEach>
 				
 				<%-- 댓글 쓰기 --%>
 				<div class="community-post-footer-comment-write-box">
@@ -247,7 +249,7 @@ $(document).ready(function() {
 			, data: {"comment":comment, "postId":postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert("comment success");
+					alert()
 					location.reload(true);
 				} else {
 					alert(data.errorMessage);

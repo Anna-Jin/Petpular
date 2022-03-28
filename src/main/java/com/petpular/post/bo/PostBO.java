@@ -31,4 +31,8 @@ public class PostBO {
 		return postDAO.selectPostList(userId);
 	}
 	
+	public int countPost(int userId) {
+		return postDAO.countPost(userId);
+	}
+	
 }
