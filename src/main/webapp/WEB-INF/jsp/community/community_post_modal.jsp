@@ -112,7 +112,7 @@ $(document).ready(function() {
 			, contentType: false
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert('post success');
+					location.reload();
 				} else {
 					alert(data.errorMassage);
 				}
