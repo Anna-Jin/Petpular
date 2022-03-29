@@ -10,10 +10,15 @@ import com.petpular.comment.model.Comment;
 @Repository
 public interface CommentDAO {
 
+	List<Comment> selectCommentList(int postId);
+	
 	int insertComment(
 			@Param("userId") int userId, 
 			@Param("postId") int postId,
 			@Param("comment") String comment);
 	
-	List<Comment> selectCommentList(int postId);
+	int deleteComment(
+			@Param("userId") int userId ,
+			@Param("postId") int postId, 
+			@Param("commentId") int CommentId);
 }
