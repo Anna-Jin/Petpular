@@ -29,7 +29,7 @@ public class CommunityBO {
 	public List<ContentView> generateContentViewList(int userId) {
 		List<ContentView> contentList = new ArrayList<>();
 		
-		List<Post> postList = postBO.getPostList(userId);
+		List<Post> postList = postBO.getPostList();
 		
 		for (Post post : postList) {
 			User user = userBO.getUserByUserId(post.getUserId());
