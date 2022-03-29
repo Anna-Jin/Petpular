@@ -314,7 +314,7 @@
 				$.post(url, params)
 				.done(function(data) {
 					if (data.result == 'success') {
-						alert('반갑습니다! 로그인해주세요.');
+						location.href="/user/login"
 					} else if (data.result == 'error') {
 						alert(data.errorMessage);
 					}
