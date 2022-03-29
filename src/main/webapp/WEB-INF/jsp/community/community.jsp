@@ -141,7 +141,7 @@
 						</div>
 						<div class="community-post-footer-comment-right">
 							<c:if test="${comment.user.id eq userId}">
-								<button type="button" class="community-post-footer-comment-delete-btn">
+								<button type="button" class="community-post-footer-comment-delete-btn" data-post-id="${comment.comment.postId}" data-comment-id="${comment.comment.id}">
 									<img src="/image/close.png" class="community-post-footer-comment-delete-img">
 								</button>
 							</c:if>
@@ -254,9 +254,6 @@ $(document).ready(function() {
 		});
 	});
 	
-	
-	
-	
 	// 댓글 입력 시에만 게시 버튼 활성화
 	$('.community-post-footer-comment-write-input').on('keyup', function() {
 		var comment = $(this).val().trim();
@@ -291,6 +288,28 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert('댓글 작성에 실패했습니다. 관리자에게 문의해주세요.');
+			}
+		});
+	});
+	
+	// 댓글 삭제
+	$('.community-post-footer-comment-delete-btn').on('click', function() {
+		var postId = $(this).data('post-id');
+		var commentId = $(this).data('comment-id');
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/comment/delete"
+			, data: {"postId":postId, "commentId":commentId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload(true);
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('댓글 삭제에 실패했습니다. 관리자에게 문의해주세요.');
 			}
 		});
 	});
