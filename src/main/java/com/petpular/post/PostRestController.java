@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -26,6 +27,13 @@ public class PostRestController {
 	@Autowired
 	private PostBO postBO;
 	
+	/**
+	 * 글 쓰기
+	 * @param postFile
+	 * @param content
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/write")
 	public Map<String, Object> writePost(
 			@RequestParam("postFile") MultipartFile postFile,
@@ -44,10 +52,34 @@ public class PostRestController {
 		if (row < 1) {
 			result.put("result", "error");
 			result.put("errorMessage", "게시물 등록에 실패했습니다. 관리자에게 문의해주세요.");
-			logger.error("[post write] 게시물 등록 userId:{}", userId);
+			logger.error("[write post] 게시물 등록 userId:{}", userId);
 		} else {
 			result.put("result", "success");
 		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/delete")
+	public Map<String, Object> deletePost(
+			@RequestParam("postId") int postId,
+			HttpServletRequest request
+			) {
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int row = postBO.deletePost(userId, postId);
+		
+		if (row < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "게시물 삭제에 실패했습니다. 관리자에게 문의해주세요.");
+			logger.error("[delete post] 게시물 삭제 userId:{}, postId:{}", userId, postId);
+		} else {
+			result.put("result", "success");
+		}
+		
 		
 		return result;
 	}

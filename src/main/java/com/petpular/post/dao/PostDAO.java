@@ -15,6 +15,14 @@ public interface PostDAO {
 			@Param("imagePath") String imagePath, 
 			@Param("content") String content);
 	
+	int deletePost(
+			@Param("userId") int userId,
+			@Param("postId")int postId);
+	
+	Post selectPostByUserIdPostId(
+			@Param("userId") int userId,
+			@Param("postId")int postId);
+	
 	List<Post> selectPostList();
 	
 	int countPost(int userId);

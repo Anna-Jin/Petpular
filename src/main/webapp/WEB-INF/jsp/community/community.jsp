@@ -247,7 +247,7 @@ $(document).ready(function() {
 			, data: {"postId":postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert("게시물 삭제 성공");
+					location.reload();
 				} else {
 					alert(data.errorMessage);
 				}
