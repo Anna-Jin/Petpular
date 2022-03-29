@@ -17,6 +17,6 @@ public class ContentView {
 	private Post post;
 	private int countPost;
 	private List<CommentView> commentList;
-	// 좋아요 여부
+	private boolean existLike;
 	
 }

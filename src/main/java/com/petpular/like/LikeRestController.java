@@ -39,6 +39,7 @@ public class LikeRestController {
 			likeBO.addLike(userId, postId);
 		}
 		
+		result.put("like", existLike);
 		result.put("result", "success");
 		
 		return result;

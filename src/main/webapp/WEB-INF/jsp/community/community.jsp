@@ -100,8 +100,15 @@
 				
 				<%-- 좋아요 버튼 --%>
 				<div class="community-post-body-nav">
-					<button type="button" class="community-post-like-btn">
-						<img src="/image/like(off).png" alt="좋아요 아이콘 off" class="community-post-like-img" data-post-id="${content.post.id}">
+					<button type="button" class="community-post-like-btn" data-post-id="${content.post.id}" data-like="${content.existLike}">
+						<c:choose>
+							<c:when test="${content.existLike}">
+								<img src="/image/like(on).png" alt="좋아요 아이콘" class="community-post-like-img">
+							</c:when>
+							<c:otherwise>
+								<img src="/image/like(off).png" alt="좋아요 아이콘" class="community-post-like-img">
+							</c:otherwise>	
+						</c:choose>
 					</button>
 				</div>
 				
@@ -226,20 +233,21 @@ $(document).ready(function() {
 	
 	
 	// 좋아요 버튼 클릭
-	$('.community-post-like-img').on('click', function() {
+	$('.community-post-like-btn').on('click', function() {
 		var postId = $(this).data('post-id');
 		
+		var likeImg = $(this).find('img');
+		
+		likeImg.attr('src', function(index, attr) {
+			if (attr.match('on')) {
+				return attr.replace('on', 'off');
+			} else {
+				return attr.replace('off', 'on');
+			}
+		});
 		
 		$.ajax({
 			url: "/like/" + postId
-			, success: function(data) {
-				if (data.result == 'success') {
-					alert('좋아요 성공');
-					locaion.reload(true);
-				} else {
-					alert(data.errorMessage);
-				}
-			}	
 			, error: function(e) {
 				alert('좋아요에 실패했습니다. 관리자에게 문의해주세요.');
 			}
