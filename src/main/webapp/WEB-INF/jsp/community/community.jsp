@@ -31,9 +31,9 @@
 						</c:otherwise>
 					</c:choose>
 					<div>
-							<a href="#" class="community-post-id" tabindex="0"
-								data-toggle="popover" data-bs-trigger="focus"
-								data-popover-content="#community-post-user-popover">${content.user.loginId}</a>
+						<a href="#" class="community-post-id" tabindex="0"
+							data-toggle="popover" data-bs-trigger="focus"
+							data-popover-content="#community-post-user-popover">${content.user.loginId}</a>
 
 							<%-- 팝오버 --%>
 						<div id="community-post-user-popover" class="popover d-none" role="tooltip">
@@ -84,9 +84,11 @@
 					</div>
 				</div>
 				<div class="community-post-header-right">
-					<button type="button" id="community-post-more-btn" data-bs-toggle="modal" data-bs-target="#moreModal">
-						<img src="/image/option.png" alt="옵션" class="community-post-more-img">
-					</button>
+					<c:if test="${content.post.userId eq userId}">
+						<button type="button" class="community-post-more-btn" data-bs-toggle="modal" data-bs-target="#moreModal" data-post-id="${content.post.id}">
+							<img src="/image/option.png" alt="옵션" class="community-post-more-img">
+						</button>
+					</c:if>
 				</div>
 			</div>
 			
@@ -181,8 +183,6 @@
   </div>
 </div>
 
-
-
 <script>
 $(document).ready(function() {
 
@@ -228,6 +228,33 @@ $(document).ready(function() {
 		moreBtn.on('click', function() {
 			content.html(content_text);
 			moreBtn.addClass('d-none');
+		});
+	});
+	
+	// more modal에 postId 주입
+	$('.community-post-more-btn').on('click', function() {
+		var postId = $(this).data('post-id');
+		$('.more-modal-delete-btn').data('post-id', postId);
+	});
+	
+	// 글 삭제
+	$('.more-modal-delete-btn').on('click', function() {
+		var postId = $(this).data('post-id');
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/post/delete"
+			, data: {"postId":postId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert("게시물 삭제 성공");
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('글 삭제에 실패했습니다. 관리자에게 문의해주세요.');
+			}
 		});
 	});
 	

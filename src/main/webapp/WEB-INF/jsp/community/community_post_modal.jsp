@@ -74,7 +74,7 @@ $(document).ready(function() {
 	}
 
 	// 모달 창 닫히면 입력값 초기화
-	$('.modal').on('hidden.bs.modal', function() {
+	$('#postWriteModal').on('hidden.bs.modal', function() {
 		console.log('modal close');
 		$(this).find('form')[0].reset();
 		$('#post-modal-body-img-file').attr('src', '');
