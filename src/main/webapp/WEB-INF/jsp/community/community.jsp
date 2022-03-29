@@ -133,9 +133,11 @@
 							</div>
 						</div>
 						<div class="community-post-footer-comment-right">
-							<button type="button" class="community-post-footer-comment-delete-btn">
-								<img src="/image/close.png" class="community-post-footer-comment-delete-img">
-							</button>
+							<c:if test="${comment.user.id eq userId}">
+								<button type="button" class="community-post-footer-comment-delete-btn">
+									<img src="/image/close.png" class="community-post-footer-comment-delete-img">
+								</button>
+							</c:if>
 						</div>
 					</div>
 				</c:forEach>
@@ -249,7 +251,6 @@ $(document).ready(function() {
 			, data: {"comment":comment, "postId":postId}
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert()
 					location.reload(true);
 				} else {
 					alert(data.errorMessage);

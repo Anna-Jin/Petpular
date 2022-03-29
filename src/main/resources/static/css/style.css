@@ -601,11 +601,12 @@ aside {
 }
 
 .community-post-body-img-box {
-	height: 550px;
+	display: flex;
+	align-items: center;
 }
 
 .community-post-body-img-box .community-post-body-img {
-	width: 550px;
+	width: 100%;
 }
 .community-post-body-nav {
 	display: flex;
