@@ -27,19 +27,19 @@ public class MainController {
 		Integer userId = (Integer)session.getAttribute("userId");
 		List<Pet> petList = petBO.getPetByUserId(userId);
 		
-		if(userId != null) {
-			String petNameArr = petList.get(0).getName();
-			String petIdArr = Integer.toString(petList.get(0).getId());
+		if(userId != null && petList.size() != 0) {
+				String petNameArr = petList.get(0).getName();
+				String petIdArr = Integer.toString(petList.get(0).getId());
 			 
-			if (petList.size() > 0) {
-				for (int i = 1; i < petList.size(); i++) {
-					
-					petIdArr = petIdArr + "," + petList.get(i).getId();
-					petNameArr = petNameArr + "," + petList.get(i).getName();
+				if (petList.size() > 0) {
+					for (int i = 1; i < petList.size(); i++) {
+						
+						petIdArr = petIdArr + "," + petList.get(i).getId();
+						petNameArr = petNameArr + "," + petList.get(i).getName();
+					}
 				}
-			}
-			session.setAttribute("petIdArr", petIdArr);
-			session.setAttribute("petNameArr", petNameArr);
+				session.setAttribute("petIdArr", petIdArr);
+				session.setAttribute("petNameArr", petNameArr);
 		}
 		
 		model.addAttribute("petList", petList);
