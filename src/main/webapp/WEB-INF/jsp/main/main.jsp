@@ -36,25 +36,34 @@
 				</div>
 			</div>
 			<div class="d-flex flex-wrap justify-content-around w-100 main-profile">
-				<c:forEach items="${petList}" var="pet">
-					<div class="main-profile-box">
-						<div class="main-profile-image-box">
-							<c:choose>
-								<c:when test="${not empty pet.petImageUrl}">
-									<img src="${pet.petImageUrl}" alt="반려동물 프로필 사진" class="mypet-profile-image">					
-								</c:when>
-								<c:otherwise>
-									<img src="/image/paws.png" alt="사진 없을 때" class="mypet-profile-image">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="main-profile-hover">
-							<a href="/mypet/${pet.id}" class="text-white">
-								${pet.name}
-							</a>
-						</div>
+				<c:choose>
+					<c:when test="${not empty petList}">
+						<c:forEach items="${petList}" var="pet">
+							<div class="main-profile-box">
+								<div class="main-profile-image-box">
+									<c:choose>
+										<c:when test="${not empty pet.petImageUrl}">
+											<img src="${pet.petImageUrl}" alt="반려동물 프로필 사진" class="mypet-profile-image">					
+										</c:when>
+										<c:otherwise>
+											<img src="/image/paws.png" alt="사진 없을 때" class="mypet-profile-image">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="main-profile-hover">
+									<a href="/mypet/${pet.id}" class="text-white">
+										${pet.name}
+									</a>
+								</div>
+							</div>
+						</c:forEach>
+					</c:when>
+					<c:otherwise>
+					<div>
+						<a type="button" class="btn main-signup-btn" href="/mypet/add">반려동물 등록</a>
 					</div>
-				</c:forEach>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</div>	
 		</c:otherwise>
