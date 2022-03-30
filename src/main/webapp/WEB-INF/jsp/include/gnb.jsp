@@ -54,7 +54,7 @@
 		    </ul>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link" href="#">For you</a>
+		    <a class="nav-link" href="/foryou">For you</a>
 		  </li>
 		</ul>
 	</div>
@@ -67,12 +67,14 @@
 					<img src="/image/user.png" alt="로그인 프로필 이미지" class="gnb-profile-img">
 				</div>
 				<div class="ms-2">
-					<div class="d-flex align-items-end">
-						<div class="text-white font-size-14 font-weight-bold">${userName}</div>
-						<div class="text-white font-size-12">님 안녕하세요!</div>
+					<div class="d-flex align-items-center">
+						<div class="gnb-user-name">${userName}</div>
+						<div class="text-white font-size-12">님 반가워요!</div>
 					</div>
 					<div class="d-flex justify-content-center">
-						<a href="/user/logout" class="gnb-logout-btn">로그아웃</a>
+						<a href="/user/logout" class="gnb-logout-btn">
+							<img  class="gnb-logout-img" src="/image/log-out.png">
+						</a>
 					</div>
 				</div>
 			</div>
