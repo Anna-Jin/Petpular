@@ -3,6 +3,7 @@ package com.petpular.community.model;
 import java.util.List;
 
 import com.petpular.comment.model.CommentView;
+import com.petpular.pet.model.Pet;
 import com.petpular.post.model.Post;
 import com.petpular.user.model.User;
 
@@ -18,5 +19,6 @@ public class ContentView {
 	private int countPost;
 	private List<CommentView> commentList;
 	private boolean existLike;
+	private List<Pet> petList;
 	
 }

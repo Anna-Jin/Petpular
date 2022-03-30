@@ -13,40 +13,27 @@
 <link href='https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css' rel='stylesheet'>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <style>
-	body {
-	margin: 100px;;
-	}
+.modal {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	display: none;
+	background-color: rgba(0, 0, 0, 0.4);
+}
 </style>
 </head>
 <body>
 
-<div class="container py-2">
-    <div class="row">
-        <div class="col">
-            <a class="popper btn btn-outline-warning" data-bs-trigger="hover" data-bs-toggle="popover">Hover me</a>
-            <div class="popper-content d-none">My popover content goes here.</div>
-        </div>
-    </div>
-</div>
+	<div class="modal">
+		<div class="modal_body">Modal</div>
+	</div>
+	<button class="btn-open-popup">Modal 띄우기</button>
+	<script> const modal = document.querySelector('.modal'); const btnOpenPopup = document.querySelector('.btn-open-popup'); btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; }); </script>
 
-<button type="button" class="btn btn-lg btn-danger example-popover" data-bs-toggle="popover" title="Popover title" data-bs-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
-	
-<script>
-$(document).ready(function() {
-	$('.example-popover').popover({
-		container: 'body'
-	});
-	
-	$('.popper').popover({
-        placement: 'left',
-        container: 'body',
-        html: true,
-        content: function () {
-            return $(this).next('.popper-content').html();
-        }
-    })
-});
-</script>
 </body>
 </html>

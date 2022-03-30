@@ -16,9 +16,66 @@
 		</div>
 		
 		<c:forEach items="${contentList}" var="content">
+		
+		<%-- 유저 정보 팝업 --%>
+		<div class="community-layout-box">
+		<div class="community-post-user-info card-number-${content.post.id}">
+			<div class="community-post-user-info-header">
+				<c:choose>
+					<c:when test="${empty content.user.profileImageUrl}">
+						<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-info-img">
+					</c:when>
+					<c:otherwise>
+						<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-info-img">
+					</c:otherwise>
+				</c:choose>
+				<div class="community-post-user-info-header-id">
+					${content.user.loginId}
+				</div>
+			</div>
+			<div class="community-post-user-info-body">
+				<c:choose>
+					<c:when test="${not empty content.petList}">
+						<div class="community-post-user-info-body-pet">
+							<div class="community-post-user-info-body-pet-title">반려냥이</div>
+							<div class="d-flex">
+								<c:forEach items="${content.petList}" var="pet">
+									<div class="community-post-user-info-body-pet-card">
+										<div class="community-post-user-info-body-pet-img-box">
+											<c:choose>
+												<c:when test="${empty pet.petImageUrl}">
+													<img src="/image/paws.png" class="community-post-user-info-body-pet-img">
+												</c:when>
+												<c:otherwise>
+													<img src="${pet.petImageUrl}" class="community-post-user-info-body-pet-img">
+												</c:otherwise>
+											</c:choose>
+										</div>
+										<div class="ms-2">
+											<div class="community-post-user-info-body-pet-name">${pet.name}</div>
+											<div class="community-post-user-info-body-pet-breed">${pet.breed}</div>
+										</div>
+									</div>
+								</c:forEach>
+							</div>
+						</div>
+					</c:when>
+					<c:otherwise>
+					<div class="community-post-user-info-body-pet">
+						<div class="community-post-user-info-body-pet-title">반려냥이</div>
+						<div class="community-post-user-info-body-no-pet">등록된 반려냥이가 없습니다.</div>
+					</div>
+					</c:otherwise>
+				</c:choose>
+				<div class="d-flex">
+					<div class="community-post-user-info-body-post-title">게시물</div>
+					<div class="font-size-14 ms-2">${content.countPost}</div>
+				</div>
+			</div>
+		</div>
+		
 		<%-- 게시물 card --%>
 		<div id="community-post-box">
-		
 			<%-- header --%>
 			<div class="community-post-header">
 				<div class="community-post-header-left">
@@ -31,53 +88,9 @@
 						</c:otherwise>
 					</c:choose>
 					<div>
-						<a href="#" class="community-post-id" tabindex="0"
-							data-toggle="popover" data-bs-trigger="focus"
-							data-popover-content="#community-post-user-popover">${content.user.loginId}</a>
-
-							<%-- 팝오버 --%>
-						<div id="community-post-user-popover" class="popover d-none" role="tooltip">
-							<div class="popover-arrow"></div>
-							<div class="popover-header">
-								<c:choose>
-									<c:when test="${empty content.user.profileImageUrl}">
-										<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
-									</c:when>
-									<c:otherwise>
-										<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-profile-img">
-									</c:otherwise>
-								</c:choose>
-								<div>${content.user.loginId}</div>
-							</div>
-							<div class="popover-body">
-								<div class="popover-body-title">반려동물</div>
-								<div class="popover-body-content">
-									<div class="popover-body-content-pet">
-										<div class="popover-body-content-pet-img-box">
-											<img src="/image/paws.png" alt="사진 없을 때" class="popover-body-content-pet-img">
-										</div>
-										<div class="d-flex flex-column align-items-center">
-											<div class="popover-body-content-pet-name">진빵</div>
-											<div class="popover-body-content-pet-breed">믹스</div>
-										</div>
-									</div>
-									<div class="popover-body-content-pet">
-										<div class="popover-body-content-pet-img-box">
-											<img src="/image/paws.png" alt="사진 없을 때" class="popover-body-content-pet-img">
-										</div>
-										<div class="d-flex flex-column align-items-center">
-											<div class="popover-body-content-pet-name">진빵</div>
-											<div class="popover-body-content-pet-breed">믹스</div>
-										</div>
-									</div>
-								</div>
-								<div class="d-flex align-items-center mt-3">
-									<div class="popover-body-title me-3">게시글</div>
-									<div class="font-size-12">${content.countPost}</div>
-								</div>
-							</div>
-						</div>
-						<%-- 팝오버 --%>
+						<button type="button" class="community-post-id" data-post-id="${content.post.id}">
+							${content.user.loginId}
+						</button>
 						
 						<fmt:formatDate value="${content.post.createdAt}" var="createdDate" pattern="yyyy년 MM월 dd일 a hh:mm"/>
 						<div class="community-post-time">${createdDate}</div>
@@ -165,6 +178,7 @@
 				</div>			
 			</div>
 		</div>
+		</div>
 		</c:forEach>
 	</div>
 </div>
@@ -185,22 +199,11 @@
 
 <script>
 $(document).ready(function() {
-
-	// 팝 오버
-	$("[data-toggle=popover]").popover({
-			html : true,
-			content : function() {
-				var content = $(this).attr("data-popover-content");
-				return $(content).children(".popover-body").html();
-			},
-			title : function() {
-				var title = $(this).attr("data-popover-content");
-				return $(title).children(".popover-header").html();
-			},
-			placement: 'left',
-			offset: [60, 120]
-		});
 	
+	$('.community-post-id').on('click', function() {
+		var postId = $(this).data('post-id');
+		$('.card-number-' + postId).toggle('slow');
+	});
 	
 	// 글내용 더보기 기능
 	$('.community-post-body-content-box').each(function() {

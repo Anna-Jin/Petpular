@@ -10,6 +10,8 @@ import com.petpular.comment.bo.CommentBO;
 import com.petpular.comment.model.CommentView;
 import com.petpular.community.model.ContentView;
 import com.petpular.like.bo.LikeBO;
+import com.petpular.pet.bo.PetBO;
+import com.petpular.pet.model.Pet;
 import com.petpular.post.bo.PostBO;
 import com.petpular.post.model.Post;
 import com.petpular.user.bo.UserBO;
@@ -30,6 +32,9 @@ public class CommunityBO {
 	@Autowired
 	private LikeBO likeBO;
 	
+	@Autowired
+	private PetBO petBO;
+	
 	public List<ContentView> generateContentViewList(int userId) {
 		List<ContentView> contentList = new ArrayList<>();
 		
@@ -40,6 +45,7 @@ public class CommunityBO {
 			List<CommentView> commentList = commentBO.generateCommentListByPostId(post.getId());
 			int countPost = postBO.countPost(user.getId());
 			boolean existLike = likeBO.existLike(userId, post.getId());
+			List<Pet> pet = petBO.getPetByUserId(userId);
 			
 			ContentView content = ContentView.builder()
 					.post(post) // 포스트
@@ -47,6 +53,7 @@ public class CommunityBO {
 					.commentList(commentList) // 댓글 리스트
 					.countPost(countPost)
 					.existLike(existLike)
+					.petList(pet)
 					.build();
 					
 			
