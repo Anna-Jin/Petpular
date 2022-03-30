@@ -11,6 +11,8 @@ public interface LikeDAO {
 			@Param("userId") int userId, 
 			@Param("postId") int postId);
 	
+	int countLike(int postId);
+	
 	void insertLike(
 			@Param("userId") int userId, 
 			@Param("postId") int postId);

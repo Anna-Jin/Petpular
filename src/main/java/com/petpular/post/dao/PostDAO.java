@@ -25,5 +25,7 @@ public interface PostDAO {
 	
 	List<Post> selectPostList();
 	
+	List<Post> selectPostListByUserId(int userId);
+	
 	int countPost(int userId);
 }
