@@ -56,14 +56,14 @@
 			<c:forEach items="${userInfo.postList}" var="post">
 				<div class="foryou-post-box">
 					<div class="d-flex justify-content-center align-items-center mb-2">
-					<div class="foryou-each-post">
-						<div class="foryou-post-content px-3">${post.post.content}</div>
-						<div class="d-flex align-items-center px-3">
-							<div class="foryou-post-like-count">${post.countLike}</div>
-							<img src="/image/like(on).png" class="foryou-post-like">
+						<div class="foryou-each-post">
+							<div class="foryou-post-content px-3">${post.post.content}</div>
+							<div class="d-flex align-items-center px-3">
+								<div class="foryou-post-like-count">${post.countLike}</div>
+								<img src="/image/like(on).png" class="foryou-post-like">
+							</div>
 						</div>
-					</div>
-						<button type="button" class="foryou-each-post-del-box mx-2">
+						<button type="button" class="foryou-each-post-del-box mx-2" data-post-content="${post.post.content}" data-post-id="${post.post.id}">
 							<img src="/image/close.png" class="foryou-each-post-del-btn">
 						</button>
 					</div>
@@ -105,12 +105,38 @@
 
 <script>
 $(document).ready(function() {
-	var postContent = $('.foryou-post-content');
-	var postContentText = postContent.text().trim();
 	
-	if (postContentText.length > 17) {
-		var postContentShort = postContentText.substring(0, 17) + '...';
-		postContent.html(postContentShort);
-	}
+	// 게시글 내용 요약
+	
+	$('.foryou-post-box').each(function() {
+		var postContent = $(this).find('.foryou-post-content');
+		var postContentText = postContent.text().trim();
+		
+		if (postContentText.length > 17) {
+			var postContentShort = postContentText.substring(0, 17) + '...';
+			postContent.html(postContentShort);
+		}
+	});
+	
+	
+	$('.foryou-each-post-del-box').on('click', function() {
+		var postId = $(this).data('post-id');
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/post/delete"
+			, data: {"postId": postId}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('게시글 삭제에 실패했습니다. 관리자에게 문의해주세요.');
+			}
+		});
+	});
 });
 </script>
