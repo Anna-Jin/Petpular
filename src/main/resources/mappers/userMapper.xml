@@ -23,6 +23,16 @@
 			, NOW()
 		)
 	</insert>
+	<update id="updateUser" parameterType="map">
+		UPDATE `user`
+		SET
+			`login_id` = #{loginId}
+			, `name` = #{name}
+			, `email` = #{email}
+			<if test="imagePath != null">, `profile_image_url` = #{imagePath}</if>
+		WHERE
+			`id` = #{userId}	
+	</update>
 	<select id="existLgoinId" parameterType="String" resultType="boolean">
 		SELECT
 			COUNT(1)

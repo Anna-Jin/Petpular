@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.petpular.common.EncryptUtils;
 import com.petpular.user.bo.UserBO;
@@ -99,6 +100,13 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 로그인
+	 * @param loginId
+	 * @param password
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/login")
 	public Map<String, Object> login(
 			@RequestParam("loginId") String loginId,
@@ -127,5 +135,32 @@ public class UserRestController {
 		
 		return result;
 	}
+	
+	@PostMapping("/edit")
+	public Map<String, Object> editUser(
+			@RequestParam("loginId") String loginId,
+			@RequestParam("name") String name,
+			@RequestParam("email") String email,
+			@RequestParam("file") MultipartFile file,
+			HttpServletRequest request
+			) {
+		
+		HttpSession session = request.getSession();
+		int userId = (int)session.getAttribute("userId");
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int row = userBO.updateUser(userId, loginId, name, email, file);
+		if (row < 1) {
+			result.put("result", "error");
+			result.put("errorMessage", "프로필 수정에 실패했습니다. 관리자에게 문의해주세요.");
+			logger.error("[edit user] 프로필 수정 userId:{}", userId);
+		} else {
+			result.put("result", "success");
+		}
+		
+		return result;
+	}
+	
 	
 }

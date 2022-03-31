@@ -25,7 +25,7 @@
 							<label for="id">아이디</label>
 						</div>
 						<div class="col-7">
-							<input type="text" class="form-control profile-input" id="id" name="id" value="${userInfo.user.loginId}">
+							<input type="text" class="form-control profile-input" id="loginid" name="loginid" value="${userInfo.user.loginId}">
 						</div>
 					</div>
 					<div class="foryou-user-info-profile-input-box">
@@ -156,11 +156,10 @@ $(document).ready(function() {
 				return;
 			}
 		}
-		 
 		
 		var formData = new FormData();
 		
-		formData.append('id', $('#id').val().trim());
+		formData.append('loginId', $('#loginId').val());
 		formData.append('name', $('#name').val().trim());
 		formData.append('email', $('#email').val().trim());
 		formData.append('file', $('#user-file')[0].files[0]);
@@ -174,7 +173,6 @@ $(document).ready(function() {
 			, contentType: false
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert('수정 성공');					
 					location.reload();
 				} else {
 					alert(data.errorMessage);

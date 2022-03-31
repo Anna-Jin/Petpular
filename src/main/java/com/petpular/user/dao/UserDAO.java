@@ -15,6 +15,14 @@ public interface UserDAO {
 			@Param("email") String email, 
 			@Param("password") String password);
 	
+	// 프로필 수정
+	int updateUser(
+			@Param("userId")int userId, 
+			@Param("loginId") String loginId, 
+			@Param("name") String name, 
+			@Param("email") String email, 
+			@Param("imagePath") String imagePath);
+	
 	// 아이디 중복 확인
 	boolean existLgoinId(String loginId);
 	
