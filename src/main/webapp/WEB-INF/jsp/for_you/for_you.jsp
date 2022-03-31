@@ -22,10 +22,10 @@
 				<div class="foryou-user-info-profile-box">
 					<div class="foryou-user-info-profile-input-box">
 						<div class="col-4 d-flex justify-content-around">
-							<label for="id">아이디</label>
+							<label for="loginId">아이디</label>
 						</div>
 						<div class="col-7">
-							<input type="text" class="form-control profile-input" id="loginid" name="loginid" value="${userInfo.user.loginId}">
+							<input type="text" class="form-control profile-input" id="loginId" name="loginId" value="${userInfo.user.loginId}">
 						</div>
 					</div>
 					<div class="foryou-user-info-profile-input-box">
@@ -44,8 +44,9 @@
 							<input type="text" class="form-control profile-input" id="email" name="email" value="${userInfo.user.email}">
 						</div>
 					</div>
-					<div class="d-flex justify-content-center">
+					<div class="d-flex justify-content-center align-items-center">
 						<button type="button" class="btn btn-primary edit-profile-btn">내 정보 수정</button>					
+						<a href="/user/logout" class="gnb-logout-btn">로그아웃</a>
 					</div>
 				</div>
 			</div>
@@ -159,7 +160,7 @@ $(document).ready(function() {
 		
 		var formData = new FormData();
 		
-		formData.append('loginId', $('#loginId').val());
+		formData.append('loginId', $('#loginId').val().trim());
 		formData.append('name', $('#name').val().trim());
 		formData.append('email', $('#email').val().trim());
 		formData.append('file', $('#user-file')[0].files[0]);
@@ -173,6 +174,7 @@ $(document).ready(function() {
 			, contentType: false
 			, success: function(data) {
 				if (data.result == 'success') {
+					alert('정보가 수정되었습니다.');
 					location.reload();
 				} else {
 					alert(data.errorMessage);

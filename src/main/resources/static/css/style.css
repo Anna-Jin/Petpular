@@ -105,8 +105,10 @@ aside {
 	font-weight: bold;
 }
 
-.gnb-logout-img {
-	width: 15px;
+.gnb-logout-btn {
+	font-size: 10px;
+	margin-left: 10px;
+	color: red;	
 }
 
 /* main */

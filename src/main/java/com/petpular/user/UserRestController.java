@@ -136,12 +136,21 @@ public class UserRestController {
 		return result;
 	}
 	
+	/**
+	 * 프로필 수정
+	 * @param loginId
+	 * @param name
+	 * @param email
+	 * @param file
+	 * @param request
+	 * @return
+	 */
 	@PostMapping("/edit")
 	public Map<String, Object> editUser(
 			@RequestParam("loginId") String loginId,
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
-			@RequestParam("file") MultipartFile file,
+			@RequestParam(value = "file", required = false) MultipartFile file,
 			HttpServletRequest request
 			) {
 		

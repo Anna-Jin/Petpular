@@ -71,11 +71,6 @@
 						<div class="gnb-user-name">${userName}</div>
 						<div class="text-white font-size-12">님 반가워요!</div>
 					</div>
-					<div class="d-flex justify-content-center">
-						<a href="/user/logout" class="gnb-logout-btn">
-							<img  class="gnb-logout-img" src="/image/log-out.png">
-						</a>
-					</div>
 				</div>
 			</div>
 		</c:when>
