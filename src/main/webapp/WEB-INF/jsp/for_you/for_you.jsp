@@ -63,22 +63,33 @@
 							<img src="/image/like(on).png" class="foryou-post-like">
 						</div>
 					</div>
-						<div class="foryou-each-post-del-box px-3">
+						<button type="button" class="foryou-each-post-del-box mx-2">
 							<img src="/image/close.png" class="foryou-each-post-del-btn">
-						</div>
+						</button>
 					</div>
 				</div>
 			</c:forEach>
 		</div>
 		<div class="foryou-pet">
 			<div class="foryou-bottom-title">내 반려냥이</div>
-			<div class="foryou-pet-box">
-				<div class="foryou-pet-profile-box">
-					<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
-				</div>
-				<div class="foryou-pet-profile-hover">
-					<a href="#" class="text-white">냥이 이름</a>
-				</div>
+			<div class="d-flex justify-content-around w-100">
+				<c:forEach items="${userInfo.petList}" var="pet">
+					<div class="foryou-pet-box">
+						<div class="foryou-pet-profile-box">
+							<c:choose>
+								<c:when test="${empty pet.petImageUrl}">
+									<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
+								</c:when>
+								<c:otherwise>
+									<img src="${pet.petImageUrl}" alt="사진 있을 때" class="foryou-pet-profile-image">
+								</c:otherwise>
+							</c:choose>
+						</div>
+						<div class="foryou-pet-profile-hover">
+							<a href="/mypet/${pet.id}" class="text-white">${pet.name}</a>
+						</div>
+					</div>
+				</c:forEach>
 			</div>
 		</div>
 	</div>

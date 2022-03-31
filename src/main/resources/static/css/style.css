@@ -828,6 +828,10 @@ aside {
 	align-items: center;
 }
 
+.foryou-post, .foryou-pet {
+	width: 50%;
+}
+
 .foryou-user-info-title {
 	font-size: 36px;
 	font-weight: bold;
@@ -922,8 +926,14 @@ aside {
 .foryou-post-like-count {
 	position: relative;
 	left: 50%;
+	top: 1px;
 	font-size: 10px;
 	color: #fff;
+}
+
+.foryou-each-post-del-box {
+	background-color: transparent;
+	border: none;
 }
 
 .foryou-each-post-del-btn {
@@ -940,7 +950,7 @@ aside {
 	background-color: var(--main-clr);
 	width: 160px;
 	height: 160px;
-	border: 3px solid #fff;
+	border: 3px solid var(--back-clr);
 	border-radius: 50%;
 	display: flex;
 	justify-content: center;
@@ -948,7 +958,8 @@ aside {
 }
 
 .foryou-pet-profile-image {
-	width: 150px;
+	width: 154px;
+	border-radius: 50%;
 }
 
 .foryou-pet-profile-hover {
