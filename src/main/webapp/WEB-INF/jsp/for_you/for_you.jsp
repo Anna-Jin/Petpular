@@ -10,13 +10,14 @@
 				<div class="foryou-user-info-profile-img-box">
 					<c:choose>
 						<c:when test="${empty userInfo.user.profileImageUrl}">
-							<img alt="프로필 이미지" src="/image/user.png" class="foryou-user-info-profile-img">
+							<img alt="프로필 이미지" src="/image/user.png" id="user-img" class="foryou-user-info-profile-img">
 						</c:when>
 						<c:otherwise>
-							<img alt="프로필 이미지" src="${userInfo.user.profileImageUrl}" class="foryou-user-info-profile-img">
+							<img alt="프로필 이미지" src="${userInfo.user.profileImageUrl}" id="user-img" class="foryou-user-info-profile-img">
 						</c:otherwise>
 					</c:choose>
 					<a href="#" class="foryou-user-info-profile-img-btn">사진 등록</a>
+					<input type="file" id="user-file" name="userImgUrl" class="d-none" accept=".gif, .jpg, .png, .jpeg">
 				</div>
 				<div class="foryou-user-info-profile-box">
 					<div class="foryou-user-info-profile-input-box">
@@ -44,7 +45,7 @@
 						</div>
 					</div>
 					<div class="d-flex justify-content-center">
-						<button type="button" class="btn btn-primary">내 정보 수정</button>					
+						<button type="button" class="btn btn-primary edit-profile-btn">내 정보 수정</button>					
 					</div>
 				</div>
 			</div>
@@ -106,8 +107,88 @@
 <script>
 $(document).ready(function() {
 	
-	// 게시글 내용 요약
+	// 유저 사진 등록 버튼 클릭
+	$('.foryou-user-info-profile-img-btn').on('click', function() {
+		$('#user-file').click();
+	});
 	
+	// 유저 사진 유효성 검사
+	$('#user-file').on('change', function(e) {
+		var userFile = e.target.files[0].name;
+		
+		// 확장자 유효성 확인
+		var extension = userFile.split('.');
+		if (extension.length < 2 || 
+		 	(extension[extension.length - 1] != 'gif' 
+		 	&& extension[extension.length - 1] != 'png' 
+		 	&& extension[extension.length - 1] != 'jpg'
+		 	&& extension[extension.length - 1] != 'jpeg')) {
+		 	
+		 	alert("이미지 파일만 업로드 할 수 있습니다.");
+		 	$(this).val(""); // 이미 올라간 것을 확인한 것이기 때문에 비워주어야 한다.
+		 	return;
+		 }
+		
+		// 파일 업로드 시 미리보기 이미지를 선택한 이미지로 변경
+		setImageFromFile(this, '#user-img');
+		
+	});
+	
+	// 파일 업로드 시 미리보기 이미지를 선택한 이미지로 변경 --> 이거를 위한 함수
+	function setImageFromFile(input, expression) {
+	    if (input.files && input.files[0]) {
+	        var reader = new FileReader();
+	        reader.onload = function (e) {
+	            $(expression).attr('src', e.target.result);
+	        }
+	        reader.readAsDataURL(input.files[0]);
+	    }
+	}
+	
+	// 유저 정보 수정
+	$('.edit-profile-btn').on('click', function() {
+		// 파일이 업로드 된 경우, 확장자 체크
+		var file = $('#user-file').val();
+		if (file != '') {
+			let ext = file.split('.').pop().toLowerCase(); 			 
+			if ($.inArray(ext, ['jpg', 'jpeg', 'png', 'gif']) == -1) {
+				alert('jpg, jpeg, png, gif 파일만 업로드 할 수 있습니다.');
+				return;
+			}
+		}
+		 
+		
+		var formData = new FormData();
+		
+		formData.append('id', $('#id').val().trim());
+		formData.append('name', $('#name').val().trim());
+		formData.append('email', $('#email').val().trim());
+		formData.append('file', $('#user-file')[0].files[0]);
+		
+		$.ajax({
+			type: "POST"
+			, url: "/user/edit"
+			, data: formData
+			, enctype: "multipart/form-data" 	
+			, processData: false			
+			, contentType: false
+			, success: function(data) {
+				if (data.result == 'success') {
+					alert('수정 성공');					
+					location.reload();
+				} else {
+					alert(data.errorMessage);
+				}
+			}
+			, error: function(e) {
+				alert('프로필 수정에 실패했습니다. 관리자에게 문의해주세요.');
+			}
+		});
+		
+	});
+	
+	
+	// 게시글 내용 요약
 	$('.foryou-post-box').each(function() {
 		var postContent = $(this).find('.foryou-post-content');
 		var postContentText = postContent.text().trim();
@@ -118,7 +199,7 @@ $(document).ready(function() {
 		}
 	});
 	
-	
+	// 게시글 삭제
 	$('.foryou-each-post-del-box').on('click', function() {
 		var postId = $(this).data('post-id');
 		
