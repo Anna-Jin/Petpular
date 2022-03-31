@@ -72,25 +72,45 @@
 		</div>
 		<div class="foryou-pet">
 			<div class="foryou-bottom-title">내 반려냥이</div>
-			<div class="d-flex justify-content-around w-100">
-				<c:forEach items="${userInfo.petList}" var="pet">
-					<div class="foryou-pet-box">
-						<div class="foryou-pet-profile-box">
-							<c:choose>
-								<c:when test="${empty pet.petImageUrl}">
-									<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
-								</c:when>
-								<c:otherwise>
-									<img src="${pet.petImageUrl}" alt="사진 있을 때" class="foryou-pet-profile-image">
-								</c:otherwise>
-							</c:choose>
-						</div>
-						<div class="foryou-pet-profile-hover">
-							<a href="/mypet/${pet.id}" class="text-white">${pet.name}</a>
-						</div>
+			<c:choose>
+				<c:when test="${empty userInfo.petList}">
+					<div>등록된 반려냥이가 없습니다</div>
+				</c:when>
+				<c:otherwise>
+					<div class="d-flex justify-content-around w-100">
+						<c:forEach items="${userInfo.petList}" var="pet">
+							<div class="foryou-pet-box">
+								<div class="foryou-pet-profile-box">
+									<c:choose>
+										<c:when test="${empty pet.petImageUrl}">
+											<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
+										</c:when>
+										<c:otherwise>
+											<img src="${pet.petImageUrl}" alt="사진 있을 때" class="foryou-pet-profile-image">
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="foryou-pet-profile-hover">
+									<a href="/mypet/${pet.id}" class="text-white">${pet.name}</a>
+								</div>
+							</div>
+						</c:forEach>
 					</div>
-				</c:forEach>
-			</div>
+				</c:otherwise>
+			</c:choose>
 		</div>
 	</div>
 </div>
+
+
+<script>
+$(document).ready(function() {
+	var postContent = $('.foryou-post-content');
+	var postContentText = postContent.text().trim();
+	
+	if (postContentText.length > 17) {
+		var postContentShort = postContentText.substring(0, 17) + '...';
+		postContent.html(postContentShort);
+	}
+});
+</script>

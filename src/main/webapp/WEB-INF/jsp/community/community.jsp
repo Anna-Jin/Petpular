@@ -212,14 +212,14 @@ $(document).ready(function() {
 		
 		// 글 내용
 		var content = $(this).find('.community-post-body-content');
-		var content_text = content.text().trim();
+		var contentText = content.text().trim();
 		
-		if (content_text.length > 9) {
+		if (contentText.length > 9) {
 			// 글 내용 요약
-			var content_short = content_text.substring(0, 10) + "...";
+			var contentShort = contentText.substring(0, 10) + "...";
 			
 			// 글 내용이 10글자 이상일 때 글자수를 10자로 줄이고, 더보기 버튼을 노출한다
-			content.html(content_short);
+			content.html(contentShort);
 			moreBtn.removeClass('d-none');
 			
 		} else {
@@ -229,7 +229,7 @@ $(document).ready(function() {
 		
 		// 더보기 버튼 클릭하면 글 내용 전체 보이기
 		moreBtn.on('click', function() {
-			content.html(content_text);
+			content.html(contentText);
 			moreBtn.addClass('d-none');
 		});
 	});
