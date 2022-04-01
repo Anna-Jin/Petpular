@@ -3,6 +3,7 @@ package com.petpular.pet;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -23,6 +24,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.petpular.pet.bo.PetBO;
 import com.petpular.pet.model.Feed;
+import com.petpular.pet.model.Pet;
 import com.petpular.pet.model.Sand;
 
 @RestController
@@ -157,6 +159,24 @@ public class PetRestController {
 			result.put("errorMessage", "반려동물 수정에 실패했습니다.");
 			logger.error("[add pet] 펫 수정 userId: {}", userId);
 		} else {
+			// 세션에 수정된 고양이 id와 name을 세션에 담는다.
+			List<Pet> petList = petBO.getPetByUserId(userId);
+			
+			if(userId != null && petList.size() != 0) {
+					String petNameArr = petList.get(0).getName();
+					String petIdArr = Integer.toString(petList.get(0).getId());
+				 
+					if (petList.size() > 0) {
+						for (int i = 1; i < petList.size(); i++) {
+							
+							petIdArr = petIdArr + "," + petList.get(i).getId();
+							petNameArr = petNameArr + "," + petList.get(i).getName();
+						}
+					}
+					session.setAttribute("petIdArr", petIdArr);
+					session.setAttribute("petNameArr", petNameArr);
+			}
+			
 			result.put("result", "success");
 		}
 		
