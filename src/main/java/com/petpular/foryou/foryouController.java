@@ -12,7 +12,7 @@ import com.petpular.foryou.bo.ForyouBO;
 import com.petpular.foryou.model.Foryou;
 
 @Controller
-public class foryouController {
+public class ForyouController {
 	
 	@Autowired
 	private ForyouBO foryouBO;
