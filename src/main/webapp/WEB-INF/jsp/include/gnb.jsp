@@ -46,7 +46,7 @@
 		    <a class="nav-link gnb-nav-service">Service</a>
 		    <ul class="nav flex-column">
 		    	<li class="service-nav">
-		    		<a href="#" class="abandoned-animals-nav d-block">> 유기동물</a>
+		    		<a href="/service/abandoned-animal" class="abandoned-animals-nav d-block">> 유기동물</a>
 		    	</li>
 		    	<li class="service-nav">
 		    		<a href="https://wayopet.com/" target='_blank' class="wayo-nav d-block">> 반려동물 돌보미</a>

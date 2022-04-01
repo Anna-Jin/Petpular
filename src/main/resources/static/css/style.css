@@ -990,3 +990,48 @@ aside {
 .foryou-pet-box:hover .foryou-pet-profile-hover {
 	 opacity: 1;
 }
+
+
+/* abandoned animal page */
+#abandoned-wrap {
+	margin: 50px 70px;
+}
+
+.abandoned-header {
+/* 	display: flex;
+	align-items: center; */
+}
+
+.abandoned-header-title {
+	font-size: 36px;
+	font-weight: bold;
+}
+
+.abandoned-nav {
+	height: 70px;
+	margin: 15px 0 30px 0;
+}
+
+.abandoned-nav-box {
+	width: 350px;
+	height: 70px;
+	background-color: var(--main-clr);
+	border-radius: 15px; 
+	display: flex;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.abandoned-body {
+	height: 600px;
+	width: 100%;
+}
+
+.abandoned-body-card {
+	width: 230px;
+	height: 280px;
+	background-color: #fff;
+	border: 1px solid var(--border-clr);
+	border-radius: 15px;
+	box-shadow: 0px 0px 5px 1px rgba(0, 0, 0, 0.25);
+}

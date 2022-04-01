@@ -37,6 +37,5 @@
 			<jsp:include page="../${viewPath}.jsp" />
 		</div>
 	</div>
-
 </body>   
 </html>
