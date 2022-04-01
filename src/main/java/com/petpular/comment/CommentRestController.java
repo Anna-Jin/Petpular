@@ -3,7 +3,6 @@ package com.petpular.comment;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -37,10 +36,9 @@ public class CommentRestController {
 	public Map<String, Object> writeComment(
 			@RequestParam("comment") String comment,
 			@RequestParam("postId") int postId,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
@@ -61,9 +59,8 @@ public class CommentRestController {
 	public Map<String, Object> deleteComment(
 			@RequestParam("postId") int postId,
 			@RequestParam("commentId") int commentId,
-			HttpServletRequest request
+			HttpSession session
 			) {
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();

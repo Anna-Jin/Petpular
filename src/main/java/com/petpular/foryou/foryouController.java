@@ -1,6 +1,5 @@
 package com.petpular.foryou;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,9 +17,8 @@ public class ForyouController {
 	private ForyouBO foryouBO;
 
 	@RequestMapping("/foryou")
-	public String foryou(Model model, HttpServletRequest request) {
+	public String foryou(Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Foryou userInfo = foryouBO.generateForyouByUserId(userId);

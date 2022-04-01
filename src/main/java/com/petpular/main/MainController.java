@@ -2,7 +2,6 @@ package com.petpular.main;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,9 +20,8 @@ public class MainController {
 	
 
 	@RequestMapping("/main")
-	public String main(Model model, HttpServletRequest request) {
+	public String main(Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		List<Pet> petList = petBO.getPetByUserId(userId);
 		

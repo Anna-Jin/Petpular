@@ -2,7 +2,6 @@ package com.petpular.calendar;
 
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,9 +23,8 @@ public class CalendarController {
 	@RequestMapping("/calendar/{petId}")
 	public Map<String, Object> calendar(
 			@PathVariable("petId") int petId, 
-			Model model, HttpServletRequest request) {
+			Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		return calendarBO.getDate(userId, petId);

@@ -3,7 +3,6 @@ package com.petpular.post;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -38,10 +37,9 @@ public class PostRestController {
 	public Map<String, Object> writePost(
 			@RequestParam("postFile") MultipartFile postFile,
 			@RequestParam(value = "content", required = false) String content,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
 		
@@ -63,9 +61,8 @@ public class PostRestController {
 	@DeleteMapping("/delete")
 	public Map<String, Object> deletePost(
 			@RequestParam("postId") int postId,
-			HttpServletRequest request
+			HttpSession session
 			) {
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();

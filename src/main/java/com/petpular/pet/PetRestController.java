@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -61,10 +60,9 @@ public class PetRestController {
 			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
 			@RequestParam("weight") BigDecimal weight,
 			@RequestParam(value = "disease", required = false) String disease,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
 		
@@ -96,10 +94,9 @@ public class PetRestController {
 			@ModelAttribute Feed feed,
 			@ModelAttribute Sand sand,
 			@PathVariable("petId") int petId,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
@@ -143,10 +140,9 @@ public class PetRestController {
 			@RequestParam("birthday") @DateTimeFormat(pattern = "yyyy-MM-dd") LocalDate birthday,
 			@RequestParam("weight") BigDecimal weight,
 			@RequestParam(value = "disease", required = false) String disease,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		String userLoginId = (String)session.getAttribute("userLoginId");
 		
@@ -196,10 +192,9 @@ public class PetRestController {
 			@ModelAttribute Feed feed,
 			@ModelAttribute Sand sand,
 			@PathVariable("petId") int petId,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();
@@ -227,12 +222,11 @@ public class PetRestController {
 	@DeleteMapping("/delete")
 	public Map<String, Object> deletePet(
 			@RequestParam("petId") int petId,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		petBO.deletePet(userId, petId);

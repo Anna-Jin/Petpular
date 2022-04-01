@@ -2,7 +2,6 @@ package com.petpular.community;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +19,8 @@ public class communityController {
 	private CommunityBO communityBO;
 	
 	@RequestMapping("/community")
-	public String community(Model model, HttpServletRequest request) {
+	public String community(Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		List<ContentView> contentList = communityBO.generateContentViewList(userId);

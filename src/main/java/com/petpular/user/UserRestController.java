@@ -3,7 +3,6 @@ package com.petpular.user;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -111,7 +110,7 @@ public class UserRestController {
 	public Map<String, Object> login(
 			@RequestParam("loginId") String loginId,
 			@RequestParam("password") String password,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
 		// 비밀번호 암호화
@@ -122,7 +121,6 @@ public class UserRestController {
 		Map<String, Object> result = new HashMap<>();
 		
 		if (user != null) {
-			HttpSession session = request.getSession();
 			session.setAttribute("userLoginId", user.getLoginId());
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
@@ -151,10 +149,9 @@ public class UserRestController {
 			@RequestParam("name") String name,
 			@RequestParam("email") String email,
 			@RequestParam(value = "file", required = false) MultipartFile file,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		int userId = (int)session.getAttribute("userId");
 		
 		Map<String, Object> result = new HashMap<>();

@@ -2,7 +2,6 @@ package com.petpular.pet;
 
 import java.util.List;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,9 +31,8 @@ public class PetController {
 	@RequestMapping("/{petId}")
 	public String mypetProfile(
 			@PathVariable("petId") int petId,
-			Model model, HttpServletRequest request) {
+			Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
@@ -69,9 +67,8 @@ public class PetController {
 	@RequestMapping("/add/more-info/{petId}")
 	public String addPetMoreInfo(
 			@PathVariable("petId") int petId,
-			Model model, HttpServletRequest request) {
+			Model model, HttpSession session) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
@@ -92,10 +89,9 @@ public class PetController {
 	public String editPet(
 			@PathVariable("petId") int petId,
 			Model model,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		PetView pet = petBO.getPetByUserIdPetId(userId, petId);
@@ -111,10 +107,9 @@ public class PetController {
 	public String editPetMoreInfo(
 			@PathVariable("petId") int petId,
 			Model model,
-			HttpServletRequest request
+			HttpSession session
 			) {
 		
-		HttpSession session = request.getSession();
 		Integer userId = (Integer)session.getAttribute("userId");
 		
 		List<PetMoreInfo> petMoreInfoList = petBO.getPetMoreIfoByUserIdPetId(userId, petId);

@@ -1,6 +1,5 @@
 package com.petpular.user;
 
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
@@ -33,8 +32,7 @@ public class UserController {
 	 * @return
 	 */
 	@RequestMapping("/user/logout")
-	public String logout(HttpServletRequest request) {
-		HttpSession session = request.getSession();
+	public String logout(HttpSession session) {
 		session.removeAttribute("userId");
 		session.removeAttribute("userLoginId");
 		session.removeAttribute("userName");
