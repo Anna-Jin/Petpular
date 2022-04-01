@@ -166,6 +166,7 @@ public class UserRestController {
 			logger.error("[edit user] 프로필 수정 userId:{}", userId);
 		} else {
 			result.put("result", "success");
+			session.setAttribute("userName", name);
 		}
 		
 		return result;
