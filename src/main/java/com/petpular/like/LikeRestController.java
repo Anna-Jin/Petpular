@@ -29,14 +29,6 @@ public class LikeRestController {
 		
 		boolean existLike = likeBO.existLike(userId, postId);
 		
-		if(existLike) {
-			// 좋아요가 활성화 되어있을 때 -> 좋아요 삭제
-			likeBO.deleteLike(userId, postId);
-		} else {
-			// 좋아요가 활성화 되어있지 않을 때 -> 좋아요 추가
-			likeBO.addLike(userId, postId);
-		}
-		
 		result.put("like", existLike);
 		result.put("result", "success");
 		
