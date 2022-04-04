@@ -15,25 +15,12 @@
 
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-<style>
-.modal {
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	display: none;
-	background-color: rgba(0, 0, 0, 0.4);
-}
-</style>
+
 </head>
 <body>
+<h1>test</h1>
+<div>${response}</div>
 
-	<div class="modal">
-		<div class="modal_body">Modal</div>
-	</div>
-	<button class="btn-open-popup">Modal 띄우기</button>
-	<script> const modal = document.querySelector('.modal'); const btnOpenPopup = document.querySelector('.btn-open-popup'); btnOpenPopup.addEventListener('click', () => { modal.style.display = 'block'; }); </script>
 
 </body>
 </html>
