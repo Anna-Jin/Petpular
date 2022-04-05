@@ -71,7 +71,7 @@ public class WebclientTestRestController {
 								.baseUrl(BASE_URL)
 								.build();
 		
-		AbandonedAnimal response = webClient.get()
+		Object responseList = webClient.get()
 								.uri(uriBuilder -> uriBuilder
 													.queryParam("serviceKey", serviceKey)
 													.queryParam("upkind", upkind)
@@ -82,12 +82,10 @@ public class WebclientTestRestController {
 													.queryParam("_type", _type)
 													.build())
 								.retrieve()
-								.bodyToMono(AbandonedAnimal.class)
+								.bodyToMono(Object.class)
 								.block();
 		
-		model.addAttribute("response", response);
-		model.addAttribute("viewPath", "/test/test");
-								
-		return "template/layout";								
+		model.addAttribute("responseList", responseList);
+		return "test/test";								
 	}
 }
