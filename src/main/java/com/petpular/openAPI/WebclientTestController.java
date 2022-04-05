@@ -6,23 +6,31 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.Map;
 
+import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-@Controller
-public class WebclientTestRestController {
+import reactor.core.publisher.Mono;
 
-	@RequestMapping("api-test")
+@Controller
+public class WebclientTestController {
+
+	@RequestMapping("/api-test")
+	@ResponseBody
 	public String apiTest() throws IOException {
 		
         StringBuilder urlBuilder = new StringBuilder("http://apis.data.go.kr/1543061/abandonmentPublicSrvc/abandonmentPublic"); /*URL*/
         urlBuilder.append("?" + URLEncoder.encode("serviceKey","UTF-8") + "=Y8ysgjcfITdLKYzk9pQp6pzphI2yY95czKzFUggqOQCdYuYLm9oAOBh%2Fhn1meZKp1UPtONWLAAIbu7McjP9R9Q%3D%3D"); /*Service Key*/
         urlBuilder.append("&" + URLEncoder.encode("upkind","UTF-8") + "=" + URLEncoder.encode("422400", "UTF-8")); /*축종코드 (개 : 417000, 고양이 : 422400, 기타 : 429900)*/
-        urlBuilder.append("&" + URLEncoder.encode("upr_cd","UTF-8") + "=" + URLEncoder.encode("6110000", "UTF-8")); /*시도코드 (시도 조회 OPEN API 참조)*/
+        urlBuilder.append("&" + URLEncoder.encode("upr_cd","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*시도코드 (시도 조회 OPEN API 참조)*/
+        urlBuilder.append("&" + URLEncoder.encode("org_cd","UTF-8") + "=" + URLEncoder.encode("", "UTF-8")); /*시군구코드 (시군구 조회 OPEN API 참조)*/
         urlBuilder.append("&" + URLEncoder.encode("state","UTF-8") + "=" + URLEncoder.encode("notice", "UTF-8")); /*상태(전체 : null(빈값), 공고중 : notice, 보호중 : protect)*/
         urlBuilder.append("&" + URLEncoder.encode("pageNo","UTF-8") + "=" + URLEncoder.encode("1", "UTF-8")); /*페이지 번호 (기본값 : 1)*/
         urlBuilder.append("&" + URLEncoder.encode("numOfRows","UTF-8") + "=" + URLEncoder.encode("20", "UTF-8")); /*페이지당 보여줄 개수 (1,000 이하), 기본값 : 10*/
@@ -53,11 +61,12 @@ public class WebclientTestRestController {
 	private final String API_KEY = "Y8ysgjcfITdLKYzk9pQp6pzphI2yY95czKzFUggqOQCdYuYLm9oAOBh%2Fhn1meZKp1UPtONWLAAIbu7McjP9R9Q%3D%3D";
 	
 	
-	@RequestMapping(value = "/webclient-test", produces = "application/json; charset=utf8")
+	@RequestMapping("/webclient-test")
 	public String getAbandonedAnimal(Model model) {
 		String serviceKey = API_KEY;
 		String upkind = "422400";
 		String upr_cd = "6110000";
+		String org_cd = "3220000";
 		String state = "notice";
 		String pageNo = "1";
 		String NumOfRows = "8";
@@ -71,21 +80,25 @@ public class WebclientTestRestController {
 								.baseUrl(BASE_URL)
 								.build();
 		
-		Object responseList = webClient.get()
+		Mono<Map<Object, Object>> response = webClient.get()
 								.uri(uriBuilder -> uriBuilder
 													.queryParam("serviceKey", serviceKey)
 													.queryParam("upkind", upkind)
 													.queryParam("upr_cd", upr_cd)
+													.queryParam("org_cd", org_cd)
 													.queryParam("state", state)
 													.queryParam("pageNo", pageNo)
 													.queryParam("NumOfRows", NumOfRows)
 													.queryParam("_type", _type)
 													.build())
+								.accept(MediaType.APPLICATION_JSON)
 								.retrieve()
-								.bodyToMono(Object.class)
-								.block();
+								.bodyToMono(new ParameterizedTypeReference<>() {});
 		
-		model.addAttribute("responseList", responseList);
+		
+		Map<Object, Object> result = response.block();
+		
+		model.addAttribute("result", result);
 		return "test/test";								
 	}
 }

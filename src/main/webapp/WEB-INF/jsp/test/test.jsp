@@ -25,7 +25,8 @@ ${item}
 <br>
 </c:forEach> --%>
 
-${responseList}
+${result.response.body.items.item}
+
 
 </body>
 </html>
