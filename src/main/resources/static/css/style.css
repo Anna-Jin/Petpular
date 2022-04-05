@@ -1006,16 +1006,32 @@ aside {
 .abandoned-nav {
 	height: 70px;
 	margin: 40px 0 55px 0;
+	display: flex;
+	align-items: center;
 }
 
 .abandoned-nav-box {
-	width: 350px;
+	width: 400px;
 	height: 70px;
 	background-color: var(--main-clr);
 	border-radius: 15px; 
 	display: flex;
 	align-items: center;
 	justify-content: space-around;
+}
+
+.abandoned-nav-sido,.abandoned-nav-sigungu {
+	width: 40%;
+}
+
+.abandoned-search-btn {
+	font-size: 16px;
+	background-color: var(--main-clr);
+	border: none;
+	border-radius: 10px;
+	padding: 10px;
+	margin-left: 10px;
+	color: #fff;
 }
 
 .abandoned-body {

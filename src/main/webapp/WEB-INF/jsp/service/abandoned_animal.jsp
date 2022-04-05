@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
 
 <div id="abandoned-wrap">
 	<div class="abandoned-header">
@@ -7,22 +8,24 @@
 	</div>
 	<div class="abandoned-nav">
 		<div class="abandoned-nav-box">
-			<div class="col-5">
-				<select class="form-select form-select-sm">
-				  <option selected>동물 선택</option>
-				  <option value="">강아지</option>
-				  <option value="2">고양이</option>
-				  <option value="3">기타</option>
+			<div class="abandoned-nav-sido">
+				<select id="sido" class="form-select form-select-sm">
+				  <option selected disabled>시/도 선택</option>
+				  
+				  <c:forEach  items="${sido.response.body.items.item}" var="sidoItem">
+				  	<option value="${sidoItem.orgCd}">${sidoItem.orgdownNm}</option>
+				  </c:forEach>
+				  
 				</select>
 			</div>
-			<div class="col-5">
-				<select class="form-select form-select-sm">
-				  <option selected>지역 선택</option>
-				  <option value="1">서울</option>
-				  <option value="2">부산</option>
-				  <option value="3">대구</option>
+			<div class="abandoned-nav-sigungu">
+				<select id="sigungu" class="form-select form-select-sm">
+					<option selected>시/군/구 선택</option>
 				</select>
 			</div>
+		</div>
+		<div class="abandoned-search-btn-box">
+			<button type="button" class="abandoned-search-btn">조회하기</button>
 		</div>
 	</div>
 	<div class="abandoned-body">
@@ -182,3 +185,27 @@
 		</div>
 	</div>
 </div>
+
+<script>
+	$(document).ready(function() {
+		$('#sido').on('change', function() {
+			var sidoCode = $('#sido option:selected').val();
+			
+			$('#sigungu').empty();
+			
+			$.ajax({
+				type: "GET"
+				, url: "/sigungu"
+				, data: {"sidoCode":sidoCode}
+				, success: function(data) {
+					var items = data.response.body.items.item;
+					for (var count = 0; count < items.length; count++) {
+						var option = $('<option value="' + items[count].orgCd + '">' + items[count].orgdownNm + '</option>');
+						$('#sigungu').append(option);
+					}
+					
+				}
+			})
+		});
+	});
+</script>
