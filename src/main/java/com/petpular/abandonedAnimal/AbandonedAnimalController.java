@@ -27,12 +27,13 @@ public class AbandonedAnimalController {
 		return "template/layout";
 	}
 	
-	@RequestMapping({"/abandoned-animal" , "/abandoned-animal/{sidoCode}/{sigunguCode}"})
+	@RequestMapping({"/abandoned-animal/{speciesCode}","/abandoned-animal/{speciesCode}/{sidoCode}", "/abandoned-animal/{speciesCode}/{sidoCode}/{sigunguCode}"})
 	public String abandonedAnimal(Model model,
+			@PathVariable String speciesCode,
 			@PathVariable(required = false) String sidoCode,
 			@PathVariable(required = false) String sigunguCode) {
 		
-		JSONArray abandonedAnimal = abandonedAnimalAPI.abandonedAniaml(sidoCode, sigunguCode);
+		JSONArray abandonedAnimal = abandonedAnimalAPI.abandonedAniaml(speciesCode, sidoCode, sigunguCode);
 		
 		model.addAttribute("abandonedAnimal", abandonedAnimal);
 		model.addAttribute("viewPath", "/service/abandoned_animal");

@@ -1013,18 +1013,18 @@ aside {
 }
 
 .search-abandoned-nav {
-	height: 70px;
+	height: 140px;
 	margin: 40px 0 55px 0;
 }
 
 .search-abandoned-nav-box {
 	width: 400px;
-	height: 70px;
+	height: 140px;
 	background-color: var(--main-clr);
 	border-radius: 15px; 
 	display: flex;
-	align-items: center;
-	justify-content: space-around;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .search-abandoned-nav-sido,.search-abandoned-nav-sigungu {
@@ -1054,6 +1054,7 @@ aside {
 	font-size: 36px;
 	font-weight: bold;
 	margin-left: 5px;
+	margin-bottom: 55px;
 }
 
 .abandoned-body {

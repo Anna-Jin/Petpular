@@ -46,6 +46,19 @@ a:hover {
 	box-shadow: 0 0 0 0.25rem rgba(255, 164, 79, 0.5);
 }
 
+.btn-check:checked + .btn-outline-primary, .btn-check:active + .btn-outline-primary, .btn-outline-primary:active, .btn-outline-primary.active, .btn-outline-primary.dropdown-toggle.show {
+	background-color: var(--main-clr);
+	border-color: #fff;
+	box-shadow: none;	
+}
+
+.btn-outline-primary, .btn-outline-primary:hover, .btn-outline-primary:focus, .btn-outline-primary:disabled, .btn-outline-primary:active {
+	background-color: #fff;
+	border-color: var(--main-clr);
+	color: var(--main-clr);
+}
+
+
 .modal-content {
 	border-radius: 15px;
 }

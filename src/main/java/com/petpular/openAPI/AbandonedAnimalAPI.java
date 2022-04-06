@@ -20,8 +20,8 @@ public class AbandonedAnimalAPI {
 	private WebClientUtils webClientUtils;
 
 	private String serviceKey = "Y8ysgjcfITdLKYzk9pQp6pzphI2yY95czKzFUggqOQCdYuYLm9oAOBh%2Fhn1meZKp1UPtONWLAAIbu7McjP9R9Q%3D%3D"; // 서비스키
-	private String pageNo = "1"; // 페이지 번호 (기본값 : 1)
-	private String NumOfRows = "20"; // 페이지당 보여줄 개수 (1,000 이하), 기본값 : 10
+	private String pageNo; // 페이지 번호 (기본값 : 1)
+	private String NumOfRows; // 페이지당 보여줄 개수 (1,000 이하), 기본값 : 10
 	private String _type = "json"; // json 형태로 반환
 	private String state = "notice"; // 공고 상태 (보호중)
 	private String bgnde = LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString(); // 유기날짜 (검색 시작일)
@@ -29,6 +29,10 @@ public class AbandonedAnimalAPI {
 	
 	
 	public JSONArray abandonedAniamlSido() {
+		pageNo = "1";
+		NumOfRows = "17";
+		
+		
 		WebClient webClient = webClientUtils.webClient();
 		
 		String response = webClient.get()
@@ -80,7 +84,10 @@ public class AbandonedAnimalAPI {
 	}
 	
 	@GetMapping("/abandonedAnimal")
-	public JSONArray abandonedAniaml(String upr_cd, String org_cd) {
+	public JSONArray abandonedAniaml(String upkind, String upr_cd, String org_cd) {
+		pageNo = "1";
+		NumOfRows = "52";
+		
 		
 		WebClient webClient = webClientUtils.webClient();
 		
@@ -89,6 +96,7 @@ public class AbandonedAnimalAPI {
 											.queryParam("serviceKey", serviceKey)
 											.queryParam("bgnde", bgnde)
 											.queryParam("endde", endde)
+											.queryParam("upkind", upkind)
 											.queryParam("upr_cd", upr_cd)
 											.queryParam("org_cd", org_cd)
 											.queryParam("state", state)
