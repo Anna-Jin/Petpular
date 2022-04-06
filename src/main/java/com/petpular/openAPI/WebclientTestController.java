@@ -6,9 +6,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.net.URLEncoder;
-import java.util.Map;
 
-import org.springframework.core.ParameterizedTypeReference;
+import org.json.simple.JSONArray;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,11 +16,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.reactive.function.client.WebClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
-import reactor.core.publisher.Mono;
+import com.petpular.common.JsonParserUtils;
 
 @Controller
 public class WebclientTestController {
-
+	
 	@RequestMapping("/api-test")
 	@ResponseBody
 	public String apiTest() throws IOException {
@@ -62,11 +61,11 @@ public class WebclientTestController {
 	
 	
 	@RequestMapping("/webclient-test")
-	public String getAbandonedAnimal(Model model) {
+	public String getAbandonedAnimal(Model model) throws Exception {
 		String serviceKey = API_KEY;
 		String upkind = "422400";
 		String upr_cd = "6110000";
-		String org_cd = "3220000";
+//		String org_cd = "3220000";
 		String state = "notice";
 		String pageNo = "1";
 		String NumOfRows = "8";
@@ -80,12 +79,11 @@ public class WebclientTestController {
 								.baseUrl(BASE_URL)
 								.build();
 		
-		Mono<Map<Object, Object>> response = webClient.get()
+		String result = webClient.get()
 								.uri(uriBuilder -> uriBuilder
 													.queryParam("serviceKey", serviceKey)
 													.queryParam("upkind", upkind)
 													.queryParam("upr_cd", upr_cd)
-													.queryParam("org_cd", org_cd)
 													.queryParam("state", state)
 													.queryParam("pageNo", pageNo)
 													.queryParam("NumOfRows", NumOfRows)
@@ -93,12 +91,13 @@ public class WebclientTestController {
 													.build())
 								.accept(MediaType.APPLICATION_JSON)
 								.retrieve()
-								.bodyToMono(new ParameterizedTypeReference<>() {});
+								.bodyToMono(String.class)
+								.block();
+		
+		JSONArray response = JsonParserUtils.parseStringToJson(result);
 		
 		
-		Map<Object, Object> result = response.block();
-		
-		model.addAttribute("result", result);
+		model.addAttribute("response", response);
 		return "test/test";								
 	}
 }

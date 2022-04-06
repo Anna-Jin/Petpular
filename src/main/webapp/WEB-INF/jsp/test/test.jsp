@@ -19,13 +19,7 @@
 </head>
 <body>
 <h1>test</h1>
-<%-- <c:forEach items="${responseList.response.body.items.item}" var="item">
-${item}
-<br>
-<br>
-</c:forEach> --%>
-
-${result.response.body.items.item}
+${response[2]}
 
 
 </body>

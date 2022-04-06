@@ -1,7 +1,6 @@
 package com.petpular.abandonedAnimal;
 
-import java.util.Map;
-
+import org.json.simple.JSONArray;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,7 +17,7 @@ public class AbandonedAnimalController {
 	@RequestMapping("/service/abandoned-animal")
 	public String abandonedAnimal(Model model) {
 		
-		Map<Object, Object> sido = abandonedAnimalAPI.abandonedAniamlSido();
+		JSONArray sido = abandonedAnimalAPI.abandonedAniamlSido();
 		
 		
 		model.addAttribute("sido", sido);
