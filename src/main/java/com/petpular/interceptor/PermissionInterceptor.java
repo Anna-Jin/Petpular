@@ -26,7 +26,7 @@ public class PermissionInterceptor implements HandlerInterceptor{
 			return false;
 		} else if (userId == null) {
 			// 로그인 안 된상태
-			if (uri.equals("/mypet/add")) {
+			if (uri.startsWith("/mypet")) {
 				response.sendRedirect("/user/login");
 				return false;
 			}
