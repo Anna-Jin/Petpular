@@ -1165,12 +1165,12 @@ aside {
 .details-img-box {
 	width: 400px;
 	overflow: hidden;
+	display: flex;
+	align-items: center;
 }
 
 .details-img {
 	width: 400px;
-	height: 400px;
-	object-fit: cover;
 	border-radius: 15px;
 }
 
