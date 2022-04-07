@@ -19,165 +19,165 @@
 		
 		<%-- 유저 정보 팝업 --%>
 		<div class="community-layout-box">
-		<div class="community-post-user-info card-number-${content.post.id}">
-			<div class="community-post-user-info-header">
-				<c:choose>
-					<c:when test="${empty content.user.profileImageUrl}">
-						<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-info-img">
-					</c:when>
-					<c:otherwise>
-						<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-info-img">
-					</c:otherwise>
-				</c:choose>
-				<div class="community-post-user-info-header-id">
-					${content.user.loginId}
-				</div>
-			</div>
-			<div class="community-post-user-info-body">
-				<c:choose>
-					<c:when test="${not empty content.petList}">
-						<div class="community-post-user-info-body-pet">
-							<div class="community-post-user-info-body-pet-title">반려냥이</div>
-							<div class="d-flex">
-								<c:forEach items="${content.petList}" var="pet">
-									<div class="community-post-user-info-body-pet-card">
-										<div class="community-post-user-info-body-pet-img-box">
-											<c:choose>
-												<c:when test="${empty pet.petImageUrl}">
-													<img src="/image/paws.png" class="community-post-user-info-body-pet-img">
-												</c:when>
-												<c:otherwise>
-													<img src="${pet.petImageUrl}" class="community-post-user-info-body-pet-img">
-												</c:otherwise>
-											</c:choose>
-										</div>
-										<div class="ms-2">
-											<div class="community-post-user-info-body-pet-name">${pet.name}</div>
-											<div class="community-post-user-info-body-pet-breed">${pet.breed}</div>
-										</div>
-									</div>
-								</c:forEach>
-							</div>
-						</div>
-					</c:when>
-					<c:otherwise>
-					<div class="community-post-user-info-body-pet">
-						<div class="community-post-user-info-body-pet-title">반려냥이</div>
-						<div class="community-post-user-info-body-no-pet">등록된 반려냥이가 없습니다.</div>
-					</div>
-					</c:otherwise>
-				</c:choose>
-				<div class="d-flex">
-					<div class="community-post-user-info-body-post-title">게시물</div>
-					<div class="font-size-14 ms-2">${content.countPost}</div>
-				</div>
-			</div>
-		</div>
-		
-		<%-- 게시물 card --%>
-		<div id="community-post-box">
-			<%-- header --%>
-			<div class="community-post-header">
-				<div class="community-post-header-left">
+			<div class="community-post-user-info card-number-${content.post.id}">
+				<div class="community-post-user-info-header">
 					<c:choose>
 						<c:when test="${empty content.user.profileImageUrl}">
-							<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+							<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-info-img">
 						</c:when>
 						<c:otherwise>
-							<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+							<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-info-img">
 						</c:otherwise>
 					</c:choose>
-					<div>
-						<button type="button" class="community-post-id" data-post-id="${content.post.id}">
-							${content.user.loginId}
-						</button>
-						
-						<fmt:formatDate value="${content.post.createdAt}" var="createdDate" pattern="yyyy년 MM월 dd일 a hh:mm"/>
-						<div class="community-post-time">${createdDate}</div>
+					<div class="community-post-user-info-header-id">
+						${content.user.loginId}
 					</div>
 				</div>
-				<div class="community-post-header-right">
-					<c:if test="${content.post.userId eq userId}">
-						<button type="button" class="community-post-more-btn" data-bs-toggle="modal" data-bs-target="#moreModal" data-post-id="${content.post.id}">
-							<img src="/image/option.png" alt="옵션" class="community-post-more-img">
-						</button>
-					</c:if>
+				<div class="community-post-user-info-body">
+					<c:choose>
+						<c:when test="${not empty content.petList}">
+							<div class="community-post-user-info-body-pet">
+								<div class="community-post-user-info-body-pet-title">반려냥이</div>
+								<div class="d-flex">
+									<c:forEach items="${content.petList}" var="pet">
+										<div class="community-post-user-info-body-pet-card">
+											<div class="community-post-user-info-body-pet-img-box">
+												<c:choose>
+													<c:when test="${empty pet.petImageUrl}">
+														<img src="/image/paws.png" class="community-post-user-info-body-pet-img">
+													</c:when>
+													<c:otherwise>
+														<img src="${pet.petImageUrl}" class="community-post-user-info-body-pet-img">
+													</c:otherwise>
+												</c:choose>
+											</div>
+											<div class="ms-2">
+												<div class="community-post-user-info-body-pet-name">${pet.name}</div>
+												<div class="community-post-user-info-body-pet-breed">${pet.breed}</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+							</div>
+						</c:when>
+						<c:otherwise>
+						<div class="community-post-user-info-body-pet">
+							<div class="community-post-user-info-body-pet-title">반려냥이</div>
+							<div class="community-post-user-info-body-no-pet">등록된 반려냥이가 없습니다.</div>
+						</div>
+						</c:otherwise>
+					</c:choose>
+					<div class="d-flex">
+						<div class="community-post-user-info-body-post-title">게시물</div>
+						<div class="font-size-14 ms-2">${content.countPost}</div>
+					</div>
 				</div>
 			</div>
 			
-			<%-- body (게시물 내용) --%>
-			<div class="community-post-body">
-				
-				<%-- 게시물 사진 --%>
-				<div class="community-post-body-img-box">
-					<img src="${content.post.imagePath}" alt="이미지" class="community-post-body-img">
-				</div>
-				
-				<%-- 좋아요 버튼 --%>
-				<div class="community-post-body-nav">
-					<button type="button" class="community-post-like-btn" data-post-id="${content.post.id}" data-like="${content.existLike}">
+			<%-- 게시물 card --%>
+			<div id="community-post-box">
+				<%-- header --%>
+				<div class="community-post-header">
+					<div class="community-post-header-left">
 						<c:choose>
-							<c:when test="${content.existLike}">
-								<img src="/image/like(on).png" alt="좋아요 아이콘" class="community-post-like-img">
+							<c:when test="${empty content.user.profileImageUrl}">
+								<img src="/image/user.png" alt="유저 프로필 이미지" class="community-post-user-profile-img">
 							</c:when>
 							<c:otherwise>
-								<img src="/image/like(off).png" alt="좋아요 아이콘" class="community-post-like-img">
-							</c:otherwise>	
+								<img src="${content.user.profileImageUrl}" alt="유저 프로필 이미지" class="community-post-user-profile-img">
+							</c:otherwise>
 						</c:choose>
-					</button>
+						<div>
+							<button type="button" class="community-post-id" data-post-id="${content.post.id}">
+								${content.user.loginId}
+							</button>
+							
+							<fmt:formatDate value="${content.post.createdAt}" var="createdDate" pattern="yyyy년 MM월 dd일 a hh:mm"/>
+							<div class="community-post-time">${createdDate}</div>
+						</div>
+					</div>
+					<div class="community-post-header-right">
+						<c:if test="${content.post.userId eq userId}">
+							<button type="button" class="community-post-more-btn" data-bs-toggle="modal" data-bs-target="#moreModal" data-post-id="${content.post.id}">
+								<img src="/image/option.png" alt="옵션" class="community-post-more-img">
+							</button>
+						</c:if>
+					</div>
 				</div>
 				
-				<%-- 게시물 내용 --%>
-				<div class="community-post-body-content-box">
-					<div class="community-post-body-content">
-						${content.post.content}
+				<%-- body (게시물 내용) --%>
+				<div class="community-post-body">
+					
+					<%-- 게시물 사진 --%>
+					<div class="community-post-body-img-box">
+						<img src="${content.post.imagePath}" alt="이미지" class="community-post-body-img">
 					</div>
-					<div>
-						<button type="button" class="community-post-body-content-view-more-btn d-none">
-							더보기
+					
+					<%-- 좋아요 버튼 --%>
+					<div class="community-post-body-nav">
+						<button type="button" class="community-post-like-btn" data-post-id="${content.post.id}" data-like="${content.existLike}">
+							<c:choose>
+								<c:when test="${content.existLike}">
+									<img src="/image/like(on).png" alt="좋아요 아이콘" class="community-post-like-img">
+								</c:when>
+								<c:otherwise>
+									<img src="/image/like(off).png" alt="좋아요 아이콘" class="community-post-like-img">
+								</c:otherwise>	
+							</c:choose>
 						</button>
 					</div>
+					
+					<%-- 게시물 내용 --%>
+					<div class="community-post-body-content-box">
+						<div class="community-post-body-content">
+							${content.post.content}
+						</div>
+						<div>
+							<button type="button" class="community-post-body-content-view-more-btn d-none">
+								더보기
+							</button>
+						</div>
+					</div>
+				</div>
+				
+				<%-- footer (게시물 댓글) --%>	
+				<div class="community-post-footer">
+					
+					<%-- 댓글 내용 --%>
+					<c:forEach items="${content.commentList}" var="comment">
+						<div class="community-post-footer-comment-box">
+							<div class="community-post-footer-comment-left">
+								<div class="community-post-footer-comment-id">
+									${comment.user.loginId}
+								</div>
+								<div>
+									${comment.comment.content}
+								</div>
+							</div>
+							<div class="community-post-footer-comment-right">
+								<c:if test="${comment.user.id eq userId}">
+									<button type="button" class="community-post-footer-comment-delete-btn" data-post-id="${comment.comment.postId}" data-comment-id="${comment.comment.id}">
+										<img src="/image/close.png" class="community-post-footer-comment-delete-img">
+									</button>
+								</c:if>
+							</div>
+						</div>
+					</c:forEach>
+					
+					<%-- 댓글 쓰기 --%>
+					<div class="community-post-footer-comment-write-box">
+						<div class="col-1">
+							<img src="/image/comment.png" alt="댓글 아이콘" class="community-post-footer-comment-write-img">
+						</div>
+						<div class="col-9">
+							<input type="text" class="community-post-footer-comment-write-input" id="comment${content.post.id}" name="comment" placeholder="댓글달기">
+						</div>
+						<div class="col-2 d-flex justify-content-end">
+							<button type="button" class="community-post-footer-comment-write-btn" disabled="disabled" data-post-id="${content.post.id}">게시</button>
+						</div>
+					</div>			
 				</div>
 			</div>
-			
-			<%-- footer (게시물 댓글) --%>	
-			<div class="community-post-footer">
-				
-				<%-- 댓글 내용 --%>
-				<c:forEach items="${content.commentList}" var="comment">
-					<div class="community-post-footer-comment-box">
-						<div class="community-post-footer-comment-left">
-							<div class="community-post-footer-comment-id">
-								${comment.user.loginId}
-							</div>
-							<div>
-								${comment.comment.content}
-							</div>
-						</div>
-						<div class="community-post-footer-comment-right">
-							<c:if test="${comment.user.id eq userId}">
-								<button type="button" class="community-post-footer-comment-delete-btn" data-post-id="${comment.comment.postId}" data-comment-id="${comment.comment.id}">
-									<img src="/image/close.png" class="community-post-footer-comment-delete-img">
-								</button>
-							</c:if>
-						</div>
-					</div>
-				</c:forEach>
-				
-				<%-- 댓글 쓰기 --%>
-				<div class="community-post-footer-comment-write-box">
-					<div class="col-1">
-						<img src="/image/comment.png" alt="댓글 아이콘" class="community-post-footer-comment-write-img">
-					</div>
-					<div class="col-9">
-						<input type="text" class="community-post-footer-comment-write-input" id="comment${content.post.id}" name="comment" placeholder="댓글달기">
-					</div>
-					<div class="col-2 d-flex justify-content-end">
-						<button type="button" class="community-post-footer-comment-write-btn" disabled="disabled" data-post-id="${content.post.id}">게시</button>
-					</div>
-				</div>			
-			</div>
-		</div>
 		</div>
 		</c:forEach>
 	</div>
@@ -202,7 +202,7 @@ $(document).ready(function() {
 	
 	$('.community-post-id').on('click', function() {
 		var postId = $(this).data('post-id');
-		$('.card-number-' + postId).toggle('slow');
+		$('.card-number-' + postId).slideToggle('slow');
 	});
 	
 	// 글내용 더보기 기능
