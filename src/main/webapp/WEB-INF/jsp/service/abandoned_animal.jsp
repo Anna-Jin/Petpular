@@ -6,11 +6,10 @@
 	<div class="abandoned-header">
 		<div class="abandoned-header-title">보호소 동물 조회</div>
 	</div>
-	
 	<div class="abandoned-body">
 		<div class="abandoned-body-box flex-wrap">
-			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal">
-				<button type="button" class="abandoned-body-card">
+			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal" varStatus="status">
+				<button type="button" class="abandoned-body-card" data-desertion-no="${abandonedAnimal.desertionNo}">
 					<div class="abandoned-animal-img-box">
 						<img src="${abandonedAnimal.popfile}" alt="유기동물 이미지" class="abandoned-animal-img">
 					</div>
@@ -36,8 +35,21 @@
 						</div>
 					</div>
 				</button>
+				<div class="abandoned-animal-details">${abandonedAnimal.desertionNo}</div>
 			</c:forEach>
 		</div>
 	</div>
 </div>
 
+<script>
+	$(document).ready(function() {
+		$('.abandoned-body-card').on('click', function(e) {
+			e.stopPropagation();
+			$('.abandoned-animal-details').not($(this).next('.abandoned-animal-details').slideToggle()).slideUp();
+		});
+		
+		$(document).on('click', function() {
+			$(this).find('.abandoned-animal-details').slideUp();
+		});
+	});
+</script>
