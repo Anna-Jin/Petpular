@@ -595,7 +595,8 @@ aside {
 
 
 .community-post-user-profile-img, .community-post-user-info-img {
-	width: 40px;
+	width: 50px;
+	height: 50px;
 	border: 2px solid var(--main-clr);
 	border-radius: 50%;
 	margin-right: 23px;
