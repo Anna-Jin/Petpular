@@ -30,10 +30,6 @@ public class PermissionInterceptor implements HandlerInterceptor{
 				response.sendRedirect("/user/login");
 				return false;
 			}
-//			if (uri.equals("/main")) {
-//				response.sendRedirect("/user/login");
-//				return false;
-//			}
 			if (uri.equals("/community")) {
 				response.sendRedirect("/user/login");
 				return false;
