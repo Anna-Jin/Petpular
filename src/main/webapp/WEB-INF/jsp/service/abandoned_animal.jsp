@@ -38,7 +38,13 @@
 						</div>
 					</div>
 				</button>
+				
+				
+				<%-- 디테일 팝업 --%>
 				<div class="abandoned-animal-details">
+					<div class="abandoned-animal-details-header">
+						<button type="button" class="btn btn-primary" class="abandoned-animal-tag-btn">찜하기</button>
+					</div>
 					<div class="abandoned-animal-details-body">
 						<div class="details-img-box">
 							<img src="${abandonedAnimal.popfile}" alt="유기동물 이미지" class="details-img">
@@ -137,19 +143,33 @@
 	</div>
 </div>
 
+<div class="target"></div>
 <script>
 	$(document).ready(function() {
+		// 유기동물 디테일창 노출
 		$('.abandoned-body-card').on('click', function(e) {
 			e.stopPropagation();
 			$('.abandoned-animal-details').not($(this).next('.abandoned-animal-details').slideToggle()).slideUp();
+			$('.target').toggle();
 		});
 		
-		$(document).on('click', function() {
-			$(this).find('.abandoned-animal-details').slideUp();
+		// 유기동물 디테일창 닫기
+		$(document).on('click', function(e) {
+			if ($(e.target).hasClass('target')) {
+				// 디테일창 외부 클릭시 창 닫기
+				$(this).find('.abandoned-animal-details').slideUp();
+				$('.target').hide();
+			}
 		});
 		
+		// 뒤로가기
 		$('.back-btn').on('click', function() {
 			window.history.back();
+		});
+
+		
+		$('.abandoned-animal-tag-btn').on('click', function() {
+			alert('test');
 		});
 	});
 </script>

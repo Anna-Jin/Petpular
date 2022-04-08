@@ -89,6 +89,7 @@ aside {
 }
 
 .gnb-profile-img {
+	height: 50px;
 	width: 50px;
 	border: 10px soild #fff;
 	border: 3px solid var(--back-clr);
@@ -103,6 +104,11 @@ aside {
 	color: #fff;
 	font-size: 16px;
 	font-weight: bold;
+}
+
+.gnb-user-name:hover {
+	color: #fff;
+	text-decoration: underline;
 }
 
 .gnb-logout-btn {
@@ -1159,17 +1165,21 @@ aside {
 .abandoned-animal-details {
 	position: fixed;
 	width: 80%;
-	margin: -30px auto;
+	margin: -50px auto;
 	padding: 30px;
 	left: 193px;
 	right: 0;
-	z-index: 1;
+	z-index: 2;
 	background-color: #fff;
 	border-radius: 15px;
 	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25);
 	display: none;
 }
 
+.abandoned-animal-details-header {
+	display: flex;
+	justify-content: end;
+}
 
 .abandoned-animal-details-body {
 	display: flex;
@@ -1200,4 +1210,19 @@ aside {
 	font-size: 24px;
 	font-weight: bold;
 	color: var(--main-clr);
+}
+
+.details-animal-info-box .table > tbody > tr >th {
+	width: 25%;
+}
+
+.target {
+	position: fixed;
+	top:0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: transparent;
+	z-index: 1;
+	display: none;
 }

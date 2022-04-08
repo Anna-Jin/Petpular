@@ -61,14 +61,21 @@
 	<c:choose>
 		<c:when test="${not empty userId}">
 			<div class="gnb-login-btn-box d-flex justify-content-center align-items-center">
-				<%-- 프로필 이미지 있을 때 노출 --%>
-				<%-- 프로필 이미지가 없을 때 --%>
 				<div>
-					<img src="/image/user.png" alt="로그인 프로필 이미지" class="gnb-profile-img">
+					<c:choose>
+						<c:when test="${not empty userProfileImg}">
+						<%-- 프로필 이미지 있을 때 노출 --%>
+							<img src="${userProfileImg}" alt="로그인 프로필 이미지" class="gnb-profile-img">
+						</c:when>
+						<c:otherwise>
+							<%-- 프로필 이미지가 없을 때 --%>
+							<img src="/image/user.png" alt="로그인 프로필 이미지" class="gnb-profile-img">
+						</c:otherwise>
+					</c:choose>
 				</div>
 				<div class="ms-2">
 					<div class="d-flex align-items-center">
-						<div class="gnb-user-name">${userName}</div>
+						<a href="/foryou" class="gnb-user-name">${userName}</a>
 						<div class="text-white font-size-12">님 반가워요!</div>
 					</div>
 				</div>

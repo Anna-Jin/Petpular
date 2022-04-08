@@ -125,6 +125,10 @@ public class UserRestController {
 			session.setAttribute("userName", user.getName());
 			session.setAttribute("userId", user.getId());
 			
+			if (user.getProfileImageUrl() != null) {
+				session.setAttribute("userProfileImg", user.getProfileImageUrl());
+			}
+			
 			result.put("result", "success");
 		} else {
 			result.put("errorMessage", "존재하지 않는 사용자입니다. 아이디와 비밀번호를 확인해주세요.");
