@@ -17,7 +17,7 @@
 					<br>
 					<br>
 					<div>
-						<a type="button" class="btn main-signup-btn" href="/user/signup">회원가입</a>
+						<a type="button" class="btn main-signup-btn" href="/user/login">로그인</a>
 					</div>
 				</div>
 			</div>

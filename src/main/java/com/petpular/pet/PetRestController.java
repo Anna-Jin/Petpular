@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.petpular.common.SessionUtils;
 import com.petpular.pet.bo.PetBO;
 import com.petpular.pet.model.Feed;
 import com.petpular.pet.model.Pet;
@@ -159,18 +160,10 @@ public class PetRestController {
 			List<Pet> petList = petBO.getPetByUserId(userId);
 			
 			if(userId != null && petList.size() != 0) {
-					String petNameArr = petList.get(0).getName();
-					String petIdArr = Integer.toString(petList.get(0).getId());
-				 
-					if (petList.size() > 0) {
-						for (int i = 1; i < petList.size(); i++) {
-							
-							petIdArr = petIdArr + "," + petList.get(i).getId();
-							petNameArr = petNameArr + "," + petList.get(i).getName();
-						}
-					}
-					session.setAttribute("petIdArr", petIdArr);
-					session.setAttribute("petNameArr", petNameArr);
+				List<String> arr = SessionUtils.petArr(userId, petList);
+				
+				session.setAttribute("petIdArr", arr.get(0));
+				session.setAttribute("petNameArr", arr.get(1));
 			}
 			
 			result.put("result", "success");
