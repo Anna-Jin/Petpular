@@ -7,6 +7,7 @@
 <div id="abandoned-wrap">
 	<div class="abandoned-header">
 		<div class="abandoned-header-title">보호소 동물 조회</div>
+		<button type="button" class="btn btn-primary back-btn">뒤로가기</button>
 	</div>
 	<div class="abandoned-body">
 		<div class="abandoned-body-box flex-wrap">
@@ -145,6 +146,10 @@
 		
 		$(document).on('click', function() {
 			$(this).find('.abandoned-animal-details').slideUp();
+		});
+		
+		$('.back-btn').on('click', function() {
+			window.history.back();
 		});
 	});
 </script>

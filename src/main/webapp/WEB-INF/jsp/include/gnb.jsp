@@ -13,7 +13,7 @@
 		    <a class="nav-link" href="/main">About</a>
 		  </li>
 		  <li class="nav-item">
-		    <a  class="nav-link gnb-nav-mypet">My pet</a>
+		    <a  class="nav-link gnb-nav-mypet stop-dragging">My pet</a>
 		    <ul class="nav flex-column">
 		    	<c:choose>
 		    		<c:when test="${empty petIdArr}">
@@ -43,7 +43,7 @@
 		    <a class="nav-link" href="/community">Community</a>
 		  </li>
 		  <li class="nav-item">
-		    <a class="nav-link gnb-nav-service">Service</a>
+		    <a class="nav-link gnb-nav-service stop-dragging">Service</a>
 		    <ul class="nav flex-column">
 		    	<li class="service-nav">
 		    		<a href="/service/search-abandoned-animal" class="abandoned-animals-nav d-block">> 유기동물</a>

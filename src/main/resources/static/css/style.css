@@ -1052,11 +1052,23 @@ aside {
 	position: relative;
 }
 
+.abandoned-header {
+	height: 60px;
+	display: flex;
+	align-items: center;
+	margin-bottom: 55px;
+}
+
 .abandoned-header-title {
+	text-align: center;
 	font-size: 36px;
 	font-weight: bold;
+	padding-top: 5px;
 	margin-left: 22px;
-	margin-bottom: 55px;
+}
+.back-btn {
+	margin-left: 20px;
+	padding: 7px 13px;
 }
 
 .abandoned-body {
@@ -1147,7 +1159,7 @@ aside {
 .abandoned-animal-details {
 	position: fixed;
 	width: 80%;
-	margin: auto;
+	margin: -30px auto;
 	padding: 30px;
 	left: 193px;
 	right: 0;
@@ -1165,6 +1177,7 @@ aside {
 
 .details-img-box {
 	width: 400px;
+	max-height: 500px;
 	overflow: hidden;
 	display: flex;
 	align-items: center;
@@ -1172,6 +1185,8 @@ aside {
 
 .details-img {
 	width: 400px;
+	max-height: 500px;
+	object-fit: cover;
 	border-radius: 15px;
 }
 
