@@ -107,6 +107,7 @@ public class AbandonedAnimalAPI {
 						.accept(MediaType.APPLICATION_JSON)
 						.retrieve()
 						.bodyToMono(String.class)
+						.retry(3)
 						.block();
 		
 		JSONArray result;
