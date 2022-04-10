@@ -1,1 +1,1 @@
-# 개인 프로젝트 \<Petpular\>
+# 토이 프로젝트 \<Petpular\>
