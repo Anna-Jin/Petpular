@@ -11,7 +11,7 @@
 	</div>
 	<div class="abandoned-body">
 		<div class="abandoned-body-box flex-wrap">
-			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal" varStatus="status">
+			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal">
 				<button type="button" class="abandoned-body-card">
 					<div class="abandoned-animal-img-box">
 						<img src="${abandonedAnimal.popfile}" alt="유기동물 이미지" class="abandoned-animal-img">
@@ -43,7 +43,9 @@
 				<%-- 디테일 팝업 --%>
 				<div class="abandoned-animal-details">
 					<div class="abandoned-animal-details-header">
-						<button type="button" class="btn btn-primary" class="abandoned-animal-tag-btn">찜하기</button>
+						<c:if test="${not empty userId}">
+							<button type="button" class="btn btn-primary abandoned-animal-tag-btn" data-desertion-no="${abandonedAnimal.desertionNo}">찜하기</button>
+						</c:if>
 					</div>
 					<div class="abandoned-animal-details-body">
 						<div class="details-img-box">
@@ -169,7 +171,30 @@
 
 		
 		$('.abandoned-animal-tag-btn').on('click', function() {
-			alert('test');
+			var desertionNo = $(this).data('desertion-no');
+			
+			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal">
+				if ('${abandonedAnimal.desertionNo}' == desertionNo) {
+					var abandonedAnimal = JSON.stringify(${abandonedAnimal});
+					
+					$.ajax({
+						type: "POST"
+						, url: "/abandoned/tag"
+						, contentType: "application/json"
+						, data: abandonedAnimal
+						, success: function(data) {
+							if (data.result == 'success') {
+								alert('성공!');
+							}
+						}
+						, error: function(e) {
+							alert('찜 등록에 실패했습니다. 관리자에게 문의해주세요.');
+						}
+					});
+				}
+			</c:forEach>
+			
+			
 		});
 	});
 </script>

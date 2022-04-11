@@ -1181,6 +1181,7 @@ aside {
 	justify-content: end;
 }
 
+
 .abandoned-animal-details-body {
 	display: flex;
 }
@@ -1213,7 +1214,7 @@ aside {
 }
 
 .details-animal-info-box .table > tbody > tr >th {
-	width: 25%;
+	width: 24%;
 }
 
 .target {
