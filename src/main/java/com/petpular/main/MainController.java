@@ -19,7 +19,12 @@ public class MainController {
 	@Autowired
 	private PetBO petBO;
 	
-
+	/**
+	 * about 페이지
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/main")
 	public String main(Model model, HttpSession session) {
 		

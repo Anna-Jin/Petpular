@@ -18,6 +18,12 @@ public class communityController {
 	@Autowired
 	private CommunityBO communityBO;
 	
+	/**
+	 * 커뮤니티 페이지
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/community")
 	public String community(Model model, HttpSession session) {
 		

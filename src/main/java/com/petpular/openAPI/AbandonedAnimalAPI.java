@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 import org.json.simple.JSONArray;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Service;
@@ -16,6 +18,8 @@ import com.petpular.common.WebClientUtils;
 @Service
 public class AbandonedAnimalAPI {
 	
+	private Logger logger = LoggerFactory.getLogger(this.getClass());
+	
 	@Autowired
 	private WebClientUtils webClientUtils;
 
@@ -27,7 +31,10 @@ public class AbandonedAnimalAPI {
 	private String bgnde = LocalDate.now().minusMonths(1).format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString(); // 유기날짜 (검색 시작일)
 	private String endde = LocalDate.now().format(DateTimeFormatter.ofPattern("yyyyMMdd")).toString(); // 유기날짜 (검색 종료일)
 	
-	
+	/**
+	 * 시/도 호출
+	 * @return
+	 */
 	public JSONArray abandonedAniamlSido() {
 		pageNo = "1";
 		NumOfRows = "17";
@@ -45,21 +52,31 @@ public class AbandonedAnimalAPI {
 						.accept(MediaType.APPLICATION_JSON)
 						.retrieve()
 						.bodyToMono(String.class)
+						.retry(3)
 						.block();
 		
-		JSONArray result;
+		if (response.startsWith("<")) {
+			logger.error("[공공 API 호출] 공공 API 호출 에러");
+		}
+		
+		
+		JSONArray result = null;
 		
 		try {
 			result = JsonParserUtils.parseStringToJson(response);
 			
-			return result;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
 	
+	/**
+	 * 시/군/구 호출
+	 * @param sidoCode
+	 * @return
+	 */
 	public JSONArray abandonedAniamlSigungu(String sidoCode) {
 		WebClient webClient = webClientUtils.webClient();
 		
@@ -72,19 +89,28 @@ public class AbandonedAnimalAPI {
 						.accept(MediaType.APPLICATION_JSON)
 						.retrieve()
 						.bodyToMono(String.class)
+						.retry(3)
 						.block();
 		
-		JSONArray result;
+		JSONArray result = null;
+		
 		try {
 			result = JsonParserUtils.parseStringToJson(response);
-			return result;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
 	
+	/**
+	 * 유기동물 리스트 호출
+	 * @param upkind
+	 * @param upr_cd
+	 * @param org_cd
+	 * @return
+	 */
 	@GetMapping("/abandonedAnimal")
 	public JSONArray abandonedAniaml(String upkind, String upr_cd, String org_cd) {
 		pageNo = "1";
@@ -112,15 +138,16 @@ public class AbandonedAnimalAPI {
 						.retry(3)
 						.block();
 		
-		JSONArray result;
+		JSONArray result = null;
+		
 		try {
 			result = JsonParserUtils.parseStringToJson(response);
-			return result;
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return result;
 	}
 
 }

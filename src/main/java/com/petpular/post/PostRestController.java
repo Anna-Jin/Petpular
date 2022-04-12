@@ -58,6 +58,12 @@ public class PostRestController {
 		return result;
 	}
 	
+	/**
+	 * 글 삭제
+	 * @param postId
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/delete")
 	public Map<String, Object> deletePost(
 			@RequestParam("postId") int postId,

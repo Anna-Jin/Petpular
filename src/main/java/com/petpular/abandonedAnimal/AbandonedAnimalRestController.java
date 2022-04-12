@@ -109,6 +109,12 @@ public class AbandonedAnimalRestController {
 		return result;
 	}
 	
+	/**
+	 * 찜 삭제
+	 * @param desertionNo
+	 * @param session
+	 * @return
+	 */
 	@DeleteMapping("/abandoned/delete")
 	public Map<String, Object> deleteTag(
 			@RequestParam("desertionNo") String desertionNo,

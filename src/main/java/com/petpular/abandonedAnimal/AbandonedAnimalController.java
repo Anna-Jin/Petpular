@@ -16,6 +16,11 @@ public class AbandonedAnimalController {
 	@Autowired
 	private AbandonedAnimalAPI abandonedAnimalAPI;
 	
+	/**
+	 * 유기동물 조회 선택화면
+	 * @param model
+	 * @return
+	 */
 	@RequestMapping("/search-abandoned-animal")
 	public String searchAbandonedAnimal(Model model) {
 		
@@ -27,6 +32,15 @@ public class AbandonedAnimalController {
 		return "template/layout";
 	}
 	
+	
+	/**
+	 * 유기동물 조회 결과 화면
+	 * @param model
+	 * @param speciesCode
+	 * @param sidoCode
+	 * @param sigunguCode
+	 * @return
+	 */
 	@RequestMapping({"/abandoned-animal/{speciesCode}","/abandoned-animal/{speciesCode}/{sidoCode}", "/abandoned-animal/{speciesCode}/{sidoCode}/{sigunguCode}"})
 	public String abandonedAnimal(Model model,
 			@PathVariable String speciesCode,

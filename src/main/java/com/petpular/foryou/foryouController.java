@@ -23,6 +23,12 @@ public class ForyouController {
 	@Autowired
 	private AbandonedAnimalBO abandonedAnimalBO;
 
+	/**
+	 * for you 페이지
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/foryou")
 	public String foryou(Model model, HttpSession session) {
 		

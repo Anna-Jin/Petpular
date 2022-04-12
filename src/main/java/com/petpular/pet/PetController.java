@@ -102,7 +102,13 @@ public class PetController {
 		return "template/layout";
 	}
 	
-	
+	/**
+	 * 고양이 추가정보 수정 화면
+	 * @param petId
+	 * @param model
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("edit/more-info/{petId}")
 	public String editPetMoreInfo(
 			@PathVariable("petId") int petId,

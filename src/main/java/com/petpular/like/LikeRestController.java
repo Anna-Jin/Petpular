@@ -18,6 +18,12 @@ public class LikeRestController {
 	@Autowired
 	private LikeBO likeBO;
 
+	/**
+	 * 좋아요 기능
+	 * @param postId
+	 * @param session
+	 * @return
+	 */
 	@RequestMapping("/like/{postId}")
 	public Map<String, Object> like(
 			@PathVariable("postId") int postId, 
