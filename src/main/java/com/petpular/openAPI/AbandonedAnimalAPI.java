@@ -48,8 +48,10 @@ public class AbandonedAnimalAPI {
 						.block();
 		
 		JSONArray result;
+		
 		try {
 			result = JsonParserUtils.parseStringToJson(response);
+			
 			return result;
 		} catch (Exception e) {
 			e.printStackTrace();

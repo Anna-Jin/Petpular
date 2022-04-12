@@ -44,4 +44,10 @@ public class AllTest {
 		assertEquals(1, rowCount);
 	}
 	
+	@Transactional
+	@Test
+	void insertTest() {
+		
+	}
+	
 }

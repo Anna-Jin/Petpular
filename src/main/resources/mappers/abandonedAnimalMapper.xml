@@ -1,0 +1,126 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.petpular.abandonedAnimal.dao.AbandonedAnimalDAO">
+	<select id="selectAbandonedTag" parameterType="map" resultType="com.petpular.abandonedAnimal.model.AbandonedAnimal">
+		SELECT
+			`id`
+			, `user_id`	
+			, `desertion_no`
+			, `popfile`
+			, `notice_no`
+			, `notice_sdt`		
+			, `notice_edt`
+			, `kind_cd`
+			, `processState`
+			, `sex_cd`
+			, `neuter_yn`
+			, `age`
+			, `weight`
+			, `special_mark`
+			, `org_nm`
+			, `care_nm`
+			, `care_addr`
+			, `care_tel`
+			, `happen_place`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`tag`
+		WHERE
+			`user_id` = #{userId}
+	</select>
+	<select id="selectAbandonedTagByUserIdDesertionNo" parameterType="map" resultType="com.petpular.abandonedAnimal.model.AbandonedAnimal">
+		SELECT
+			`id`
+			, `user_id`	
+			, `desertion_no`
+			, `popfile`
+			, `notice_no`
+			, `notice_sdt`		
+			, `notice_edt`
+			, `kind_cd`
+			, `processState`
+			, `sex_cd`
+			, `neuter_yn`
+			, `age`
+			, `weight`
+			, `special_mark`
+			, `org_nm`
+			, `care_nm`
+			, `care_addr`
+			, `care_tel`
+			, `happen_place`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`tag`
+		WHERE
+			`user_id` = #{userId} AND
+			`desertion_no` = #{desertionNo}
+	</select>
+	<select id = "existAbandonedTag" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`tag`
+		WHERE
+			`user_id` = #{userId} AND
+			`desertion_no` = #{desertionNo}
+	</select>
+	<insert id="insertAbandonedTag" parameterType="com.petpular.abandonedAnimal.model.AbandonedAnimal">
+		INSERT INTO `tag`
+		(
+			`user_id`	
+			, `desertion_no`
+			, `popfile`
+			, `notice_no`
+			, `notice_sdt`		
+			, `notice_edt`
+			, `kind_cd`
+			, `processState`
+			, `sex_cd`
+			, `neuter_yn`
+			, `age`
+			, `weight`
+			, `special_mark`
+			, `org_nm`
+			, `care_nm`
+			, `care_addr`
+			, `care_tel`
+			, `happen_place`
+			, `created_at`
+			, `updated_at`
+		)
+		VALUES
+		(
+			#{userId}
+			, #{abandonedAnimal.desertionNo}
+			, #{abandonedAnimal.popfile}
+			, #{abandonedAnimal.noticeNo}
+			, #{abandonedAnimal.noticeSdt}
+			, #{abandonedAnimal.noticeEdt}
+			, #{abandonedAnimal.kindCd}
+			, #{abandonedAnimal.processState}
+			, #{abandonedAnimal.sexCd}
+			, #{abandonedAnimal.neuterYn}
+			, #{abandonedAnimal.age}
+			, #{abandonedAnimal.weight}
+			, #{abandonedAnimal.specialMark}
+			, #{abandonedAnimal.orgNm}
+			, #{abandonedAnimal.careNm}
+			, #{abandonedAnimal.careAddr}
+			, #{abandonedAnimal.careTel}
+			, #{abandonedAnimal.happenPlace}
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	<delete id="deleteAbandonedTag" parameterType="map">
+		DELETE FROM `tag`
+		WHERE
+			`user_id` = #{userId} AND
+			`desertion_no` = #{desertionNo}
+	</delete>
+</mapper>

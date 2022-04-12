@@ -11,8 +11,8 @@
 	</div>
 	<div class="abandoned-body">
 		<div class="abandoned-body-box flex-wrap">
-			<c:forEach items="${abandonedAnimal}" var="abandonedAnimal" varStatus="status">
-				<button type="button" class="abandoned-body-card">
+			<c:forEach items="${abandonedAnimalList}" var="abandonedAnimal">
+				<button type="button" class="abandoned-body-card" data-desertion-no="${abandonedAnimal.desertionNo}">
 					<div class="abandoned-animal-img-box">
 						<img src="${abandonedAnimal.popfile}" alt="유기동물 이미지" class="abandoned-animal-img">
 					</div>
@@ -43,7 +43,11 @@
 				<%-- 디테일 팝업 --%>
 				<div class="abandoned-animal-details">
 					<div class="abandoned-animal-details-header">
-						<button type="button" class="btn btn-primary" class="abandoned-animal-tag-btn">찜하기</button>
+						<c:if test="${not empty userId}">
+							<button type="button" class="btn btn-primary abandoned-animal-tag-btn" data-desertion-no="${abandonedAnimal.desertionNo}">
+								
+							</button>
+						</c:if>
 					</div>
 					<div class="abandoned-animal-details-body">
 						<div class="details-img-box">
@@ -151,6 +155,21 @@
 			e.stopPropagation();
 			$('.abandoned-animal-details').not($(this).next('.abandoned-animal-details').slideToggle()).slideUp();
 			$('.target').toggle();
+			
+			
+			// 찜 비활성화일 때 - 찜하기
+			// 찜 활성화 일 때 - 찜 삭제
+			var desertionNo = $(this).data('desertion-no')
+			$.ajax({
+				type: "GET"
+				, url: "/abandoned/exist-tag"
+				, data: {"desertionNo":desertionNo}
+				, success: function(data) {
+					$('.abandoned-animal-tag-btn').empty();
+					var temp_html = data.status
+					$('.abandoned-animal-tag-btn').append(temp_html);
+				}
+			});
 		});
 		
 		// 유기동물 디테일창 닫기
@@ -166,10 +185,35 @@
 		$('.back-btn').on('click', function() {
 			window.history.back();
 		});
-
 		
+		
+		// 찜 하기
 		$('.abandoned-animal-tag-btn').on('click', function() {
-			alert('test');
+			var desertionNo = $(this).data('desertion-no');
+			var tagBtn = $(this);
+			
+			<c:forEach items="${abandonedAnimalList}" var="abandonedAnimal">
+				if ('${abandonedAnimal.desertionNo}' == desertionNo) {
+					var abandonedAnimal = JSON.stringify(${abandonedAnimal});
+					
+					$.ajax({
+						type: "POST"
+						, url: "/abandoned/tag"
+						, contentType: "application/json"
+						, data: abandonedAnimal
+						, success: function(data) {
+							if (data.result == 'success') {
+								tagBtn.text(data.status);
+							}
+						}
+						, error: function(e) {
+							alert('찜 등록에 실패했습니다. 관리자에게 문의해주세요.');
+						}
+					});
+				}
+			</c:forEach>
+			
+			
 		});
 	});
 </script>
