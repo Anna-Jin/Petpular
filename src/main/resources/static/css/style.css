@@ -822,28 +822,27 @@ aside {
 	margin: auto;
 	padding: 50px;
 }
-
-
-.foryou-top, .foryou-bottom {
-	height: 50%;
-}
-
 .foryou-top {
 	display: flex;
-	justify-content: center;
+	justify-content: space-around;
+	margin-bottom: 60px;
 }
 
+/* .foryou-left, .foryou-right {
+	border: 1px solid var(--border-clr);
+	border-radius: 10px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px 1px rgba(0, 0, 0, 0.25); 
+	padding: 30px;
+}
+ */
 .foryou-user-info, .foryou-post, .foryou-pet {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 }
 
-.foryou-post, .foryou-pet {
-	width: 50%;
-}
-
-.foryou-user-info-title {
+.foryou-user-info-title, .foryou-right-title, .foryou-bottom-title {
 	font-size: 36px;
 	font-weight: bold;
 	margin-bottom: 50px;
@@ -903,16 +902,10 @@ aside {
 	font-size: 14px;
 }
 
-.foryou-bottom {
+.foryou-right {
 	display: flex;
+	flex-direction: column;
 	justify-content: space-around;
-	margin-top: 60px;
-}
-
-.foryou-bottom-title {
-	font-size: 36px;
-	font-weight: bold;
-	margin-bottom: 20px;
 }
 
 .foryou-each-post {

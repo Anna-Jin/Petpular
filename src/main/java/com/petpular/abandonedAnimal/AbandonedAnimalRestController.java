@@ -45,8 +45,9 @@ public class AbandonedAnimalRestController {
 			HttpSession session) {
 		
 		int userId = (int)session.getAttribute("userId");
+		String userLoginId = (String)session.getAttribute("userLoginId");
 		
-		int row = abandonedAnimalBO.abandonedTag(userId, abandonedAnimal);
+		int row = abandonedAnimalBO.abandonedTag(userId, userLoginId, abandonedAnimal);
 		
 		Map<String, Object> result = new HashMap<>();
 		
@@ -65,6 +66,7 @@ public class AbandonedAnimalRestController {
 		
 		return result;
 	}
+	
 	
 	@GetMapping("/abandoned/exist-tag")
 	public Map<String, Object> existTag(

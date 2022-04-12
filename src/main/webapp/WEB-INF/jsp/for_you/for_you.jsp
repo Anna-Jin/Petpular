@@ -4,102 +4,119 @@
 
 <div id="foryou-wrap">
 	<div class="foryou-top">
-		<div class="foryou-user-info">
-			<div class="foryou-user-info-title">내 정보</div>
-			<div class="foryou-user-info-box">
-				<div class="foryou-user-info-profile-img-box">
-					<c:choose>
-						<c:when test="${empty userInfo.user.profileImageUrl}">
-							<img alt="프로필 이미지" src="/image/user.png" id="user-img" class="foryou-user-info-profile-img">
-						</c:when>
-						<c:otherwise>
-							<img alt="프로필 이미지" src="${userInfo.user.profileImageUrl}" id="user-img" class="foryou-user-info-profile-img">
-						</c:otherwise>
-					</c:choose>
-					<a href="#" class="foryou-user-info-profile-img-btn">사진 등록</a>
-					<input type="file" id="user-file" name="userImgUrl" class="d-none" accept=".gif, .jpg, .png, .jpeg">
-				</div>
-				<div class="foryou-user-info-profile-box">
-					<div class="foryou-user-info-profile-input-box">
-						<div class="col-4 d-flex justify-content-around">
-							<label for="loginId">아이디</label>
-						</div>
-						<div class="col-7">
-							<input type="text" class="form-control profile-input" id="loginId" name="loginId" value="${userInfo.user.loginId}">
-						</div>
+		<div class="foryou-left">
+			<div class="foryou-user-info">
+				<div class="foryou-user-info-title">내 정보</div>
+				<div class="foryou-user-info-box">
+					<div class="foryou-user-info-profile-img-box">
+						<c:choose>
+							<c:when test="${empty userInfo.user.profileImageUrl}">
+								<img alt="프로필 이미지" src="/image/user.png" id="user-img" class="foryou-user-info-profile-img">
+							</c:when>
+							<c:otherwise>
+								<img alt="프로필 이미지" src="${userInfo.user.profileImageUrl}" id="user-img" class="foryou-user-info-profile-img">
+							</c:otherwise>
+						</c:choose>
+						<a href="#" class="foryou-user-info-profile-img-btn">사진 등록</a>
+						<input type="file" id="user-file" name="userImgUrl" class="d-none" accept=".gif, .jpg, .png, .jpeg">
 					</div>
-					<div class="foryou-user-info-profile-input-box">
-						<div class="col-4 d-flex justify-content-around">
-							<label for="name">이름</label>
+					<div class="foryou-user-info-profile-box">
+						<div class="foryou-user-info-profile-input-box">
+							<div class="col-4 d-flex justify-content-around">
+								<label for="loginId">아이디</label>
+							</div>
+							<div class="col-7">
+								<input type="text" class="form-control profile-input" id="loginId" name="loginId" value="${userInfo.user.loginId}">
+							</div>
 						</div>
-						<div class="col-7">
-							<input type="text" class="form-control profile-input" id="name" name="name" value="${userInfo.user.name}">
+						<div class="foryou-user-info-profile-input-box">
+							<div class="col-4 d-flex justify-content-around">
+								<label for="name">이름</label>
+							</div>
+							<div class="col-7">
+								<input type="text" class="form-control profile-input" id="name" name="name" value="${userInfo.user.name}">
+							</div>
 						</div>
-					</div>
-					<div class="foryou-user-info-profile-input-box">
-						<div class="col-4 d-flex justify-content-around">
-							<label for="email">이메일</label>
+						<div class="foryou-user-info-profile-input-box">
+							<div class="col-4 d-flex justify-content-around">
+								<label for="email">이메일</label>
+							</div>
+							<div class="col-7">
+								<input type="text" class="form-control profile-input" id="email" name="email" value="${userInfo.user.email}">
+							</div>
 						</div>
-						<div class="col-7">
-							<input type="text" class="form-control profile-input" id="email" name="email" value="${userInfo.user.email}">
+						<div class="d-flex justify-content-center align-items-center">
+							<button type="button" class="btn btn-primary edit-profile-btn">내 정보 수정</button>					
+							<a href="/user/logout" class="gnb-logout-btn">로그아웃</a>
 						</div>
-					</div>
-					<div class="d-flex justify-content-center align-items-center">
-						<button type="button" class="btn btn-primary edit-profile-btn">내 정보 수정</button>					
-						<a href="/user/logout" class="gnb-logout-btn">로그아웃</a>
 					</div>
 				</div>
 			</div>
 		</div>
+		<div class="foryou-right">
+			<div class="foryou-post">
+				<div class="foryou-right-title">내가 쓴 글</div>
+				<c:forEach items="${userInfo.postList}" var="post">
+					<div class="foryou-post-box">
+						<div class="d-flex justify-content-center align-items-center mb-2">
+							<div class="foryou-each-post">
+								<div class="foryou-post-content px-3">${post.post.content}</div>
+								<div class="d-flex align-items-center px-3">
+									<div class="foryou-post-like-count">${post.countLike}</div>
+									<img src="/image/like(on).png" class="foryou-post-like">
+								</div>
+							</div>
+							<button type="button" class="foryou-each-post-del-box mx-2" data-post-content="${post.post.content}" data-post-id="${post.post.id}">
+								<img src="/image/close.png" class="foryou-each-post-del-btn">
+							</button>
+						</div>
+					</div>
+				</c:forEach>
+			</div>
+			<div class="foryou-pet">
+				<div class="foryou-right-title">내 반려냥이</div>
+				<c:choose>
+					<c:when test="${empty userInfo.petList}">
+						<div>등록된 반려냥이가 없습니다</div>
+					</c:when>
+					<c:otherwise>
+						<div class="d-flex justify-content-around w-100">
+							<c:forEach items="${userInfo.petList}" var="pet">
+								<div class="foryou-pet-box">
+									<div class="foryou-pet-profile-box">
+										<c:choose>
+											<c:when test="${empty pet.petImageUrl}">
+												<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
+											</c:when>
+											<c:otherwise>
+												<img src="${pet.petImageUrl}" alt="사진 있을 때" class="foryou-pet-profile-image">
+											</c:otherwise>
+										</c:choose>
+									</div>
+									<div class="foryou-pet-profile-hover">
+										<a href="/mypet/${pet.id}" class="text-white">${pet.name}</a>
+									</div>
+								</div>
+							</c:forEach>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</div>
+		</div>
 	</div>
 	<div class="foryou-bottom">
-		<div class="foryou-post">
-			<div class="foryou-bottom-title">내가 쓴 글</div>
-			<c:forEach items="${userInfo.postList}" var="post">
-				<div class="foryou-post-box">
-					<div class="d-flex justify-content-center align-items-center mb-2">
-						<div class="foryou-each-post">
-							<div class="foryou-post-content px-3">${post.post.content}</div>
-							<div class="d-flex align-items-center px-3">
-								<div class="foryou-post-like-count">${post.countLike}</div>
-								<img src="/image/like(on).png" class="foryou-post-like">
-							</div>
+		<div class="foryou-bottom-title">유기동물 찜 목록</div>
+		<div class="foryou-abandoned-tag-body">
+			<div class="foryou-abandoned-tag-body-box flex-wrap">
+				<c:forEach items="${abandonedAnimalTagList}" var="abandonedAnimalTag">
+					<button type="button" class="abandoned-tag-card">
+						<div class="abandoned-tag-img-box">
+							<img alt="유기동물 썸네일" src="${abandonedAnimalTag.popfile}">
+							<div>${abandonedAnimalTag.age}</div>
 						</div>
-						<button type="button" class="foryou-each-post-del-box mx-2" data-post-content="${post.post.content}" data-post-id="${post.post.id}">
-							<img src="/image/close.png" class="foryou-each-post-del-btn">
-						</button>
-					</div>
-				</div>
-			</c:forEach>
-		</div>
-		<div class="foryou-pet">
-			<div class="foryou-bottom-title">내 반려냥이</div>
-			<c:choose>
-				<c:when test="${empty userInfo.petList}">
-					<div>등록된 반려냥이가 없습니다</div>
-				</c:when>
-				<c:otherwise>
-					<div class="d-flex justify-content-around w-100">
-						<c:forEach items="${userInfo.petList}" var="pet">
-							<div class="foryou-pet-box">
-								<div class="foryou-pet-profile-box">
-									<c:choose>
-										<c:when test="${empty pet.petImageUrl}">
-											<img src="/image/paws.png" alt="사진 없을 때" class="foryou-pet-profile-image">
-										</c:when>
-										<c:otherwise>
-											<img src="${pet.petImageUrl}" alt="사진 있을 때" class="foryou-pet-profile-image">
-										</c:otherwise>
-									</c:choose>
-								</div>
-								<div class="foryou-pet-profile-hover">
-									<a href="/mypet/${pet.id}" class="text-white">${pet.name}</a>
-								</div>
-							</div>
-						</c:forEach>
-					</div>
-				</c:otherwise>
-			</c:choose>
+					</button>
+				</c:forEach>
+			</div>
 		</div>
 	</div>
 </div>

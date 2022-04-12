@@ -9,6 +9,7 @@ public class AbandonedAnimal {
 	private int id;
 	private int userId;
 	private String desertionNo;
+	private String popfile;
 	private String noticeNo;
 	private String noticeSdt;
 	private String noticeEdt;
