@@ -10,6 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -31,6 +32,11 @@ public class AbandonedAnimalRestController {
 	@Autowired
 	private AbandonedAnimalBO abandonedAnimalBO;
 	
+	/**
+	 * 시군구 조회
+	 * @param sidoCode
+	 * @return
+	 */
 	@GetMapping("/sigungu")
 	public JSONArray sigungu(
 			@RequestParam("sidoCode") String sidoCode
@@ -39,6 +45,12 @@ public class AbandonedAnimalRestController {
 		return abandonedAnimalAPI.abandonedAniamlSigungu(sidoCode);
 	}
 	
+	/**
+	 * 찜 등록 / 삭제
+	 * @param abandonedAnimal
+	 * @param session
+	 * @return
+	 */
 	@PostMapping("/abandoned/tag")
 	public Map<String, Object> abandonedTag(
 			@RequestBody AbandonedAnimal abandonedAnimal,
@@ -68,6 +80,13 @@ public class AbandonedAnimalRestController {
 	}
 	
 	
+	/**
+	 * 찜 유무
+	 * @param desertionNo
+	 * @param session
+	 * @param model
+	 * @return
+	 */
 	@GetMapping("/abandoned/exist-tag")
 	public Map<String, Object> existTag(
 			@RequestParam("desertionNo") String desertionNo,
@@ -86,6 +105,23 @@ public class AbandonedAnimalRestController {
 				result.put("status", "찜삭제");
 			}
 		}
+		
+		return result;
+	}
+	
+	@DeleteMapping("/abandoned/delete")
+	public Map<String, Object> deleteTag(
+			@RequestParam("desertionNo") String desertionNo,
+			HttpSession session
+			) {
+		
+		Map<String, Object> result = new HashMap<>();
+		
+		int userId = (int)session.getAttribute("userId");
+		
+		abandonedAnimalBO.deleteAbandonedTag(userId, desertionNo);
+		
+		result.put("result", "success");
 		
 		return result;
 	}

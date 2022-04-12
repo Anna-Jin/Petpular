@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>  
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>   
 
 <div id="foryou-wrap">
 	<div class="foryou-top">
@@ -108,20 +110,148 @@
 		<div class="foryou-bottom-title">유기동물 찜 목록</div>
 		<div class="foryou-abandoned-tag-body">
 			<div class="foryou-abandoned-tag-body-box flex-wrap">
+				<c:choose>
+				<c:when test="${not empty abandonedAnimalTagList}">
 				<c:forEach items="${abandonedAnimalTagList}" var="abandonedAnimalTag">
-					<button type="button" class="abandoned-tag-card">
-						<div class="abandoned-tag-img-box">
-							<img alt="유기동물 썸네일" src="${abandonedAnimalTag.popfile}">
-							<div>${abandonedAnimalTag.age}</div>
+						<button type="button" class="abandoned-tag-card" data-desertion-no="${abandonedAnimalTag.desertionNo}">
+							<div class="abandoned-tag-img-box">
+								<img alt="유기동물 썸네일" src="${abandonedAnimalTag.popfile}" class="abandoned-tag-img">
+							</div>
+							<div class="abandoned-tag-info-box">
+								<div class="font-size-12">
+									<span class="fw-bold">상태 : </span>
+									<span id="abandoned-animal-status">${abandonedAnimalTag.processState}</span>
+								</div>
+								<div class="font-size-12">
+									<span class="fw-bold">성별 : </span>
+									<c:choose>
+										<c:when test="${abandonedAnimalTag.sexCd eq 'F'}">
+											<span id="abandoned-animal-sex">여</span>
+										</c:when>
+										<c:otherwise>
+											<span id="abandoned-animal-sex">남</span>
+										</c:otherwise>
+									</c:choose>
+								</div>
+								<div class="font-size-12">
+									<span class="fw-bold">보호 장소 : </span>
+									<span id="abandoned-animal-center-addr">${abandonedAnimalTag.careAddr}</span>
+								</div>						
+							</div>
+						</button>
+						
+						<%-- 디테일 팝업 --%>
+						<div class="abandoned-tag-details">
+							<div class="abandoned-animal-details-header">
+								<button type="button" class="btn btn-primary abandoned-animal-tag-btn" data-desertion-no="${abandonedAnimalTag.desertionNo}">
+									찜삭제
+								</button>
+							</div>
+							<div class="abandoned-animal-details-body">
+								<div class="details-img-box">
+									<img src="${abandonedAnimalTag.popfile}" alt="유기동물 이미지" class="details-img">
+								</div>
+								<div class="details-animal-info-box">
+									<div class="col-6 me-1">
+										<div class="details-animal-info-box-title">동물 정보</div>
+										<table class="table">
+											<thead>
+											</thead>
+											<tbody>
+												<tr>
+													<th>공고번호</th>
+													<td>${abandonedAnimalTag.noticeNo}</td>
+												</tr>
+												<tr>
+													<th>공고기간</th>
+														<fmt:parseDate value="${abandonedAnimalTag.noticeSdt}" pattern="yyyyMMdd" var="noticeSdt"/>
+														<fmt:formatDate value="${noticeSdt}" pattern="yyyy-MM-dd" var="sdt"/>
+														<fmt:parseDate value="${abandonedAnimalTag.noticeEdt}" pattern="yyyyMMdd" var="noticeEdt"/>
+														<fmt:formatDate value="${noticeEdt}" pattern="yyyy-MM-dd" var="edt"/>
+													<td>${sdt} ~ ${edt}</td>
+												</tr>
+												<tr>
+													<th>품종</th>
+													<td>${abandonedAnimalTag.kindCd}</td>
+												</tr>
+												<tr>
+													<th>성별</th>
+													<td>
+														<c:choose>
+															<c:when test="${abandonedAnimalTag.sexCd eq 'F'}">
+																<span id="abandoned-animal-sex">여</span>
+															</c:when>
+															<c:when test="${abandonedAnimalTag.sexCd eq 'M'}">
+																<span id="abandoned-animal-sex">남</span>
+															</c:when>
+															<c:otherwise>
+																<span id="abandoned-animal-sex">미상</span>	
+															</c:otherwise>
+														</c:choose>
+														<c:if test="${abandonedAnimalTag.neuterYn eq 'Y'}">
+															<span> / 중성화</span>
+														</c:if>
+													</td>
+												</tr>
+												<tr>
+													<th>나이</th>
+													<td>${abandonedAnimalTag.age}</td>
+												</tr>
+												<tr>
+													<th>체중</th>
+													<td>${abandonedAnimalTag.weight}</td>
+												</tr>
+												<tr>
+													<th>특징</th>
+													<td>${abandonedAnimalTag.specialMark}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+									<div class="col-6 ms-1">
+										<div class="details-animal-info-box-title">보호센터 정보</div>
+										<table class="table">
+											<thead>
+											</thead>
+											<tbody>
+												<tr>
+													<th>관할기관</th>
+													<td>${abandonedAnimalTag.orgNm}</td>
+												</tr>
+												<tr>
+													<th>보호센터</th>
+													<td>${abandonedAnimalTag.careNm}</td>
+												</tr>
+												<tr>
+													<th>보호센터주소</th>
+													<td>${abandonedAnimalTag.careAddr}</td>
+												</tr>
+												<tr>
+													<th>보호센터연락처</th>
+													<td>${abandonedAnimalTag.careTel}</td>
+												</tr>
+												<tr>
+													<th>발견장소</th>
+													<td>${abandonedAnimalTag.happenPlace}</td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
 						</div>
-					</button>
 				</c:forEach>
+				</c:when>
+				<c:otherwise>
+					<div>찜 목록이 비어있습니다</div>
+				</c:otherwise>
+				</c:choose>
 			</div>
 		</div>
 	</div>
 </div>
 
-
+<div class="target"></div>
 <script>
 $(document).ready(function() {
 	
@@ -233,6 +363,43 @@ $(document).ready(function() {
 			}
 			, error: function(e) {
 				alert('게시글 삭제에 실패했습니다. 관리자에게 문의해주세요.');
+			}
+		});
+	});
+	
+	
+	// 유기동물 목록
+	// 유기동물 디테일창 노출
+	$('.abandoned-tag-card').on('click', function(e) {
+		e.stopPropagation();
+		$('.abandoned-tag-details').not($(this).next('.abandoned-tag-details').slideToggle()).slideUp();
+		$('.target').toggle();
+		
+	});
+	
+	// 유기동물 디테일창 닫기
+	$(document).on('click', function(e) {
+		if ($(e.target).hasClass('target')) {
+			// 디테일창 외부 클릭시 창 닫기
+			$(this).find('.abandoned-tag-details').slideUp();
+			$('.target').hide();
+		}
+	});
+	
+	$('.abandoned-animal-tag-btn').on('click', function() {
+		var desertionNo = $(this).data('desertion-no');
+		
+		$.ajax({
+			type: "DELETE"
+			, url: "/abandoned/delete"
+			, data: {"desertionNo":desertionNo}
+			, success: function(data) {
+				if (data.result == 'success') {
+					location.reload();
+				}
+			}
+			, error: function(e) {
+				alert('찜 삭제에 실패했습니다. 관리자에게 문의해주세요.');
 			}
 		});
 	});

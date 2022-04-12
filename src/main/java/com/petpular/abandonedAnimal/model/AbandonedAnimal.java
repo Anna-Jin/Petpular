@@ -14,6 +14,7 @@ public class AbandonedAnimal {
 	private String noticeSdt;
 	private String noticeEdt;
 	private String kindCd;
+	private String processState;
 	private String sexCd;
 	private String neuterYn;
 	private String age;

@@ -13,6 +13,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
+			, `processState`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
@@ -40,6 +41,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
+			, `processState`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
@@ -77,6 +79,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
+			, `processState`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
@@ -99,6 +102,7 @@
 			, #{abandonedAnimal.noticeSdt}
 			, #{abandonedAnimal.noticeEdt}
 			, #{abandonedAnimal.kindCd}
+			, #{abandonedAnimal.processState}
 			, #{abandonedAnimal.sexCd}
 			, #{abandonedAnimal.neuterYn}
 			, #{abandonedAnimal.age}
