@@ -32,4 +32,6 @@ public class TestController {
 	public List<Test> dbTest() {
 		return testBO.getUserList();
 	}
+	
+	
 }

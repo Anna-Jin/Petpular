@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+<mapper namespace="com.petpular.user.dao.UserDAO">
+	<insert id="insertUser" parameterType="map">
+		INSERT INTO `user`
+		(
+			`login_id`
+			, `name`
+			, `email`
+			, `password`
+			, `created_at`
+			, `updated_at`
+		)
+		VALUES
+		(
+			#{loginId}
+			, #{name}
+			, #{email}
+			, #{password}		
+			, NOW()
+			, NOW()
+		)
+	</insert>
+	<update id="updateUser" parameterType="map">
+		UPDATE `user`
+		SET
+			`login_id` = #{loginId}
+			, `name` = #{name}
+			, `email` = #{email}
+			<if test="imagePath != null">, `profile_image_url` = #{imagePath}</if>
+		WHERE
+			`id` = #{userId}	
+	</update>
+	<select id="existLgoinId" parameterType="String" resultType="boolean">
+		SELECT
+			COUNT(1)
+		FROM
+			`user`
+		WHERE
+			`login_id` = #{loginId}
+	</select>
+	<select id="existEmail" parameterType="String" resultType="boolean">
+		SELECT
+			COUNT(1)
+		FROM
+			`user`
+		WHERE
+			`email` = #{email}
+	</select>
+	<select id="selectUserByLoginIdAndPassword" parameterType="map" resultType="com.petpular.user.model.User">
+		SELECT
+			`id`
+			, `login_id`
+			, `name`
+			, `email`
+			, `password`
+			, `profile_image_url`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`user`
+		WHERE
+			`login_id` = #{loginId} AND
+			`password` = #{password}
+	</select>
+	<select id="selectUserByUserId" resultType="com.petpular.user.model.User">
+		SELECT
+			`id`
+			, `login_id`
+			, `name`
+			, `email`
+			, `password`
+			, `profile_image_url`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`user`
+		WHERE
+			`id` = #{userId}
+	</select>
+</mapper>

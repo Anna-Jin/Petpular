@@ -1,0 +1,191 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="com.petpular.pet.dao.PetDAO">
+ 	<select id="selectPetByUserIdPetId" resultType="com.petpular.pet.model.Pet">
+ 		SELECT
+ 			`id`
+ 			,`user_id`
+			, `pet_image_url`
+			, `name`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`pet`
+		WHERE
+			`id`  = #{id} AND
+			`user_id` = #{userId}	
+ 	</select>
+ 	<select id="selectPetByUserId" resultType="com.petpular.pet.model.Pet">
+ 		SELECT
+ 			`id`
+ 			,`user_id`
+			, `pet_image_url`
+			, `name`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`pet`
+		WHERE
+			`user_id` = #{userId}
+ 	</select>
+ 	<select id="selectPetMoreIfoByUserIdPetId" resultType="com.petpular.pet.model.PetMoreInfo">
+ 		SELECT 
+ 			`id`
+			, `user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `count`
+			, `volume`
+			, `kcal`
+			, `after_date`
+			, `created_at`
+			, `updated_at`
+ 		FROM
+ 			`pet_more_info`
+ 		WHERE
+ 			`user_id` = #{userId} AND
+ 			`pet_id` = #{petId}
+ 	</select>
+ 	<insert id="insertPet" parameterType="com.petpular.pet.model.Pet">
+ 		INSERT INTO `pet`
+ 		(
+ 			`user_id`
+			, `pet_image_url`
+			, `name`
+			, `breed`
+			, `sex`
+			, `neuter`
+			, `birthday`
+			, `weight`
+			, `disease`
+			, `created_at`
+			, `updated_at`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petImageUrl}
+ 			, #{name}
+ 			, #{breed}
+ 			, #{sex}
+ 			, #{neuter}
+ 			, #{birthday}
+ 			, #{weight}
+ 			, #{disease}
+ 			, NOW()
+ 			, NOW()
+ 		)
+ 	</insert>
+ 	<insert id="insertPetMoreInfoBySand" parameterType="map">
+ 		INSERT INTO `pet_more_info`
+ 		(
+ 			`user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `count`
+			, `volume`
+			, `after_date`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petId}
+ 			, #{sandType}
+ 			, #{sandDate}
+ 			, #{sandCount}
+ 			, #{sandVolume}
+ 			, #{sandAfterDate}
+ 		)
+ 	</insert>
+ 	<insert id="insertPetMoreInfoByFeed" parameterType="map">
+ 		INSERT INTO `pet_more_info`
+ 		(
+ 			`user_id`
+			, `pet_id`
+			, `type`
+			, `date`
+			, `count`
+			, `volume`
+			, `kcal`
+			, `after_date`
+ 		)
+ 		VALUES
+ 		(
+ 			#{userId}
+ 			, #{petId}
+ 			, #{feedType}
+ 			, #{feedDate}
+ 			, #{feedCount}
+ 			, #{feedVolume}
+ 			, #{feedKcal}
+ 			, #{feedAfterDate}
+ 		)
+ 	</insert>
+ 	<update id="updatePet" parameterType="map">
+ 		UPDATE `pet`
+ 		SET
+ 			`user_id` = #{userId}
+ 			<if test="petImageUrl != null">, `pet_image_url` = #{petImageUrl}</if>
+			, `name` = #{name}
+			, `breed` = #{breed}
+			, `sex` = #{sex}
+			, `neuter` = #{neuter}
+			, `birthday`= #{birthday}
+			, `weight` = #{weight}
+			<if test="disease != null">, `disease` = #{disease}</if>
+		WHERE
+			`id` = #{petId}	
+ 	</update>
+ 	<update id="updatePetMoreInfoBySand" parameterType="map">
+ 		UPDATE `pet_more_info`
+ 		SET	
+			`date` = #{sandDate}
+			, `count` = #{sandCount}
+			, `volume` = #{sandVolume}
+			, `after_date` = #{sandAfterDate}
+		WHERE
+			`type` = #{sandType} AND
+			`user_id` = #{userId} AND
+			`pet_id` = #{petId}
+ 	</update>
+ 	 	<update id="updatePetMoreInfoByFeed" parameterType="map">
+ 		UPDATE `pet_more_info`
+ 		SET	
+			`date` = #{feedDate}
+			, `count` = #{feedCount}
+			, `volume` = #{feedVolume}
+			, `after_date` = #{feedAfterDate}
+		WHERE
+			`type` = #{feedType} AND
+			`user_id` = #{userId} AND
+			`pet_id` = #{petId}
+ 	</update>
+ 	<delete id="deletePet" parameterType="map">
+ 		DELETE FROM `pet`
+ 		WHERE
+ 			`id` = #{petId} AND
+ 			`user_id` = #{userId} 
+ 	</delete>
+ 	<delete id="deletePetMoreInfo" parameterType="map">
+ 		DELETE FROM `pet_more_info`
+ 		WHERE
+ 			`user_id` = #{userId} AND
+ 			`pet_id` = #{petId}
+ 	</delete>
+ </mapper>
