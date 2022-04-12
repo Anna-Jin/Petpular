@@ -27,6 +27,41 @@
 		FROM
 			`tag`
 		WHERE
+			`user_id` = #{userId}
+	</select>
+	<select id="selectAbandonedTagByUserIdDesertionNo" parameterType="map" resultType="com.petpular.abandonedAnimal.model.AbandonedAnimal">
+		SELECT
+			`id`
+			, `user_id`	
+			, `desertion_no`
+			, `notice_no`
+			, `notice_sdt`		
+			, `notice_edt`
+			, `kind_cd`
+			, `sex_cd`
+			, `neuter_yn`
+			, `age`
+			, `weight`
+			, `special_mark`
+			, `org_nm`
+			, `care_nm`
+			, `care_addr`
+			, `care_tel`
+			, `happen_place`
+			, `created_at`
+			, `updated_at`
+		FROM
+			`tag`
+		WHERE
+			`user_id` = #{userId} AND
+			`desertion_no` = #{desertionNo}
+	</select>
+	<select id = "existAbandonedTag" parameterType="map" resultType="int">
+		SELECT
+			COUNT(1)
+		FROM
+			`tag`
+		WHERE
 			`user_id` = #{userId} AND
 			`desertion_no` = #{desertionNo}
 	</select>

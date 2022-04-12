@@ -33,9 +33,11 @@ public class AbandonedAnimalController {
 			@PathVariable(required = false) String sidoCode,
 			@PathVariable(required = false) String sigunguCode) {
 		
-		JSONArray abandonedAnimal = abandonedAnimalAPI.abandonedAniaml(speciesCode, sidoCode, sigunguCode);
 		
-		model.addAttribute("abandonedAnimal", abandonedAnimal);
+		JSONArray abandonedAnimalList = abandonedAnimalAPI.abandonedAniaml(speciesCode, sidoCode, sigunguCode);
+		
+		
+		model.addAttribute("abandonedAnimalList", abandonedAnimalList);
 		model.addAttribute("viewPath", "/service/abandoned_animal");
 		return "template/layout";
 	}
