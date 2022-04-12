@@ -1,11 +1,15 @@
 package com.petpular.common;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.UUID;
+
+import javax.imageio.ImageIO;
 
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;
@@ -45,12 +49,40 @@ public class FileManagerService {
 		return null;
 	}
 	
+	public String saveApiFile(String userLoginId, String imageUrl) {
+		String directoryName = userLoginId + "_" + System.currentTimeMillis() + "/";
+		String filePath = FILE_UPLOAD_PATH + directoryName;
+		
+		// 디렉토리 생성
+		File directory = new File(filePath);
+		if (directory.mkdir() == false) {
+			return null; // 디렉토리 생성 시 실패하면 null을 리턴
+		}
+		
+		try {
+			URL url = new URL(imageUrl);
+			String ext = imageUrl.substring(imageUrl.lastIndexOf(".") + 1); // 확장자
+			BufferedImage image = ImageIO.read(url);
+			String saveFileName = getUuid();
+			File file = new File(filePath + saveFileName + "." + ext);
+			
+			ImageIO.write(image, ext, file);
+			
+			return "/images/" + directoryName + saveFileName + "." + ext;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+	
 	public static String getUuid() {
 		return UUID.randomUUID().toString().replaceAll("-", "");
 	}
 	
+	
 	public void deleteFile(String imagePath) {
-		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", ""));
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", "").split("/")[0]);
 		if (Files.exists(path)) {
 			// 이미지 파일이 있으면 삭제
 			try {
