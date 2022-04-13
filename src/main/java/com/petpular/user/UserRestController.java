@@ -167,7 +167,10 @@ public class UserRestController {
 			logger.error("[edit user] 프로필 수정 userId:{}", userId);
 		} else {
 			result.put("result", "success");
-			session.setAttribute("userName", name);
+			User user = userBO.getUserByUserId(userId);
+			session.setAttribute("userName", user.getName());
+			session.setAttribute("userLoginId", user.getLoginId());
+			session.setAttribute("userProfileImg", user.getProfileImageUrl());
 		}
 		
 		return result;
