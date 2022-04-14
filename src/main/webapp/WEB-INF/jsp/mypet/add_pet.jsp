@@ -123,7 +123,7 @@
 			</div>
 			
 			<div class="d-flex justify-content-center">
-				<button type="button" id="add-pet-btn" class="btn my-4" disabled >등록</button>
+				<button type="button" id="add-pet-btn" class="btn my-4" disabled data-pet-id="">등록</button>
 			</div>
 		</div>
 	</div>
@@ -261,7 +261,7 @@ $(document).ready(function() {
 			, contentType: false
 			, success: function(data) {
 				if (data.result == 'success') {
-					alert("등록 성공");
+					location.href = "/main"
 				} else {
 					alert(data.errorMassage);
 				}
