@@ -30,6 +30,7 @@ public class TestController {
 	@ResponseBody
 	@RequestMapping("/db_test")
 	public List<Test> dbTest() {
+		
 		return testBO.getUserList();
 	}
 	
