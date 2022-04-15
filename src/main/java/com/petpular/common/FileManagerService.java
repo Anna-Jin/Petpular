@@ -83,7 +83,7 @@ public class FileManagerService {
 	
 	
 	public void deleteFile(String imagePath) {
-		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/images/", "").split("/")[0]);
+		Path path = Paths.get(FILE_UPLOAD_PATH + imagePath.replace("/upload_images/", "").split("/")[0]);
 		if (Files.exists(path)) {
 			// 이미지 파일이 있으면 삭제
 			try {
