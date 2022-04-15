@@ -265,19 +265,20 @@ $(document).ready(function() {
 	// 좋아요 버튼 클릭
 	$('.community-post-like-btn').on('click', function() {
 		var postId = $(this).data('post-id');
-		
 		var likeImg = $(this).find('img');
 		
-		likeImg.attr('src', function(index, attr) {
-			if (attr.match('on')) {
-				return attr.replace('on', 'off');
-			} else {
-				return attr.replace('off', 'on');
-			}
-		});
 		
 		$.ajax({
 			url: "/like/" + postId
+			, success: function(data) {
+				if (data.result == 'success') {
+					if (data.like) {
+						likeImg.attr('src', '/image/like(on).png');
+					} else {
+						likeImg.attr('src', '/image/like(off).png')
+					}
+				}
+			}
 			, error: function(e) {
 				alert('좋아요에 실패했습니다. 관리자에게 문의해주세요.');
 			}

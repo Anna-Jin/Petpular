@@ -33,7 +33,8 @@ public class LikeRestController {
 		
 		Map<String, Object> result = new HashMap<>();
 		
-		boolean existLike = likeBO.existLike(userId, postId);
+		boolean existLike = likeBO.changeLike(userId, postId);
+		
 		
 		result.put("like", existLike);
 		result.put("result", "success");

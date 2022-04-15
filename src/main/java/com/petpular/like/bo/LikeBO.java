@@ -12,20 +12,24 @@ public class LikeBO {
 	private LikeDAO likeDAO;
 
 	public boolean existLike(int userId, int postId) {
-		boolean existLike = likeDAO.existLike(userId, postId);
-		
-		if(existLike) {
-			// 좋아요가 활성화 되어있을 때 -> 좋아요 삭제
-			deleteLike(userId, postId);
-		} else {
-			// 좋아요가 활성화 되어있지 않을 때 -> 좋아요 추가
-			addLike(userId, postId);
-		}
-		return existLike;
+		return likeDAO.existLike(userId, postId);
 	}
 	
 	public int countLike(int postId) {
 		return likeDAO.countLike(postId);
+	}
+	
+	public boolean changeLike (int userId, int postId) {
+		boolean existList = likeDAO.existLike(userId, postId);
+		
+		if (existList) {
+			// 좋아요 되어있을 때 - 좋아요 삭제
+			deleteLike(userId, postId);
+			return false;
+		} else {
+			addLike(userId, postId);
+			return true;
+		}
 	}
 	
 	public void addLike(int userId, int postId) {

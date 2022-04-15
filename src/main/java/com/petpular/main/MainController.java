@@ -33,7 +33,7 @@ public class MainController {
 		if(userId != null) {
 			List<Pet> petList = petBO.getPetByUserId(userId);
 			
-			if (petList.size() != 0) {
+			if (petList.size() > 0) {
 			
 				List<String> arr = SessionUtils.petArr(userId, petList);
 				
