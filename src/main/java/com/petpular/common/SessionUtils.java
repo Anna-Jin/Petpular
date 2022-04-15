@@ -16,11 +16,13 @@ public class SessionUtils {
 			for (int i = 1; i <= petList.size(); i++) {
 				
 				petIdArr = petIdArr + "," + petList.get(i).getId();
-				arr.add(petIdArr);
 				petNameArr = petNameArr + "," + petList.get(i).getName();
-				arr.add(petNameArr);
+				
 			}
 		}
+		arr.add(petIdArr);
+		arr.add(petNameArr);
+		
 		return arr;
 	}
 }
