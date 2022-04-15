@@ -13,7 +13,7 @@ public class SessionUtils {
 		String petIdArr = Integer.toString(petList.get(0).getId());
 	 
 		if (petList.size() > 1) {
-			for (int i = 1; i <= petList.size(); i++) {
+			for (int i = 1; i < petList.size(); i++) {
 				
 				petIdArr = petIdArr + "," + petList.get(i).getId();
 				petNameArr = petNameArr + "," + petList.get(i).getName();
