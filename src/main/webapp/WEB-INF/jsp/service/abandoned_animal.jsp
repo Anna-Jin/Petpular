@@ -203,6 +203,7 @@
 						, data: abandonedAnimal
 						, success: function(data) {
 							if (data.result == 'success') {
+								alert(data.status + '되었습니다');
 								tagBtn.text(data.status);
 							}
 						}
