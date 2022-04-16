@@ -51,7 +51,7 @@
 
 ### 2-1. 기획서
 
-<a href="https://www.notion.so/305071e2f4574234932856912cb8a67d" target="_blank">노션 기획서 페이지</a>
+[노션 기획서 페이지](https://www.notion.so/305071e2f4574234932856912cb8a67d){:target="_blank"}
 
 <br>
 
@@ -59,7 +59,9 @@
 
 ### 3-1. 기술 스택 및 구현 기능
 
-<a href="https://www.notion.so/186c0ace56174cc2831a394d36800a54" target="_blank">노션 개발 페이지</a>
+[노션 개발 페이지](https://www.notion.so/186c0ace56174cc2831a394d36800a54){:target="_blank"}
+
+<br>
 
 ### 3-2. 주요 기능
 - 반려동물 등록 : 반려냥이의 프로필을 등록하고 수정할 수 있습니다.
