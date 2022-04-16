@@ -13,7 +13,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
-			, `processState`
+			, `process_state`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
@@ -41,7 +41,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
-			, `processState`
+			, `process_state`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
@@ -79,7 +79,7 @@
 			, `notice_sdt`		
 			, `notice_edt`
 			, `kind_cd`
-			, `processState`
+			, `process_state`
 			, `sex_cd`
 			, `neuter_yn`
 			, `age`
