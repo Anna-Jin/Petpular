@@ -166,7 +166,7 @@
 				, data: {"desertionNo":desertionNo}
 				, success: function(data) {
 					$('.abandoned-animal-tag-btn').empty();
-					var temp_html = data.status
+					var temp_html = data.status;
 					$('.abandoned-animal-tag-btn').append(temp_html);
 				}
 			});
@@ -205,6 +205,7 @@
 							if (data.result == 'success') {
 								alert(data.status + '되었습니다');
 								tagBtn.text(data.status);
+								location.reload(true);
 							}
 						}
 						, error: function(e) {
