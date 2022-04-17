@@ -100,9 +100,9 @@ public class AbandonedAnimalRestController {
 		if (userId != null) {
 			int row = abandonedAnimalBO.existAbandonedTag(userId, desertionNo);
 			if (row < 1) {
-				result.put("status", "찜하기");
-			} else {
 				result.put("status", "찜삭제");
+			} else {
+				result.put("status", "찜하기");
 			}
 		}
 		
