@@ -38,6 +38,7 @@ public class UserController {
 		session.removeAttribute("userName");
 		session.removeAttribute("petIdArr");
 		session.removeAttribute("petNameArr");
+		session.removeAttribute("userProfileImg");
 		
 		return "redirect:/main";
 	}
