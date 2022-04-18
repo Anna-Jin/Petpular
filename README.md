@@ -113,6 +113,7 @@ Petpular는 반려냥이의 정보를 한눈에 보고 관리할 수 있도록 �
 # 4. 데모
 
 ### 4-1. 데모 영상
+[![토이프로젝트 Petpular 데모 영상](https://img.youtube.com/vi/KmsWxZXVdd8/0.jpg)](https://www.youtube.com/watch?v=KmsWxZXVdd8)
 
 <br>
 
