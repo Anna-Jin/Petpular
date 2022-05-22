@@ -81,7 +81,7 @@ Petpular는 반려냥이의 정보를 한눈에 보고 관리할 수 있도록 �
 
 ### 2-1. 기획서
 
-[노션 기획서 페이지](https://www.notion.so/305071e2f4574234932856912cb8a67d)
+[노션 기획서 페이지](https://planet-punishment-427.notion.site/305071e2f4574234932856912cb8a67d)
 
 
 <br>
@@ -90,7 +90,7 @@ Petpular는 반려냥이의 정보를 한눈에 보고 관리할 수 있도록 �
 
 ### 3-1. 기술 문서
 
-[기술 스택, 라이브러리, 구현기능, 트러블 슈팅](https://www.notion.so/186c0ace56174cc2831a394d36800a54)
+[기술 스택, 라이브러리, 구현기능, 트러블 슈팅](https://planet-punishment-427.notion.site/Petpular-74c9f753ef66475c85636f641285ae9d)
 
 
 <br>
